@@ -1,0 +1,125 @@
+@media screen and (min-width: 100px) {
+  .container {
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 775px) {
+  .container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .page-title-content {
+    margin-left: 5px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 1270px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1270px) {
+  .container {
+    width: 1120px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .cart-item .btn-remove-cart {
+    align-items: flex-end;
+  }
+  .fa-trash-can {
+    font-size: 18px;
+  }
+}
+@media (max-width: 992px) {
+  .cart-items-wrapper {
+    margin-right: 0;
+  }
+
+  .header-cart-item .checkbox-all-product {
+    flex-basis: 12%;
+  }
+  .header-cart-item > div:nth-child(n + 3) {
+    flex-basis: 0%;
+    display: none;
+  }
+
+  .cart-content {
+    flex-direction: column;
+  }
+  .cart-item {
+    padding: 11px 0;
+  }
+  .cart-summary {
+    margin-top: 20px;
+  }
+  .cart-summary button {
+    width: 100%;
+  }
+  .cart-item .checked-product-cart {
+    flex-basis: 8%;
+    justify-content: flex-end;
+  }
+  .cart-item .img-product-cart {
+    flex-basis: 28%;
+    padding: 6px 10px;
+  }
+
+  .cart-item .group-product-info {
+    flex-direction: column;
+    flex-basis: 70%;
+  }
+  .cart-item .group-product-info .info-product-cart {
+    padding: 0 12px 0 6px;
+  }
+  .product-name {
+    display: block;
+  }
+  .cart-item .group-product-info .price-original {
+    padding: 5px 0;
+  }
+  .cart-item-price {
+    display: flex;
+    align-items: baseline;
+  }
+  .cart-item-price .price {
+    color: #c92127;
+  }
+  .cart-total-price {
+    display: none;
+  }
+  .number-product-cart {
+    flex-direction: column-reverse;
+    margin: inherit;
+    align-items: unset;
+    padding: 0 12px 0 6px;
+  }
+  .number-product-cart .product-view-quantity-box {
+    display: flex;
+    padding: 0px;
+    justify-content: space-between;
+  }
+  .number-product-cart
+    .product-view-quantity-box
+    .product-view-quantity-box-block {
+    width: 100px;
+  }
+
+  .cart-item .group-product-info .number-product-cart {
+    flex-direction: column-reverse;
+    margin: inherit;
+    align-items: unset;
+    padding: 0 12px 0 6px;
+  }
+}

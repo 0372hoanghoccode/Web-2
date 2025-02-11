@@ -1,0 +1,159 @@
+/* Start: Filter */
+.admin__content--body__filter {
+  height: auto;
+  width: 90%;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 20px auto 0;
+  padding: 20px;
+}
+
+.admin__content--body__filter h1 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.admin__content--body__filter p {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.admin__content--body__filter--gr1 {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.admin__content--body__filter--gr1 p {
+  color: #333;
+}
+
+.body__filter--nameClient {
+  width: 50%;
+}
+
+.body__filter--field p {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.body__filter--field input,
+.body__filter--field select {
+  width: 100%;
+  height: 35px;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #333;
+}
+
+.body__filter--nameClient {
+  width: 50%;
+}
+
+.body__filter--orderDate {
+  width: 15%;
+}
+
+.body__filter--status {
+  width: 20%;
+}
+
+/* .body__filter--field {
+  width: 20% !important;
+} */
+
+.admin__content--body__filter--gr2 {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.body__filter--actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.body__filter--orderDate label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.body__filter--orderDate input {
+  margin-top: 5px;
+  width: 100%;
+  height: 35px;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #333;
+}
+
+.body__filter--actions button {
+  border: none;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-weight: 600;
+}
+
+.body__filter--actions button:focus {
+  outline: none;
+}
+
+.body__filter--actions button:active {
+  transform: translateY(3px);
+  box-shadow: rgb(154, 154, 154) 0px 0px 0px 0px;
+}
+
+.body__filter--action__add {
+  color: #eee;
+  background-color: #333;
+  box-shadow: rgb(154, 154, 154) 0px 3px 0px 0px;
+}
+
+.body__filter--action__reset {
+  color: #333;
+  background-color: #eee;
+  box-shadow: rgb(154, 154, 154) 0px 3px 0px 0px;
+}
+
+.body__filter--action__filter {
+  color: #333;
+  background-color: rgb(69, 220, 69);
+  box-shadow: rgba(48, 191, 13, 0.983) 0px 3px 0px 0px;
+}
+/* End: Filter */
+.d-flex-right {
+  justify-content: end;
+}
+
+.w-30 {
+  width: 30%;
+}
+#zero-item {
+  /* background-color: #5e3434; */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#zero-item h2 {
+  background-color: #333;
+  margin-top: 30px;
+  color: #fff;
+  width: 90%;
+  padding: 15px 30px;
+  border-radius: 8px;
+}
+
+.admin__content--body__filter .message {
+  color: red;
+}

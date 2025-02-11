@@ -1,0 +1,413 @@
+:root {
+  --primary-color: #c92127;
+  --body-color: #f5f5f5;
+  --border-color: #d0d0d0;
+  --product-border-color: #ededed;
+
+  --side-bar-height: 240px;
+  --top-bar-height: 60px;
+}
+input[type="date"] {
+  border: none;
+  outline: none;
+  width: 300px;
+  height: 40px;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #333;
+}
+
+.date > h3 {
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.date {
+  margin: 10px 10px 0 10px;
+}
+
+#filter {
+  height: 40px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #d1d1d1;
+  color: #fff;
+  background-color: #333;
+  cursor: pointer;
+}
+
+#filter:hover {
+  opacity: 0.8;
+}
+
+.thongkechitiet__container {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+}
+
+.thongkechitiet__container h1 {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.thongke {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: aliceblue; */
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 20px 10px;
+  gap: 10px;
+  width: calc(100% / 4 - 20px);
+  /* width: 220px; */
+  /* margin: 10px; */
+}
+
+.thongke .sanpham {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.thongke .chitietbtn {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.thongke .chitietbtn:hover {
+  opacity: 0.8;
+}
+
+.thongke .money {
+  font-weight: bold;
+  color: #f39801;
+  font-size: 18px;
+}
+
+.thongke {
+  font-size: 16px;
+}
+
+.content-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 40px 20px 20px;
+  align-items: end;
+  gap: 20px;
+}
+
+table {
+  width: 95%;
+  margin-left: 2.5%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: rgb(71, 71, 71);
+  color: white;
+  padding: 15px;
+  border: 1px solid black;
+  text-align: left;
+}
+
+td {
+  border: 1px solid black;
+  padding: 15px;
+  text-align: left;
+}
+table .image {
+  text-align: center;
+}
+table .image img {
+  width: 60%;
+  height: auto;
+}
+
+thead th:nth-child(2),
+thead th:nth-child(1) {
+  width: 15%;
+}
+
+/* Trang Chu*/
+.content {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 8px;
+}
+
+/* Thẻ */
+.card {
+  padding: 20px;
+  border-radius: 5px;
+  width: 230px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  /* Chú ý */
+  background: none;
+  /* Chú ý */
+  text-align: center;
+  /* Canh giữa nội dung trong card */
+}
+
+.card:nth-child(1) {
+  background-color: #e8b3c3fe;
+}
+
+.card:nth-child(2) {
+  background-color: #f0cca0;
+}
+
+.card:nth-child(3) {
+  background-color: #a6e9bf;
+}
+
+.card:nth-child(4) {
+  background-color: #df9de6;
+}
+
+/* Số liệu */
+.number {
+  font-size: 30px;
+  color: #111;
+}
+
+/* Biểu tượng */
+.icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  /* Đặt vòng tròn ở vị trí tuyệt đối */
+  top: 10px;
+  /* Vị trí từ đỉnh */
+  left: 10px;
+  /* Vị trí từ trái */
+}
+
+.icon i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Thay đổi màu biểu tượng theo số liệu */
+.card:nth-child(1) .icon {
+  background-color: #c2325dfe;
+}
+
+.card:nth-child(2) .icon {
+  background-color: #df9132;
+}
+
+.card:nth-child(3) .icon {
+  /* Màu cho card thứ 3 */
+  background-color: #32e072;
+}
+
+.card:nth-child(4) .icon {
+  background-color: #cd33de;
+}
+
+/* Bao bọc các phần tử trong card */
+.card-content {
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* Khoảng cách giữa các thẻ trong card-content */
+.card-content p,
+.card-content h2,
+.card-content span {
+  margin-top: 10px;
+}
+
+/* In đậm các thẻ span */
+.card-content span {
+  font-weight: bold;
+}
+
+.card-content h2 {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 871px) {
+  .card {
+    padding: 20px;
+    border-radius: 5px;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    /* Chú ý */
+    background: none;
+    /* Chú ý */
+    text-align: center;
+    /* Canh giữa nội dung trong card */
+  }
+}
+
+.popup {
+  /* position: relative; */
+  /* display: inline-block; */
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popupbutton {
+  background-color: #2f80ed;
+  color: white;
+  margin-top: 10px;
+  border-radius: 4px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.popup .popupmenu {
+  visibility: inherit;
+  display: flex;
+  border-radius: 10px;
+  position: fixed;
+  z-index: 8;
+  height: 650px;
+  max-height: 80%;
+  max-width: calc(100% - var(--side-bar-height));
+  width: 850px;
+  top: max(var(--top-bar-height) + 10px, 10%);
+  left: 50%;
+  transform: translateX(calc(var(--side-bar-height) / 2 - 50%));
+
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: white;
+  flex-direction: column;
+
+  margin: 0 auto;
+}
+
+.popupwrapper {
+  cursor: default;
+  visibility: hidden;
+  position: relative;
+  display: flex;
+}
+
+.popupbg {
+  z-index: 1;
+  background-color: rgba(68, 68, 68, 0.8);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 0.1s;
+  animation: fadeIn 0.1s;
+}
+.popup #title {
+  margin: 20px 0 20px 5px;
+}
+#title > span {
+  font-weight: bold;
+  font-size: x-large;
+}
+.table-container {
+  height: 520px;
+  font-family: 'Roboto',  sans-serif;
+  width: 100%;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.table__wrapper {
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.container table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+#content-product thead th:nth-child(1) {
+  width: 4% !important;
+}
+#content-product thead th:nth-child(3) {
+  width: 12% !important;
+}
+#content-product thead th:nth-child(2) {
+  width: 5% !important;
+}
+#content-product thead th:nth-child(4),
+#content-product thead th:nth-child(6) {
+  width: 6% !important;
+}
+.table-content .image img {
+  width: 90% !important;
+}
+#close {
+  float: right;
+  border: none;
+  background: none;
+}
+
+#close i {
+  cursor: pointer;
+  font-size: 28px;
+  color: #333;
+}
+
+#close i:hover {
+  opacity: 0.8;
+}

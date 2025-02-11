@@ -1,0 +1,22 @@
+/* Mobile */
+@media (max-width: 576px) {
+  .modal-content {
+    flex-direction: column;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) AND (max-width: 768px) {
+  .modal-qnt {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}

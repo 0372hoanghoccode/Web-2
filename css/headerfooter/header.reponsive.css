@@ -1,0 +1,139 @@
+@media (min-width: 320px) and (max-width: 768px) {
+  header {
+    padding-top: 10px;
+  }
+
+  .headerTop {
+    height: 40px;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .header {
+    height: 80px;
+    justify-content: space-around;
+  }
+  .headerLeft {
+    display: none;
+  }
+  .headerCenter {
+    margin: auto 0 auto 20px;
+    width: 60%;
+  }
+
+  .input-wrapper input {
+    padding-right: 90px;
+  }
+
+  .searchInputContainer i {
+    right: 60px;
+  }
+
+  #searchButton {
+    width: 60px;
+  }
+
+  .books {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .headerRight {
+    gap: 20px;
+    margin-right: 10px;
+    margin-left: 20px;
+    justify-content: end;
+    width: 40%;
+    flex: 1;
+    display: none;
+  }
+
+  .headerRight--smallDevice {
+    display: block;
+  }
+
+  .headerRight--options {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .headerTop {
+    display: none;
+  }
+
+  .header {
+    justify-content: space-around;
+  }
+
+  .headerLeft {
+    margin-left: 20px;
+  }
+
+  .headerCenter {
+    margin: auto 0;
+    width: 40%;
+  }
+
+  .input-wrapper input {
+    padding-right: 90px;
+  }
+
+  .searchInputContainer i {
+    right: 60px;
+  }
+
+  #searchButton {
+    width: 60px;
+  }
+
+  .headerRight {
+    margin-right: 20px;
+    width: 25%;
+    gap: 20px;
+  }
+
+  .headerRight--options {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .headerTop {
+    display: none;
+  }
+
+  .headerCenter {
+    width: 40%;
+  }
+
+  .input-wrapper input {
+    padding-right: 92px;
+  }
+
+  .searchInputContainer i {
+    right: 60px;
+  }
+
+  #searchButton {
+    width: 60px;
+  }
+
+  .headerRight {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1650px) {
+  .input-wrapper input {
+    padding: 0 140px 0 10px;
+  }
+
+  .searchInputContainer i {
+    right: 110px;
+  }
+}

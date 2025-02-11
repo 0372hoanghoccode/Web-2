@@ -1,0 +1,26 @@
+.body__filter--field {
+  width: 50% !important;
+}
+
+#content-product thead th:nth-child(1) {
+  width: 10% !important;
+}
+#content-product thead th:nth-child(2) {
+  width: 20% !important;
+}
+#content-product thead th:nth-child(3) {
+  width: 28% !important;
+}
+#content-product thead th:nth-child(4) {
+  width: 15% !important;
+}
+#content-product thead th:nth-child(5) {
+  width: 15% !important;
+}
+#content-product thead th:nth-child(6) {
+  width: 12% !important;
+}
+
+.message {
+  color:  red;
+}

@@ -1,0 +1,117 @@
+body {
+  background-color: #f0f0f0;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.backGround {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  max-width: 1270px;
+  margin: 40px auto;
+  border-radius: 4px;
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 10px;
+  /* box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); */
+  position: relative;
+  overflow: hidden;
+  width: 900px;
+  max-width: 100%;
+  /* min-height: 580px; */
+  padding: 24px 8px 8px 8px;
+}
+
+.adminLoginTitle {
+  display: flex;
+  justify-content: center; /* Canh giữa theo trục ngang */
+  margin-bottom: 20px; /* Khoảng cách dưới */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-container {
+  width: 100%; /* Chiều rộng form */
+  margin: 0 auto; /* Căn giữa theo trục ngang */
+  text-align: center;
+  padding: 0 32px 16px;
+}
+
+/* CSS styling for the form rows */
+.loginForm {
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.form-row .passwordContainer {
+  width: 100%;
+  position: relative;
+}
+
+.form-row .passwordContainer .loginPasswordView {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+.form-row input,
+.form-row .passwordContainer input {
+  width: calc(100% - 20px);
+  height: 40px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+  background-color: #f0f0f0;
+}
+
+.form-row .passwordContainer input {
+  width: calc(100% - 50px);
+  padding: 0 40px 0 10px;
+}
+
+.btnSubmit {
+  background: #c92127;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  width: 100%;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 5px 0;
+  top: 0;
+}
+
+.loginPasswordView i {
+  cursor: pointer;
+}
+
+.loginPasswordView i.hide {
+  display: none;
+}
+
+.btnSubmit:hover {
+  opacity: 0.8;
+}

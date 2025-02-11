@@ -1,0 +1,296 @@
+#Modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  overflow: hidden; /* Hide scrollbar */
+}
+
+.editModal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto; /* Thay đổi margin thành auto để căn giữa theo chiều ngang */
+  margin-top: 5%; /* Căn giữa theo chiều dọc */
+  padding: 20px;
+  border: 1px solid #888;
+  /* width: 40%; */
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  /* height: 70%; */
+  border-radius: 5px;
+}
+
+.editModal-content h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.close i {
+  color: #333;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close i:hover {
+  opacity: 0.5;
+}
+
+/* .close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} */
+.input-field {
+  margin-bottom: 15px;
+}
+
+.input-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-field input[type="text"],
+.input-field input[type="email"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+.input-field input[type="text"]:focus,
+.input-field input[type="email"]:focus,
+.input-field select:focus {
+  outline: none;
+  border-color: #007bff; /* Change border color on focus */
+}
+
+.input-field input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff; /* Màu nền */
+    color: #fff; /* Màu chữ */
+    border: none;
+    border-radius: 5px;
+    margin-left: auto; /* Đẩy nút về bên phải nhất */
+    margin-right: 20px;
+}
+
+.saveButton {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.editAuthorButton,
+.editFunctionButton {
+  color: #000;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+/* Css specials */
+.body__filter--field {
+  width: 30%;
+}
+
+.d-flex-start {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.d-none {
+  display: none;
+}
+#content-product thead th:nth-child(1),
+#content-product thead th:nth-child(4) {
+  width: 15%;
+}
+#content-product thead th:nth-child(2) {
+  width: 30%;
+}
+#content-product thead th:nth-child(3) {
+  width: 40%;
+}
+.editModal-edit-author-container {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.editModal-edit-author {
+  margin-top: 100px;
+  background: #fff;
+  width: 500px;
+  /* height: auto; */
+  max-height: 600px;
+  border: 1px solid rgb(126, 123, 123);
+  position: relative;
+  left: 50%;
+  transform: translateX(calc(var(--side-bar-height) / 2 - 50%));
+  border-radius: 10px;
+}
+
+.editModal-edit-author .editModal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #dedede;
+}
+
+.editModal-edit-author .editModal-header h3 {
+  font-size: 25px;
+  margin: 0;
+}
+
+.deleteModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  overflow: hidden; /* Hide scrollbar */
+}
+
+.deleteModal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto; /* Thay đổi margin thành auto để căn giữa theo chiều ngang */
+  margin-top: 5%; /* Căn giữa theo chiều dọc */
+  padding: 20px;
+  border: 1px solid #888;
+  /* width: 40%; */
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  /* height: 70%; */
+  border-radius: 5px;
+}
+
+.deleteModal-content h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* .close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} */
+
+.deleteAuthorButton,
+.deleteFunctionButton {
+  color: #000;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.deleteModal-delete-author-container {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+.deleteModal-delete-author {
+  margin-top: 100px;
+  background: #fff;
+  width: 500px;
+  /* height: auto; */
+  max-height: 600px;
+  border: 1px solid rgb(126, 123, 123);
+  position: relative;
+  left: 50%;
+  transform: translateX(calc(var(--side-bar-height) / 2 - 50%));
+  border-radius: 10px;
+}
+
+.deleteModal-delete-author .deleteModal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #dedede;
+}
+
+.deleteModal-delete-author .deleteModal-header h3 {
+  font-size: 25px;
+  margin: 0;
+}
+
+.addModal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto; /* Thay đổi margin thành auto để căn giữa theo chiều ngang */
+  margin-top: 5%; /* Căn giữa theo chiều dọc */
+  padding: 20px;
+  border: 1px solid #888;
+  /* width: 40%; */
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  /* height: 70%; */
+  border-radius: 5px;
+}
+
+.addModal-content h2 {
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+}
+
+.body__filter--field {
+  width: calc(100% / 3);
+}

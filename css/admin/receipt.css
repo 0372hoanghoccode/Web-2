@@ -1,0 +1,67 @@
+#content-product thead th:nth-child(3) {
+  width: 15%;
+}
+#content-product thead th:nth-child(4) {
+  width: 15%;
+}
+.editModal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto; /* Thay đổi margin thành auto để căn giữa theo chiều ngang */
+  margin-top: 5%; /* Căn giữa theo chiều dọc */
+  padding: 20px;
+  border: 1px solid #888;
+  /* width: 40%; */
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  border-radius: 5px;
+}
+.addModal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto; /* Thay đổi margin thành auto để căn giữa theo chiều ngang */
+  margin-top: 5%; /* Căn giữa theo chiều dọc */
+  padding: 20px;
+  border: 1px solid #888;
+  /* width: 40%; */
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  /* height: 70%; */
+  border-radius: 5px;
+}
+
+.input-field {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.input-field label {
+  width: 30%; /* Độ rộng của label */
+  margin-right: 10px; /* Khoảng cách với input */
+}
+
+
+/* Chỉnh kích thước dòng trong bảng */
+.book-table table {
+  font-size: 14px; /* Đặt kích thước font chữ cho dòng */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Kích thước tối đa và thanh cuộn cho bảng */
+.book-table {
+  max-height: 200px; /* Chiều cao tối đa của bảng */
+  overflow-y: auto; /* Hiển thị thanh cuộn theo chiều dọc khi cần thiết */
+}
+.book-table thead th {
+  background-color: #c92127;
+  color: #fff;
+  height: 50px;
+}
+#addTable {
+  width: 100%;
+}
