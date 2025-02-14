@@ -6,7 +6,7 @@
         header('Location: index.php');
       }
     }
-  } 
+  }
 ?>
 
 <!DOCTYPE html>
@@ -19,18 +19,21 @@
     href="assets/fontawesome-free-6.5.1-web/css/all.min.css?v=<?php echo time(); ?>"
     />
     <link rel="stylesheet" href="css/fonts/fonts.css?v=<?php echo time(); ?>" />
+    <link rel="icon" href="assets/images/logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/headerfooter/headerfooter.css?v=<?php echo time(); ?>" />
     <link rel="stylesheet" href="css/headerfooter/header.reponsive.css?v=<?php echo time(); ?>" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer src="js/logout.js?v=<?php echo time(); ?>"></script>
     <script defer src="js/header.js?v=<?php echo time(); ?>"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   </head>
   <body>
     <header>
      <div class="headerTop">
           <a href="index.php">
             <img
-              src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png"
+              src="assets/images/logoweb.jpg"
               alt=""
             />
           </a>
@@ -39,7 +42,7 @@
         <div class="headerLeft">
           <a href="index.php">
             <img
-              src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png"
+              src="assets/images/logoweb.jpg"
               alt=""
             />
           </a>
@@ -74,7 +77,7 @@
 
         <div class="headerRight">
           <?php
-            $hideCart = ""; 
+            $hideCart = "";
             if ((!isset($_SESSION['cart']) || !$_SESSION['cart']) && (!isset($_SESSION['username']) || !$_SESSION['username'])) {
               $hideCart = "hide";
             }
@@ -84,7 +87,7 @@
             <a href="index.php?page=cart">
               <i class="fa-solid fa-cart-shopping"></i>
               <span>Giỏ hàng</span>
-              
+
               <?php
                 $cartQnt = 0;
                 $hide = "";
@@ -100,7 +103,7 @@
           <div class="account">
             <i class="fa-solid fa-user"></i>
             <span>
-            <?php 
+            <?php
               if (isset($_SESSION['username'])) {
                 echo $_SESSION['username'];
               } else {
@@ -156,7 +159,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="headerRight--smallDevice">
           <i class="fa-solid fa-bars headerRightMenuBar"></i>
           <i class="fa-solid fa-xmark headerRightCloseBar hide"></i>
@@ -165,7 +168,7 @@
       </div>
       <div class="headerRight--options hide">
       <?php
-            $hideCart = ""; 
+            $hideCart = "";
             if ((!isset($_SESSION['cart']) || !$_SESSION['cart']) && (!isset($_SESSION['username']) || !$_SESSION['username'])) {
               $hideCart = "hide";
             }
@@ -175,7 +178,7 @@
             <a href="index.php?page=cart">
               <i class="fa-solid fa-cart-shopping"></i>
               <span>Giỏ hàng</span>
-              
+
               <?php
                 $cartQnt = 0;
                 $hide = "";
@@ -191,7 +194,7 @@
           <div class="account">
             <i class="fa-solid fa-user"></i>
             <span>
-            <?php 
+            <?php
               if (isset($_SESSION['username'])) {
                 echo $_SESSION['username'];
               } else {

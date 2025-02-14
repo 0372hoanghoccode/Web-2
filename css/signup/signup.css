@@ -63,11 +63,11 @@ body {
 }
 
 .button.active {
-  color: #c92127;
+  color: #0077B6;
 }
 
 .button.active::after {
-  background-color: #c92127; /* Gạch đỏ dưới chân nút */
+  background-color: #0077B6; /* Gạch đỏ dưới chân nút */
 }
 
 /* CSS styling for the form container */
@@ -144,7 +144,7 @@ button {
 }
 
 .btnSubmit {
-  background: #c92127;
+  background: #0077B6;
   color: white;
   border: none;
   cursor: pointer;
@@ -256,9 +256,8 @@ button {
 
   /* margin-top: 2%; */
 }
-
 .fakelink {
-  color: #c92127;
+  color: #0077B6;
   text-decoration: underline;
   cursor: pointer;
   margin-top: 5px;

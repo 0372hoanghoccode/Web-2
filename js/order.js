@@ -96,7 +96,7 @@ function renderHTMLDetailOrder(data) {
   data.orderDetails.forEach((orderDetail) => {
     const forrmatPrice = parseFloat(orderDetail.price).toLocaleString("vi-VN");
 
-    html += `  
+    html += `
       <tr>
         <td style="width: 20%"><img style="width: 60%;object-fit: cover;" src="${orderDetail.image_path}"/></td>
         <td >${orderDetail.product_name}</td>

@@ -15,7 +15,7 @@
             <div>
               <a class="leftFooterLogo">
                 <img
-                  src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png"
+                  src="assets/images/logoweb.jpg"
                 />
               </a>
             </div>

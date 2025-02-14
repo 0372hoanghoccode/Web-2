@@ -34,7 +34,7 @@ body {
 
 .order-header-content strong {
   margin-left: 4px;
-  color: #c92127;
+  color: #0077B6;
 }
 
 .order-title {
@@ -129,7 +129,7 @@ body {
   height: 40px;
   transition: all 0.3s;
   color: #fff;
-  background: #c92127;
+  background: #0077B6;
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
@@ -344,7 +344,7 @@ input.checkbox-add-order[type="checkbox"],
   flex: 3;
 }
 .order-total-price .order-price .price {
-  color: #c92127;
+  color: #0077B6;
   font-weight: bold;
   font-size: 17px;
 }
@@ -366,7 +366,7 @@ input.checkbox-add-order[type="checkbox"],
 }
 
 .btn-remove-order .btn-remove-desktop-order:hover {
-  color: #c92127;
+  color: #0077B6;
 }
 
 .checkout-button {
@@ -422,7 +422,7 @@ input.checkbox-add-order[type="checkbox"],
 }
 
 .order-bottom-totalprice strong {
-  color: #c92127;
+  color: #0077B6;
   font-size: 18px;
   margin-left: 4px;
 }
@@ -439,7 +439,7 @@ input.checkbox-add-order[type="checkbox"],
   height: 40px;
   padding: 0 20px;
   color: #fff;
-  background: #c92127;
+  background: #0077B6;
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
@@ -547,7 +547,7 @@ input.checkbox-add-order[type="checkbox"],
 }
 
 .modal thead td {
-  background-color: #c92127;
+  background-color: #0077B6;
   color: #fff;
   height: 50px;
 }

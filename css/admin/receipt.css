@@ -58,7 +58,7 @@
   overflow-y: auto; /* Hiển thị thanh cuộn theo chiều dọc khi cần thiết */
 }
 .book-table thead th {
-  background-color: #c92127;
+  background-color: #0077B6;
   color: #fff;
   height: 50px;
 }

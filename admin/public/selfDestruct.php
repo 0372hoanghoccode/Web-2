@@ -24,16 +24,16 @@
                 align-items: center;
             }
             button{
-                
+
 
                 margin-top:10vh;
                 height: 80vh;
                 width: 80vw;
-                background-color:#c92127;
+                background-color:#0077B6;
                 font-size:30vh;
                 border-radius:5vh;
                 cursor:pointer;
-            }   
+            }
         </style>
         <div class="flex">
         <button onclick="selfDestruct();">Tự hủy</button>

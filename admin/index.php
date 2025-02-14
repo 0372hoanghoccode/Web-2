@@ -45,7 +45,7 @@ if (!isset($_SESSION['usernameAdmin'])) {
   </div>
   <div class="sidebar">
     <div class="sidebar__logo">
-      <img src="../assets/images/fahasa-logo.png" alt="Logo">
+      <img src="../assets/images/logoweb.jpg" alt="Logo">
     </div>
     <ul class="sidebar__items">
     </ul>

@@ -108,7 +108,7 @@ body {
   height: 40px;
   transition: all 0.3s;
   color: #fff;
-  background: #c92127;
+  background: #0077B6;
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
@@ -382,7 +382,7 @@ input.qty-cart {
   flex: 3;
 }
 .cart-total-price .cart-price .price {
-  color: #c92127;
+  color: #0077B6;
   font-weight: bold;
   font-size: 17px;
 }
@@ -405,12 +405,12 @@ input.qty-cart {
 }
 
 .btn-remove-cart .btn-remove-desktop-cart:hover {
-  color: #c92127;
+  color: #0077B6;
 }
 
 .checkout-button {
   padding: 5px 10px;
-  background-color: #c92127;
+  background-color: #0077B6;
   color: #fff;
   font-size: 16px;
   cursor: pointer;

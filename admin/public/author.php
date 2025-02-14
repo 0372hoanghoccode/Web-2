@@ -55,12 +55,12 @@ $_SESSION["render"] ->setTable("authors");
                 <button class="body__filter--action__filter">Lọc</button>
             </div>
         </div>
-        
+
     </form>
 
     <div id="addAuthorModal" class="modal">
   <div class="addModal-content">
-  
+
     <span class="close">
                 <i class="fa-solid fa-xmark"></i>
             </span>
@@ -85,7 +85,7 @@ $_SESSION["render"] ->setTable("authors");
                 <i class="fa-solid fa-xmark"></i>
             </span>
             <div class="form">
-              
+
             </div>
             <div class="form-actions">
       <button class="editAuthorButton d-none">Chỉnh thông tin tác giả</button>
@@ -93,19 +93,19 @@ $_SESSION["render"] ->setTable("authors");
     </div>
         </div>
     </div>
-    <div class='deleteModal' id='deleteModal'> 
+    <div class='deleteModal' id='deleteModal'>
     <div class="deleteModal-content">
             <span class="close">
                 <i class="fa-solid fa-xmark"></i>
             </span>
             <div class="form">
-               
+
             </div>
             <div class="form-actions">
         <button type="submit"  id="del-confirm" class="btn">Xác nhận</button>
         <button type="button" class="del-cancel">Hủy bỏ</button>
       </div>
-        </div> 
+        </div>
     </div>
 
     <script defer src="../js/admin/author.js?v=<?php echo time(); ?> "></script>
