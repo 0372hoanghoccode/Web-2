@@ -1,117 +1,184 @@
+/* Reset mặc định và kiểu chữ chung */
 body {
-  background-color: #f0f0f0;
-  font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  color: #333;
 }
 
-.backGround {
-  padding: 30px;
+/* Kết hợp các lớp chung */
+.background,
+.container {
+  background-color: #fff;
+  border-radius: 12px;
+}
+
+.background {
+  padding: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
   max-width: 1270px;
   margin: 40px auto;
-  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .container {
-  background-color: #fff;
-  border-radius: 10px;
-  /* box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); */
   position: relative;
   overflow: hidden;
   width: 900px;
   max-width: 100%;
-  /* min-height: 580px; */
-  padding: 24px 8px 8px 8px;
+  padding: 30px 16px 24px;
 }
 
+/* Tiêu đề */
 .adminLoginTitle {
-  display: flex;
-  justify-content: center; /* Canh giữa theo trục ngang */
-  margin-bottom: 20px; /* Khoảng cách dưới */
-  font-size: 24px;
-  font-weight: bold;
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 26px;
+  font-weight: 600;
+  color: #343a40;
 }
 
+/* Form chung */
 .form-container {
-  width: 100%; /* Chiều rộng form */
-  margin: 0 auto; /* Căn giữa theo trục ngang */
+  max-width: 420px;
+  margin: 0 auto;
   text-align: center;
   padding: 0 32px 16px;
-}
-
-/* CSS styling for the form rows */
-.loginForm {
 }
 
 .form-row {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  width: 100%;
-  gap: 4px;
-  margin-bottom: 8px;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+/* Input và Password Container */
+.form-row input,
+.form-row .passwordContainer input {
+  height: 40px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f0f0f0;
+  padding: 0 10px;
+  outline: none;
+  width: calc(100% - 20px);
 }
 
 .form-row .passwordContainer {
-  width: 100%;
   position: relative;
-}
-
-.form-row .passwordContainer .loginPasswordView {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 40px;
-  font-size: 16px;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-}
-
-.form-row input,
-.form-row .passwordContainer input {
-  width: calc(100% - 20px);
-  height: 40px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  padding: 0 10px;
-  background-color: #f0f0f0;
+  width: 100%;
 }
 
 .form-row .passwordContainer input {
   width: calc(100% - 50px);
-  padding: 0 40px 0 10px;
+  padding-right: 40px;
 }
 
-.btnSubmit {
-  background: #0077B6;
-  color: white;
+.form-row input:focus,
+.form-row .passwordContainer input:focus {
+  border-color: #0077B6;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
+}
+
+/* Password View Toggle */
+.form-row .passwordContainer .loginPasswordView {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40px;
+  font-size: 16px;
   border: none;
+  background: transparent;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  margin-top: 8px;
-  width: 100%;
-  font-size: 18px;
-  border-radius: 5px;
-  padding: 5px 0;
-  top: 0;
+  transition: color 0.2s ease;
+}
+
+.loginPasswordView:hover {
+  color: #212529;
 }
 
 .loginPasswordView i {
-  cursor: pointer;
+  font-size: 18px;
 }
 
 .loginPasswordView i.hide {
   display: none;
 }
 
+/* Nút Submit */
+.btnSubmit {
+  background: #0077B6;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 12px 0;
+  margin-top: 16px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 119, 182, 0.2);
+}
+
 .btnSubmit:hover {
-  opacity: 0.8;
+  background-color: #005b8a;
+  box-shadow: 0 6px 12px rgba(0, 119, 182, 0.3);
+}
+
+.btnSubmit:active {
+  transform: translateY(1px);
+}
+
+/* Nhãn */
+.form-row label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .background {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .form-container {
+    padding: 0 16px 16px;
+  }
+
+  .container {
+    padding: 24px 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .adminLoginTitle {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .form-row input,
+  .form-row .passwordContainer input {
+    height: 44px;
+  }
+
+  .btnSubmit {
+    padding: 10px 0;
+  }
 }
