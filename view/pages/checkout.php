@@ -1,6 +1,6 @@
 <?
     session_start();
-    
+
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
         <form id="checkout-form" action="" method="post">
             <div class="container">
                 <?php
-                
+
                 ?>
                 <h3>Địa Chỉ Nhận Hàng</h3>
                 <!-- <hr> -->
@@ -102,6 +102,10 @@
                 <div class="form-group"><input id="id4" type="radio" name="id_test" value="" checked />
                     <label for="id4"><i class="fa-solid fa-dong-sign"></i>Thanh toán bằng tiền mặt khi nhận hàng</label>
                 </div>
+                <div class="form-group"><input id="id4" type="radio" name="id_test" value="" />
+                    <label for="idfake"><i class="fa-solid fa-dong-sign"></i>Thanh toán bằng thẻ ngân hàng(giao diện ảo do gv yêu cầu)</label>
+                </div>
+
             </div>
             <div class="container">
                 <h3>MÃ KHUYẾN MÃI</h3>
@@ -176,9 +180,9 @@
                             </div>
                             <hr>';
                         }
-                    } 
+                    }
                 ?>
-                
+
                 <div class="form-group">
                 </div>
             </div>
@@ -186,7 +190,7 @@
                 <div class="total">
                     <div class="chiphi">
                         <span class="cost-name">Thành tiền </span>
-                        <?php 
+                        <?php
                             $formatTotalPriceAllProducts = number_format($totalPriceAllProducts, 0, ',', '.').'đ';
                         ?>
                         <span class="money"><?php echo $formatTotalPriceAllProducts?></span><br>
@@ -222,7 +226,7 @@
         <div class="total" id="total-fixed">
             <div class="chiphi">
                 <span class="cost-name">Thành tiền </span>
-                <?php 
+                <?php
                     $formatTotalPriceAllProducts = number_format($totalPriceAllProducts, 0, ',', '.').'đ';
                 ?>
                 <span class="money"><?php echo $formatTotalPriceAllProducts?></span><br>
@@ -260,7 +264,7 @@
                     <td>Số lượng tồn</td>
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
         </div>

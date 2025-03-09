@@ -306,7 +306,8 @@ header {
   display: none;
   position: absolute;
   top: 45px;
-  right: 0;
+  right: 50%;
+  transform: translateX(50%);
   background-color: #fff;
   border-radius: 12px;
   padding: 12px;
