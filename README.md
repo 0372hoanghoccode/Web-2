@@ -2,8 +2,6 @@ Cấu trúc thư mục
 
 admin/: Chứa giao diện hiển thị dữ liệu cuả bên admin (Views trong mô hình MVC).
 
-public/: Chứa các file công khai như ảnh, CSS, JavaScript.
-
 assets/images/: Chứa hình ảnh của dự án.
 
 controller/: Chứa các file xử lý logic (Controllers trong mô hình MVC).
