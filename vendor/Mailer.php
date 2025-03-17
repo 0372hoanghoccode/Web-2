@@ -16,13 +16,13 @@ class Mailer
         $this->mail = new PHPMailer(true);
 
         try {
-            $this->mail->isSMTP();                               
-            $this->mail->Host = 'smtp.gmail.com';   
-            $this->mail->SMTPAuth = true;   
-            $this->mail->Username = 'fahasa.bookstore.official@gmail.com';
-            $this->mail->Password = 'nugp clfs ikkq gyiv';
-            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $this->mail->Port = 587;
+            $this->mail->isSMTP();
+            $this->mail->Host = 'smtp.gmail.com';
+            $this->mail->SMTPAuth = true;
+            $this->mail->Username = 'vuh47009@gmail.com';
+            $this->mail->Password = 'bdlt focu ymok cvua';
+            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $this->mail->Port = 465;
 
             $this->mail->setFrom('fahasa.bookstore.official@gmail.com', 'Fahasa Bookstore');
         } catch (Exception $e) {
@@ -31,18 +31,18 @@ class Mailer
     }
 
     public function sendMail($to, $subject, $body)
-    {
-        try {
-            $this->mail->addAddress($to);
-
-            $this->mail->isHTML(true);                         
-            $this->mail->Subject = $subject;   
-            $this->mail->Body    = $body; 
-
-            $this->mail->send();
-            return true;
-        } catch (Exception $e) {
-            return false;
-        }
+{
+    try {
+        $this->mail->addAddress($to);
+        $this->mail->isHTML(true);
+        $this->mail->Subject = $subject;
+        $this->mail->Body = $body;
+        $this->mail->send();
+        return true;
+    } catch (Exception $e) {
+        error_log("Mail error: " . $this->mail->ErrorInfo);
+        echo "Mail error: " . $this->mail->ErrorInfo; 
+        return false;
     }
+}
 }
