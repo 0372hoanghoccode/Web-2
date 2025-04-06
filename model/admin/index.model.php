@@ -96,75 +96,58 @@ function getStats($date_start, $date_end)
         return;
     }
 
-    // Fetch all categories
-    $sql = "SELECT * FROM categories";
-    $result = $database->query($sql);
+    // Truy vấn để lấy danh sách khách hàng dựa trên user_id từ delivery_infoes
+    $sql = "SELECT
+                a.username,
+                di.user_id,
+                SUM(od.quantity) AS total_quantity
+            FROM
+                accounts a
+            INNER JOIN
+                delivery_infoes di ON a.username = di.user_id
+            INNER JOIN
+                orders o ON di.user_info_id = o.delivery_info_id
+            INNER JOIN
+                order_details od ON o.id = od.order_id
+            WHERE
+                o.status_id = 5
+                AND o.date_create BETWEEN ? AND DATE_ADD(?, INTERVAL 0 DAY)
+            GROUP BY
+                a.username, di.user_id
+            HAVING
+                total_quantity > 0";
 
-    // Check each category for sold products
-    while ($row = mysqli_fetch_array($result)) {
-        $category_id = $row['id'];
-
-        // Query to check if the category has sold products
-        $sql_check = "SELECT SUM(od.quantity) AS total_quantity
-                      FROM products p
-                      LEFT JOIN category_details cd ON p.id = cd.product_id
-                      INNER JOIN order_details od ON p.id = od.product_id
-                      INNER JOIN orders o ON od.order_id = o.id
-                      WHERE cd.category_id = ? AND o.status_id = 5
-                      AND o.date_create BETWEEN ? AND DATE_ADD(?, INTERVAL 0 DAY)";
-        $stmt_check = $database->conn->prepare($sql_check);
-        if ($stmt_check === false) {
-            echo "<div id='zero-item'><h2>Lỗi truy vấn: " . htmlspecialchars($database->conn->error) . "</h2></div>";
-            $database->close();
-            return;
-        }
-        $stmt_check->bind_param("sss", $category_id, $date_start, $date_end);
-        $stmt_check->execute();
-        $check_result = $stmt_check->get_result();
-        $check_row = $check_result->fetch_assoc();
-        $stmt_check->close();
-
-        // Only display the category if it has sold products
-        if ($check_row['total_quantity'] > 0) {
-            echo '<div class="thongke">';
-            echo '<h3 class="sanpham">' . htmlspecialchars($row['name']) . '</h3>';
-            echo '<button type="button" class="chitietbtn" data-id="' . $row['id'] . '">Chi tiết</button>';
-            echo '</div>';
-        }
-    }
-
-    // Check for products with no category
-    $sql_no_category = "SELECT SUM(od.quantity) AS total_quantity
-                        FROM products p
-                        LEFT JOIN category_details cd ON p.id = cd.product_id
-                        INNER JOIN order_details od ON p.id = od.product_id
-                        INNER JOIN orders o ON od.order_id = o.id
-                        WHERE cd.category_id IS NULL AND o.status_id = 5
-                        AND o.date_create BETWEEN ? AND DATE_ADD(?, INTERVAL 0 DAY)";
-    $stmt_no_category = $database->conn->prepare($sql_no_category);
-    if ($stmt_no_category === false) {
+    $stmt = $database->conn->prepare($sql);
+    if ($stmt === false) {
         echo "<div id='zero-item'><h2>Lỗi truy vấn: " . htmlspecialchars($database->conn->error) . "</h2></div>";
         $database->close();
         return;
     }
-    $stmt_no_category->bind_param("ss", $date_start, $date_end);
-    $stmt_no_category->execute();
-    $no_category_result = $stmt_no_category->get_result();
-    $no_category_row = $no_category_result->fetch_assoc();
-    $stmt_no_category->close();
 
-    // Only display "Không thể loại" if there are sold products
-    if ($no_category_row['total_quantity'] > 0) {
+    $stmt->bind_param("ss", $date_start, $date_end);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        echo "<div id='zero-item'><h2>Không có khách hàng nào mua hàng trong khoảng thời gian này.</h2></div>";
+        $stmt->close();
+        $database->close();
+        return;
+    }
+
+    // Hiển thị danh sách khách hàng
+    while ($row = $result->fetch_assoc()) {
         echo '<div class="thongke">';
-        echo '<h3 class="sanpham">Không thể loại</h3>';
-        echo '<button type="button" class="chitietbtn" data-id="NULL">Chi tiết</button>';
+        echo '<h3 class="sanpham">' . htmlspecialchars($row['username']) . '</h3>';
+        echo '<button type="button" class="chitietbtn" data-id="' . htmlspecialchars($row['username']) . '">Chi tiết</button>';
         echo '</div>';
     }
 
+    $stmt->close();
     $database->close();
 }
 
-function getStatDetails($id, $date_start, $date_end, $order, $type)
+function getStatDetails($username, $date_start, $date_end, $order, $type)
 {
     $database = new connectDB();
     if (!$database->conn) {
@@ -172,10 +155,7 @@ function getStatDetails($id, $date_start, $date_end, $order, $type)
         return;
     }
 
-    // Set the condition for category filtering
-    $condition = ($id == "NULL") ? "cd.category_id IS NULL" : "cd.category_id = ?";
-
-    // Step 1: Get the total quantity sold for each product in the category
+    // Truy vấn để lấy chi tiết sản phẩm đã bán của khách hàng
     $sql = "SELECT
                 p.id AS product_id,
                 p.name,
@@ -184,14 +164,17 @@ function getStatDetails($id, $date_start, $date_end, $order, $type)
                 SUM(od.quantity) AS total_quantity_sold
             FROM
                 products p
-            LEFT JOIN
-                category_details cd ON p.id = cd.product_id
             INNER JOIN
                 order_details od ON p.id = od.product_id
             INNER JOIN
                 orders o ON od.order_id = o.id
+            INNER JOIN
+                delivery_infoes di ON o.delivery_info_id = di.user_info_id
+            INNER JOIN
+                accounts a ON di.user_id = a.username
             WHERE
-                $condition AND o.status_id = 5
+                a.username = ?
+                AND o.status_id = 5
                 AND o.date_create BETWEEN ? AND DATE_ADD(?, INTERVAL 0 DAY)
             GROUP BY
                 p.id, p.name, p.image_path, p.price
@@ -199,44 +182,31 @@ function getStatDetails($id, $date_start, $date_end, $order, $type)
 
     $stmt = $database->conn->prepare($sql);
     if ($stmt === false) {
-        error_log("Prepare failed: (" . $database->conn->errno . ") " . $database->conn->error);
         echo "<div id='zero-item'><h2>Lỗi truy vấn: " . htmlspecialchars($database->conn->error) . "</h2></div>";
         $database->close();
         return;
     }
 
-    if ($id != "NULL") {
-        $stmt->bind_param("sss", $id, $date_start, $date_end);
-    } else {
-        $stmt->bind_param("ss", $date_start, $date_end);
-    }
-
-    if (!$stmt->execute()) {
-        echo "<div id='zero-item'><h2>Có lỗi xảy ra khi thực thi truy vấn: " . htmlspecialchars($stmt->error) . "</h2></div>";
-        $stmt->close();
-        $database->close();
-        return;
-    }
-
+    $stmt->bind_param("sss", $username, $date_start, $date_end);
+    $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows === 0) {
-        echo "<div id='zero-item'><h2>Không bán được sản phẩm nào trong danh mục này.</h2></div>";
+        echo "<div id='zero-item'><h2>Khách hàng này không mua sản phẩm nào trong khoảng thời gian này.</h2></div>";
         $stmt->close();
         $database->close();
         return;
     }
 
-    // Array to store product details
+    // Mảng để lưu chi tiết sản phẩm
     $products = [];
     $total_revenue = 0;
     $total_quantity = 0;
 
-    // Step 2: Process each product and calculate revenue with discounts
     while ($row = $result->fetch_assoc()) {
         $product_id = $row['product_id'];
 
-        // Step 3: Get all orders for this product to calculate the discounted price
+        // Tính doanh thu có áp dụng giảm giá
         $sql_orders = "SELECT
                         o.id AS order_id,
                         o.discount_code,
@@ -247,10 +217,14 @@ function getStatDetails($id, $date_start, $date_end, $order, $type)
                         order_details od
                     INNER JOIN
                         orders o ON od.order_id = o.id
+                    INNER JOIN
+                        delivery_infoes di ON o.delivery_info_id = di.user_info_id
                     LEFT JOIN
                         discounts d ON o.discount_code = d.discount_code
                     WHERE
-                        od.product_id = ? AND o.status_id = 5
+                        od.product_id = ?
+                        AND di.user_id = ?
+                        AND o.status_id = 5
                         AND o.date_create BETWEEN ? AND DATE_ADD(?, INTERVAL 0 DAY)
                     GROUP BY
                         o.id, o.discount_code, d.type, d.discount_value";
@@ -262,22 +236,19 @@ function getStatDetails($id, $date_start, $date_end, $order, $type)
             $database->close();
             return;
         }
-        $stmt_orders->bind_param("iss", $product_id, $date_start, $date_end);
+        $stmt_orders->bind_param("isss", $product_id, $username, $date_start, $date_end);
         $stmt_orders->execute();
         $orders_result = $stmt_orders->get_result();
 
-        // Calculate the total revenue for this product
         $product_revenue = 0;
         while ($order = $orders_result->fetch_assoc()) {
             $quantity_in_order = $order['quantity_in_order'];
             $discounted_price = $row['original_price'];
 
-            // Apply discount if applicable
             if ($order['discount_code'] && $order['discount_type']) {
                 if ($order['discount_type'] == 'PR') {
                     $discounted_price = round($row['original_price'] - ($row['original_price'] * $order['discount_value'] / 100), 0);
                 } elseif ($order['discount_type'] == 'AR') {
-                    // For AR, we need the total quantity in the order (across all products)
                     $sql_total_order_qty = "SELECT SUM(quantity) AS total_qty FROM order_details WHERE order_id = ?";
                     $stmt_total_order_qty = $database->conn->prepare($sql_total_order_qty);
                     if ($stmt_total_order_qty === false) {
@@ -302,7 +273,6 @@ function getStatDetails($id, $date_start, $date_end, $order, $type)
         }
         $stmt_orders->close();
 
-        // Add product to the array
         $products[] = [
             'id' => $row['product_id'],
             'name' => $row['name'],
@@ -316,15 +286,17 @@ function getStatDetails($id, $date_start, $date_end, $order, $type)
         $total_quantity += $row['total_quantity_sold'];
     }
 
-    // Sort the products based on the specified order and type
-    $key_values = array_column($products, $order);
-    if ($type == "ASC") {
-        array_multisort($key_values, SORT_ASC, $products);
-    } else if ($type == "DESC") {
-        array_multisort($key_values, SORT_DESC, $products);
+    // Sắp xếp sản phẩm theo yêu cầu
+    if (!empty($products)) {
+        $key_values = array_column($products, $order);
+        if ($type == "ASC") {
+            array_multisort($key_values, SORT_ASC, $products);
+        } else if ($type == "DESC") {
+            array_multisort($key_values, SORT_DESC, $products);
+        }
     }
 
-    // Display the table
+    // Hiển thị bảng chi tiết
     echo '
     <table id="content-product">
     <thead class="menu">
@@ -332,27 +304,24 @@ function getStatDetails($id, $date_start, $date_end, $order, $type)
             <th data-order="id">Mã SP</th>
             <th>Ảnh</th>
             <th data-order="name">Tên Sản Phẩm</th>
-            <th data-order="price">Giá</th>
-            <th data-order="total">Tổng doanh thu</th>
-
+            <th data-order="original_price">Giá</th>
+            <th data-order="total_revenue">Tổng doanh thu</th>
         </tr>
     </thead>
     <tbody class="table-content" id="content">';
 
     foreach ($products as $product) {
         echo '<tr>
-            <td class="id">' . $product['id'] . '</td>
+            <td class="id">' . htmlspecialchars($product['id']) . '</td>
             <td class="image">
                 <img src="../' . htmlspecialchars($product['image_path']) . '" alt="image not found" style="width: 50px; height: auto;">
             </td>
             <td class="name">' . htmlspecialchars($product['name']) . '</td>
             <td class="price">' . money_format($product['original_price']) . '</td>
             <td class="total">' . money_format($product['total_revenue']) . '</td>
-
         </tr>';
     }
 
-    // Add the total row
     echo '<tr>
         <td></td>
         <td></td>
