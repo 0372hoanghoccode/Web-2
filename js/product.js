@@ -24,12 +24,10 @@ function renderProductHTML(data) {
           <div class="product-img">
             <div class="product-action">
               <div class="product-action--wrapper">
-                <a href="index.php?page=product_detail&pid=${
-                  product.id || product.product_id
-                }" class="product-action--btn product-action__detail">Chi tiết</a>
-                <input type="hidden" class="productId" value="${
-                  product.id || product.product_id
-                }"/>
+                <a href="index.php?page=product_detail&pid=${product.id || product.product_id
+      }" class="product-action--btn product-action__detail">Chi tiết</a>
+                <input type="hidden" class="productId" value="${product.id || product.product_id
+      }"/>
                 <button class="product-action--btn product-action__addToCart ${notAllowed}">Thêm vào giỏ</button>
               </div>
             </div>
@@ -39,13 +37,11 @@ function renderProductHTML(data) {
                 alt="${product.product_name || product.name}" />
             </div>
           </div>
-          <a href="index.php?page=product_detail&pid=${
-            product.id || product.product_id
-          }" >
+          <a href="index.php?page=product_detail&pid=${product.id || product.product_id
+      }" >
             <div class="product-detail">
-                <p class="product-title">${
-                  product.name || product.product_name
-                }</p>
+                <p class="product-title">${product.name || product.product_name
+      }</p>
                 <p class="product-price">${formatPrice}</p>
             </div>
           </a>
@@ -135,9 +131,25 @@ function renderProductsPerPage(
 }
 
 $(document).ready(function () {
+  // Khôi phục bộ lọc từ localStorage khi tải trang
+  if (localStorage.getItem("listCategoryIds")) {
+    listCategoryIds = JSON.parse(localStorage.getItem("listCategoryIds"));
+    listCategoryIds.forEach((id) => {
+      $(`input[name="theloai"][data="${id}"]`).prop("checked", true);
+    });
+  }
+  if (localStorage.getItem("priceRange")) {
+    priceRange = localStorage.getItem("priceRange");
+    $(`input[name="giaban"][data="${priceRange}"]`).prop("checked", true).attr("checked", "checked");
+  }
+
   // Tự load sản phẩm ở lần đầu vào trang
   if (!localStorage.getItem("keyword")) {
-    renderProductsPerPage(1);
+    renderProductsPerPage(1, listCategoryIds, priceRange, keyword);
+  } else {
+    keyword = localStorage.getItem("keyword");
+    renderProductsPerPage(1, listCategoryIds, priceRange, keyword);
+    document.querySelector("#searchInput").value = keyword;
   }
 
   // Sử dụng Event Delegation cho các nút phân trang
@@ -149,31 +161,21 @@ $(document).ready(function () {
     renderProductsPerPage(current_page, listCategoryIds, priceRange, keyword);
   });
 
-  if (localStorage.getItem("keyword")) {
-    keyword = localStorage.getItem("keyword");
-    renderProductsPerPage(1, listCategoryIds, priceRange, keyword);
-  }
-
-  // Xử lý click nút search
-  if (localStorage.getItem("keyword")) {
-    keyword = localStorage.getItem("keyword");
-    renderProductsPerPage(1, listCategoryIds, priceRange, keyword);
-    resetFilter();
-    document.querySelector("#searchInput").value = keyword;
-    // // Xoá localStorage khi bấm nút search lưu
-    // localStorage.removeItem("keyword");
-  } else {
+  // Xử lý click nút search trong product.js (nếu có)
+  $("#searchButton").click(function () {
     keyword = document.querySelector("#searchInput").value;
-    $("#searchButton").click(function () {
-      renderProductsPerPage(1, listCategoryIds, priceRange, keyword);
-      resetFilter();
-    });
-  }
+    renderProductsPerPage(1, listCategoryIds, priceRange, keyword);
+  });
+
+  // Xử lý nút Reset
+  $(".reset_theloai").click(function (e) {
+    e.preventDefault(); // Ngăn reload mặc định của thẻ <a>
+    resetFilter(); // Gọi hàm reset
+    renderProductsPerPage(1); // Render lại danh sách sản phẩm không có bộ lọc
+  });
 
   // Lọc nâng cao theo thể loại
   $('input[name="theloai"]').click(function () {
-    // Nếu click vào mà ckb.selected = true thì add vào mảng
-    // Ngược lại thì bỏ khỏi mảng
     const categoryIdData = $(this).attr("data");
     if ($(this).is(":checked")) {
       listCategoryIds.push(+categoryIdData);
@@ -182,8 +184,6 @@ $(document).ready(function () {
         (categoryId) => categoryId != categoryIdData
       );
     }
-
-    // Tự load sản phẩm ở lần đầu vào trang
     renderProductsPerPage(1, listCategoryIds, priceRange, keyword);
   });
 
@@ -226,8 +226,18 @@ function resetFilter() {
   ckbs.forEach((ckb) => {
     if (ckb.checked) {
       ckb.checked = false;
+      ckb.removeAttribute("checked"); // Đảm bảo xóa thuộc tính checked
     }
   });
+  listCategoryIds = [];
+  priceRange = null;
+  keyword = null; // Reset cả keyword nếu cần
+  localStorage.removeItem("listCategoryIds");
+  localStorage.removeItem("priceRange");
+  localStorage.removeItem("keyword"); // Xóa keyword trong localStorage
+  if (document.querySelector("#searchInput")) {
+    document.querySelector("#searchInput").value = ""; // Xóa nội dung ô tìm kiếm
+  }
 }
 
 function uncheckPriceRange(currentCkb) {
