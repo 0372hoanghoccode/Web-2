@@ -70,7 +70,7 @@ function send_code($email)
   $database = new connectDB();
   $code = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
   $msg = "Your mail verification code is: $code";
-  $title = "Fahasa Verification Code";
+  $title = "Boocify Verification Code";
   $sql = "SELECT * FROM verify_code where email='$email'";
   $result = $database->query($sql);
   if (mysqli_num_rows($result) > 0) {
@@ -82,7 +82,7 @@ function send_code($email)
   $msg = wordwrap($msg, 70);
 
   // send email
-  $mailrs = $mailer->sendMail($email, $title, $msg); 
+  $mailrs = $mailer->sendMail($email, $title, $msg);
   // $mail  = mail($email, $title, $msg);
   $database->close();
   if ($mailrs) {
@@ -130,7 +130,7 @@ function registerNewAccount($username, $email, $fullname, $phoneNumber, $address
   // Nếu như username chưa tồn tại, thì tạo tài khoản
   $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-  $sqlInsertAccount = "INSERT INTO accounts (username, password, role_id, status,email) 
+  $sqlInsertAccount = "INSERT INTO accounts (username, password, role_id, status,email)
                       VALUES ('$username', '$hashedPassword', 3, 1,'$email')";
   $sqlInsertUserInfo = "INSERT INTO delivery_infoes (user_id, fullname, phone_number, address, city, district, ward)
                             VALUES ('$username', '$fullname', '$phoneNumber', '$address', '$city', '$district', '$ward')";

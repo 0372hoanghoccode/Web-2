@@ -1,9 +1,10 @@
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2024 at 04:40 PM
+-- Generation Time: Nov 25, 2025 at 04:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `backend_web2`
+-- Database: `db_web2`
 --
 
 -- --------------------------------------------------------
@@ -40,10 +41,10 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`username`, `password`, `role_id`, `status`, `email`) VALUES
-('adminfahasa', '$2y$10$496hMq30QBeRcWUOBWwT9OIiadH9yATeAmh0Kd85B1qCwTpcCA6Iq', 1, 1, 'admin@gmail.com'),
-('customerfahasa', '$2y$10$EvqvVH183r/F347XOsPXvOvMbJyy.lOtDoN3UioCJWhP0ylF7hYtW', 3, 1, 'customer@gmail.com'),
+('admin', '$2y$10$496hMq30QBeRcWUOBWwT9OIiadH9yATeAmh0Kd85B1qCwTpcCA6Iq', 1, 1, 'admin@gmail.com'),
+('customer', '$2y$10$EvqvVH183r/F347XOsPXvOvMbJyy.lOtDoN3UioCJWhP0ylF7hYtW', 3, 1, 'customer@gmail.com'),
 ('minhne04', '$2y$10$kj/i/S9lDmsK9Br44rWMOeDRiPkLYsbxsk.gA/xpzJbArwW2u834G', 3, 1, 'minhne04@gmail.com'),
-('stafffahasa', '$2y$10$8BrxqGno5iZoDhTzhlLb5u/6QzGhGZgIcxFeqyZiJV2rOcafvr/Va', 2, 1, 'staff@gmail.com'),
+('staff', '$2y$10$8BrxqGno5iZoDhTzhlLb5u/6QzGhGZgIcxFeqyZiJV2rOcafvr/Va', 2, 1, 'staff@gmail.com'),
 ('triwjbu1212', '$2y$10$UZxqa5DNDv.7M06aU6EB3.wpKWiS.Ny4lL.FN0x8wEXLhwa1bgr42', 3, 1, 'echosans57@gmail.com'),
 ('triwjbu13', '$2y$10$qzmvOZuUtohyTfB1ro6vwetlx2MCLWVOlWpkTD7.aWb0/E6v//FEO', 3, 1, 'minhtriqt04@gmail.com');
 
@@ -210,10 +211,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `status`, `delete_date`, `create_date`, `update_date`) VALUES
-(1, ' Tâm lý học ', 1, NULL, '2024-04-27', '2024-05-09'),
-(2, ' Tâm linh - tôn giáo ', 1, NULL, '2024-04-27', '2024-05-09'),
-(3, ' Lịch sử Việt Nam ', 1, NULL, '2024-04-27', '2024-05-09'),
-(4, '  Ngôn tình ', 1, NULL, '2024-04-27', '2024-05-09');
+(1, ' Tâm lý học ', 1, NULL, '2025-04-27', '2025-05-09'),
+(2, ' Tâm linh - tôn giáo ', 1, NULL, '2025-04-27', '2025-05-09'),
+(3, ' Lịch sử Việt Nam ', 1, NULL, '2025-04-27', '2025-05-09'),
+(4, '  Ngôn tình ', 1, NULL, '2025-04-27', '2025-05-09');
 
 -- --------------------------------------------------------
 
@@ -324,13 +325,13 @@ CREATE TABLE `delivery_infoes` (
 --
 
 INSERT INTO `delivery_infoes` (`user_info_id`, `user_id`, `fullname`, `phone_number`, `address`, `city`, `district`, `ward`) VALUES
-(1, 'customerfahasa', 'Lữ Quang Minhaaa', '0931814480', '280 An Dương Vương', 'TP. Hồ Chí Minh', 'Quận 5', 'Phường 03'),
-(2, 'customerfahasa', 'Tèo Ú aaa', '0931814480', '273 An Dương Vương', 'TP. Hồ Chí Minh', 'Quận 5', 'Phường 03'),
-(3, 'customerfahasa', 'Dương Chươnggg', '0911311312', '280 An Dương Vương', 'TP. Hồ Chí Minh', 'Quận 5', 'Phường 03'),
+(1, 'customer', 'Lữ Quang Minhaaa', '0931814480', '280 An Dương Vương', 'TP. Hồ Chí Minh', 'Quận 5', 'Phường 03'),
+(2, 'customer', 'Tèo Ú aaa', '0931814480', '273 An Dương Vương', 'TP. Hồ Chí Minh', 'Quận 5', 'Phường 03'),
+(3, 'customer', 'Dương Chươnggg', '0911311312', '280 An Dương Vương', 'TP. Hồ Chí Minh', 'Quận 5', 'Phường 03'),
 (4, 'minhne04', 'Lữ Quang Minh', '0931814480', '528 Hưng Phú', 'TP. Hồ Chí Minh', 'Quận 8', 'Phường 09'),
-(5, 'adminfahasa', 'Lữ Quang Minh', '0931814480', '528 Hưng Phú', 'TP. Hồ Chí Minh', 'Quận 8', 'Phường 09'),
-(6, 'stafffahasa', 'Nguyễn Minh Trí', '0983479999', '200 Phạm Văn Đồng', 'TP. Hồ Chí Minh', 'Quận Gò Vấp', 'Phường 01'),
-(7, 'customerfahasa', 'Nguyễn Thế Ngọc', '0377927824', '20 Lê Minh Xuân', 'TP. Hồ Chí Minh', 'Quận Bình Tân', 'Phường Bình Hưng Hòa'),
+(5, 'admin', 'Lữ Quang Minh', '0931814480', '528 Hưng Phú', 'TP. Hồ Chí Minh', 'Quận 8', 'Phường 09'),
+(6, 'staff', 'Nguyễn Minh Trí', '0983479999', '200 Phạm Văn Đồng', 'TP. Hồ Chí Minh', 'Quận Gò Vấp', 'Phường 01'),
+(7, 'customer', 'Nguyễn Thế Ngọc', '0377927824', '20 Lê Minh Xuân', 'TP. Hồ Chí Minh', 'Quận Bình Tân', 'Phường Bình Hưng Hòa'),
 (8, 'minhne04', 'Lữ Quang Minh', '0931814480', '502 Hưng Phú', 'TP. Hồ Chí Minh', 'Quận 8', 'Phường 09'),
 (10, 'triwjbu13', 'Nguyễn Minh Trí', '0394080644', '115 Mạc Đĩnh Chi', 'Vĩnh Phúc', 'Vĩnh Yên', 'Phường Tích Sơn'),
 (11, 'triwjbu1212', 'Nguyễn Minh Trí', '0394080644', '115 Mạc Đĩnh Chi', 'Bắc Giang', 'Bắc Giang', 'Phường Thọ Xương');
@@ -358,8 +359,8 @@ CREATE TABLE `discounts` (
 --
 
 INSERT INTO `discounts` (`discount_code`, `discount_value`, `type`, `start_date`, `end_date`, `status`, `delete_date`, `create_date`, `update_date`) VALUES
-('SALE50K', 50000, 'AR', '2024-04-01', '2030-04-01', 1, NULL, '2024-05-09', '2024-05-09'),
-('SALENUAGIA', 50, 'PR', '2024-04-01', '2031-04-01', 1, NULL, '2024-05-09', '2024-05-09');
+('SALE50K', 50000, 'AR', '2025-04-01', '2030-04-01', 1, NULL, '2025-05-09', '2025-05-09'),
+('SALENUAGIA', 50, 'PR', '2025-04-01', '2031-04-01', 1, NULL, '2025-05-09', '2025-05-09');
 
 -- --------------------------------------------------------
 
@@ -533,41 +534,41 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `publisher_id`, `image_path`, `create_date`, `update_date`, `price`, `quantity`, `supplier_id`, `status`) VALUES
-(1, 'THAO TÚNG CẢM XÚC: LÀM SAO THOÁT KHỎI CHIẾC BẪY VÔ', 3, 'assets/images/product/image_1.jpg', '2024-04-01', '2024-04-01', 109000, 0, 1, 1),
-(2, 'TỰ DO KHÔNG YÊU ĐƯƠNG', 4, 'assets/images/product/image_2.jpg', '2024-04-01', '2024-04-01', 169000, 0, 1, 1),
-(3, 'ĐỪNG THÁCH THỨC NHÂN TÍNH', 5, 'assets/images/product/image_3.jpg', '2024-04-01', '2024-04-01', 196000, 0, 1, 1),
-(4, 'NÓI LUÔN CHO NÓ VUÔNG', 6, 'assets/images/product/image_4.jpg', '2024-04-01', '2024-04-01', 108000, 0, 1, 1),
-(5, 'TRẮC ẨN VỚI CHÍNH MÌNH', 7, 'assets/images/product/image_5.jpg', '2024-04-01', '2024-04-01', 158000, 0, 1, 1),
-(6, 'CON NGƯỜI VÀ BIỂU TƯỢNG', 6, 'assets/images/product/image_6.jpg', '2024-04-01', '2024-04-01', 450000, 0, 1, 1),
-(7, 'DÁM SỐNG HƯỚNG NỘI VÀ CỰC KỲ NHẠY CẢM', 6, 'assets/images/product/image_7.jpg', '2024-04-01', '2024-04-01', 99000, 0, 1, 1),
-(8, 'TỚ ĐÃ TỪNG SỢ HÃI - LỜI KHUYÊN TỪ CHUYÊN GIA TÂM L', 5, 'assets/images/product/image_8.jpg', '2024-04-01', '2024-04-01', 75000, 0, 1, 1),
-(9, 'NGHIÊN CỨU PHÂN TÂM HỌC', 6, 'assets/images/product/image_9.jpg', '2024-04-01', '2024-04-01', 135000, 0, 1, 1),
-(10, 'TƯ DUY NHƯ NHÀ TÂM LÝ HỌC', 6, 'assets/images/product/image_10.jpg', '2024-04-01', '2024-04-01', 139000, 0, 1, 1),
-(11, 'CON QUÁI VẬT TRONG TÂM TRÍ – NHỮNG CA BỆNH TÂM LÝ ', 3, 'assets/images/product/image_11.jpg', '2024-04-01', '2024-04-01', 148000, 0, 1, 1),
-(12, 'LÝ DO ĐỂ SỐNG TIẾP', 8, 'assets/images/product/image_12.jpg', '2024-04-01', '2024-04-01', 115000, 0, 1, 1),
-(13, 'THIỀN ĐỊNH MỖI NGÀY', 5, 'assets/images/product/image_13.jpg', '2024-04-01', '2024-04-01', 118000, 0, 1, 1),
-(14, 'MỌI VIỆC ĐỀU CÓ THỂ GIẢI QUYẾT - THÁO GỠ KHÓ KHĂN ', 5, 'assets/images/product/image_14.jpg', '2024-04-01', '2024-04-01', 138000, 0, 1, 1),
-(15, 'LÀM SAO HỌC HẾT ĐƯỢC NHÂN SINH', 5, 'assets/images/product/image_15.jpg', '2024-04-01', '2024-04-01', 169000, 0, 1, 1),
-(16, 'CHIÊM TINH PHÙ THỦY - ÚM BA LA ... SOI RA TÍNH CÁC', 6, 'assets/images/product/image_16.jpg', '2024-04-01', '2024-04-01', 216000, 0, 1, 1),
-(17, 'BÙA CHÚ - GIẢI THÍCH CÁC TRÒ MẸO VÀ PHÉP BÍ THUẬT ', 6, 'assets/images/product/image_17.jpg', '2024-04-01', '2024-04-01', 59000, 0, 1, 1),
-(18, 'NGÀY TẬN THẾ - LỜI TIÊN TRI VỀ TƯƠNG LAI VÀ THẾ GI', 9, 'assets/images/product/image_18.jpg', '2024-04-01', '2024-04-01', 189000, 0, 1, 1),
-(19, 'TANG LỄ CỦA NGƯỜI AN NAM (BÌA CỨNG)', 6, 'assets/images/product/image_19.jpg', '2024-04-01', '2024-04-01', 289000, 0, 1, 1),
-(20, 'CÁ HỒI - HÀNH TRÌNH TỈNH THỨC', 4, 'assets/images/product/image_20.jpg', '2024-04-01', '2024-04-01', 99000, 0, 1, 1),
-(21, 'Ba Đồn mạn thuật', 2, 'assets/images/product/image_21.jpg', '2024-04-01', '2024-04-01', 545000, 0, 2, 1),
-(22, 'Bộ Sách Hội Kín', 2, 'assets/images/product/image_22.jpg', '2024-04-01', '2024-04-01', 149000, 0, 2, 1),
-(23, 'Chìm nổi ở Sài Gòn – Những cảnh đời bần cùng ở một', 2, 'assets/images/product/image_23.jpg', '2024-04-01', '2024-04-01', 259000, 0, 2, 1),
-(27, 'Tâm lý Dân Tộc An Nam', 2, 'assets/images/product/image_27.jpg', '2024-04-01', '2024-04-01', 149000, 0, 2, 1),
-(39, 'Năm Tháng Tĩnh Lặng, Kiếp Này Bình Yên', 10, 'assets/images/product/image_39.jpg', '2024-04-01', '2024-04-01', 138000, 0, 3, 1),
-(40, 'Eo Thon Nhỏ', 11, 'assets/images/product/image_40.jpg', '2024-04-01', '2024-04-01', 239000, 0, 3, 1),
-(41, 'Mãi Mãi Là Bao Xa', 11, 'assets/images/product/image_41.jpg', '2024-04-01', '2024-04-01', 135000, 0, 3, 1),
-(42, 'Chỉ Muốn Thương Anh, Chiều Anh, Nuôi Anh', 8, 'assets/images/product/image_42.jpg', '2024-04-01', '2024-04-01', 259000, 0, 3, 1),
-(43, 'Bến Xe', 8, 'assets/images/product/image_43.jpg', '2024-04-01', '2024-04-01', 76000, 0, 3, 1),
-(44, 'Thất Tịch Không Mưa', 4, 'assets/images/product/image_44.jpg', '2024-04-01', '2024-04-01', 86000, 0, 3, 1),
-(45, 'Rung Động Chỉ Vì Em', 3, 'assets/images/product/image_45.jpg', '2024-04-01', '2024-04-01', 189000, 0, 3, 1),
-(46, 'All In Love - Ngập Tràn Yêu Thương', 4, 'assets/images/product/image_46.jpg', '2024-04-01', '2024-04-01', 119000, 0, 3, 1),
-(47, 'Yêu Em Từ Cái Nhìn Đầu Tiên', 8, 'assets/images/product/image_47.jpg', '2024-04-01', '2024-04-01', 179000, 0, 3, 1),
-(48, 'Em Vốn Thích Cô Độc, Cho Đến Khi Có Anh', 8, 'assets/images/product/image_48.jpg', '2024-04-01', '2024-04-01', 108000, 0, 3, 1),
-(49, 'Chờ Em Lớn Nhé Được Không?', 8, 'assets/images/product/image_49.jpg', '2024-04-01', '2024-04-01', 99000, 0, 3, 1);
+(1, 'THAO TÚNG CẢM XÚC: LÀM SAO THOÁT KHỎI CHIẾC BẪY VÔ', 3, 'assets/images/product/image_1.jpg', '2025-04-01', '2025-04-01', 109000, 0, 1, 1),
+(2, 'TỰ DO KHÔNG YÊU ĐƯƠNG', 4, 'assets/images/product/image_2.jpg', '2025-04-01', '2025-04-01', 169000, 0, 1, 1),
+(3, 'ĐỪNG THÁCH THỨC NHÂN TÍNH', 5, 'assets/images/product/image_3.jpg', '2025-04-01', '2025-04-01', 196000, 0, 1, 1),
+(4, 'NÓI LUÔN CHO NÓ VUÔNG', 6, 'assets/images/product/image_4.jpg', '2025-04-01', '2025-04-01', 108000, 0, 1, 1),
+(5, 'TRẮC ẨN VỚI CHÍNH MÌNH', 7, 'assets/images/product/image_5.jpg', '2025-04-01', '2025-04-01', 158000, 0, 1, 1),
+(6, 'CON NGƯỜI VÀ BIỂU TƯỢNG', 6, 'assets/images/product/image_6.jpg', '2025-04-01', '2025-04-01', 450000, 0, 1, 1),
+(7, 'DÁM SỐNG HƯỚNG NỘI VÀ CỰC KỲ NHẠY CẢM', 6, 'assets/images/product/image_7.jpg', '2025-04-01', '2025-04-01', 99000, 0, 1, 1),
+(8, 'TỚ ĐÃ TỪNG SỢ HÃI - LỜI KHUYÊN TỪ CHUYÊN GIA TÂM L', 5, 'assets/images/product/image_8.jpg', '2025-04-01', '2025-04-01', 75000, 0, 1, 1),
+(9, 'NGHIÊN CỨU PHÂN TÂM HỌC', 6, 'assets/images/product/image_9.jpg', '2025-04-01', '2025-04-01', 135000, 0, 1, 1),
+(10, 'TƯ DUY NHƯ NHÀ TÂM LÝ HỌC', 6, 'assets/images/product/image_10.jpg', '2025-04-01', '2025-04-01', 139000, 0, 1, 1),
+(11, 'CON QUÁI VẬT TRONG TÂM TRÍ – NHỮNG CA BỆNH TÂM LÝ ', 3, 'assets/images/product/image_11.jpg', '2025-04-01', '2025-04-01', 148000, 0, 1, 1),
+(12, 'LÝ DO ĐỂ SỐNG TIẾP', 8, 'assets/images/product/image_12.jpg', '2025-04-01', '2025-04-01', 115000, 0, 1, 1),
+(13, 'THIỀN ĐỊNH MỖI NGÀY', 5, 'assets/images/product/image_13.jpg', '2025-04-01', '2025-04-01', 118000, 0, 1, 1),
+(14, 'MỌI VIỆC ĐỀU CÓ THỂ GIẢI QUYẾT - THÁO GỠ KHÓ KHĂN ', 5, 'assets/images/product/image_14.jpg', '2025-04-01', '2025-04-01', 138000, 0, 1, 1),
+(15, 'LÀM SAO HỌC HẾT ĐƯỢC NHÂN SINH', 5, 'assets/images/product/image_15.jpg', '2025-04-01', '2025-04-01', 169000, 0, 1, 1),
+(16, 'CHIÊM TINH PHÙ THỦY - ÚM BA LA ... SOI RA TÍNH CÁC', 6, 'assets/images/product/image_16.jpg', '2025-04-01', '2025-04-01', 216000, 0, 1, 1),
+(17, 'BÙA CHÚ - GIẢI THÍCH CÁC TRÒ MẸO VÀ PHÉP BÍ THUẬT ', 6, 'assets/images/product/image_17.jpg', '2025-04-01', '2025-04-01', 59000, 0, 1, 1),
+(18, 'NGÀY TẬN THẾ - LỜI TIÊN TRI VỀ TƯƠNG LAI VÀ THẾ GI', 9, 'assets/images/product/image_18.jpg', '2025-04-01', '2025-04-01', 189000, 0, 1, 1),
+(19, 'TANG LỄ CỦA NGƯỜI AN NAM (BÌA CỨNG)', 6, 'assets/images/product/image_19.jpg', '2025-04-01', '2025-04-01', 289000, 0, 1, 1),
+(20, 'CÁ HỒI - HÀNH TRÌNH TỈNH THỨC', 4, 'assets/images/product/image_20.jpg', '2025-04-01', '2025-04-01', 99000, 0, 1, 1),
+(21, 'Ba Đồn mạn thuật', 2, 'assets/images/product/image_21.jpg', '2025-04-01', '2025-04-01', 545000, 0, 2, 1),
+(22, 'Bộ Sách Hội Kín', 2, 'assets/images/product/image_22.jpg', '2025-04-01', '2025-04-01', 149000, 0, 2, 1),
+(23, 'Chìm nổi ở Sài Gòn – Những cảnh đời bần cùng ở một', 2, 'assets/images/product/image_23.jpg', '2025-04-01', '2025-04-01', 259000, 0, 2, 1),
+(27, 'Tâm lý Dân Tộc An Nam', 2, 'assets/images/product/image_27.jpg', '2025-04-01', '2025-04-01', 149000, 0, 2, 1),
+(39, 'Năm Tháng Tĩnh Lặng, Kiếp Này Bình Yên', 10, 'assets/images/product/image_39.jpg', '2025-04-01', '2025-04-01', 138000, 0, 3, 1),
+(40, 'Eo Thon Nhỏ', 11, 'assets/images/product/image_40.jpg', '2025-04-01', '2025-04-01', 239000, 0, 3, 1),
+(41, 'Mãi Mãi Là Bao Xa', 11, 'assets/images/product/image_41.jpg', '2025-04-01', '2025-04-01', 135000, 0, 3, 1),
+(42, 'Chỉ Muốn Thương Anh, Chiều Anh, Nuôi Anh', 8, 'assets/images/product/image_42.jpg', '2025-04-01', '2025-04-01', 259000, 0, 3, 1),
+(43, 'Bến Xe', 8, 'assets/images/product/image_43.jpg', '2025-04-01', '2025-04-01', 76000, 0, 3, 1),
+(44, 'Thất Tịch Không Mưa', 4, 'assets/images/product/image_44.jpg', '2025-04-01', '2025-04-01', 86000, 0, 3, 1),
+(45, 'Rung Động Chỉ Vì Em', 3, 'assets/images/product/image_45.jpg', '2025-04-01', '2025-04-01', 189000, 0, 3, 1),
+(46, 'All In Love - Ngập Tràn Yêu Thương', 4, 'assets/images/product/image_46.jpg', '2025-04-01', '2025-04-01', 119000, 0, 3, 1),
+(47, 'Yêu Em Từ Cái Nhìn Đầu Tiên', 8, 'assets/images/product/image_47.jpg', '2025-04-01', '2025-04-01', 179000, 0, 3, 1),
+(48, 'Em Vốn Thích Cô Độc, Cho Đến Khi Có Anh', 8, 'assets/images/product/image_48.jpg', '2025-04-01', '2025-04-01', 108000, 0, 3, 1),
+(49, 'Chờ Em Lớn Nhé Được Không?', 8, 'assets/images/product/image_49.jpg', '2025-04-01', '2025-04-01', 99000, 0, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -640,9 +641,9 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `name`, `email`, `number_phone`, `status`, `delete_date`, `create_date`, `update_date`) VALUES
-(1, ' Nhã Nam ', ' info@nhanam.com ', ' 0324253224', 1, NULL, '2024-05-09', '2024-05-09'),
-(2, ' Omega Plus ', ' info@omegaplus.vn ', ' 0932329922', 1, NULL, '2024-05-09', '2024-05-09'),
-(3, 'Minh Quang Books', 'info@minhquangbooks.com', '0975225265', 1, NULL, '2024-05-09', '2024-05-09');
+(1, ' Nhã Nam ', ' info@nhanam.com ', ' 0324253224', 1, NULL, '2025-05-09', '2025-05-09'),
+(2, ' Omega Plus ', ' info@omegaplus.vn ', ' 0932329922', 1, NULL, '2025-05-09', '2025-05-09'),
+(3, 'Minh Quang Books', 'info@minhquangbooks.com', '0975225265', 1, NULL, '2025-05-09', '2025-05-09');
 
 -- --------------------------------------------------------
 
@@ -661,12 +662,12 @@ CREATE TABLE `verify_code` (
 --
 
 INSERT INTO `verify_code` (`email`, `code`, `time_send`) VALUES
-('admin@gmail.com', '890678', '2024-05-03 09:21:29'),
-('customer@gmail.com', '325786', '2024-05-15 04:22:03'),
-('echosans57@gmail.com', '631292', '2024-05-16 09:37:03'),
-('minhne04@gmail.com', '325786', '2024-05-15 04:22:03'),
-('minhtriqt04@gmail.com', '482407', '2024-05-16 09:10:10'),
-('staff@gmail.com', '325786', '2024-05-15 04:22:03');
+('admin@gmail.com', '890678', '2025-05-03 09:21:29'),
+('customer@gmail.com', '325786', '2025-05-15 04:22:03'),
+('echosans57@gmail.com', '631292', '2025-05-16 09:37:03'),
+('minhne04@gmail.com', '325786', '2025-05-15 04:22:03'),
+('minhtriqt04@gmail.com', '482407', '2025-05-16 09:10:10'),
+('staff@gmail.com', '325786', '2025-05-15 04:22:03');
 
 --
 -- Indexes for dumped tables

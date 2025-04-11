@@ -161,10 +161,10 @@ class pagnation
                         </td>';
                             echo '</tr>';
                         }
-                        echo ' 
+                        echo '
                         </tbody>
                         </table>
-                    
+
                         </div>';
                     }
                     break;
@@ -198,10 +198,10 @@ class pagnation
                         //         echo '<td class="status" >Không hoạt động</td>';
                         //     }
                         //     $disabled = ($row['status'] == 0) ? 'disabled' : '';
-                        //     // echo '<td class="status">' . $row['status'] . '</td>';                          
+                        //     // echo '<td class="status">' . $row['status'] . '</td>';
                         //     echo '<td class="actions">
-                        //      <button class="actions--edit" id="edit-status" ' . $disabled . '>Sửa</button>  
-                        //      <button class="actions--delete" id="delete-status" ' . $disabled . '>Xoá</button> 
+                        //      <button class="actions--edit" id="edit-status" ' . $disabled . '>Sửa</button>
+                        //      <button class="actions--delete" id="delete-status" ' . $disabled . '>Xoá</button>
                         // </td>
                         // </tr>';
                         // }
@@ -217,20 +217,20 @@ class pagnation
                                 echo '<td class="status">Không hoạt động</td>';
                             }
 
-                            // Kiểm tra status để quyết định ẩn nút  
+                            // Kiểm tra status để quyết định ẩn nút
                             if ($row['status'] == 0) {
-                                echo '<td class="actions">  
-                                        <span>Không thể sửa/Xoá</span>  
+                                echo '<td class="actions">
+                                        <span>Không thể sửa/Xoá</span>
                                       </td>';
                             } else {
-                                echo '<td class="actions">  
-                                        <button class="actions--edit" id="edit-status">Sửa</button>  
-                                        <button class="actions--delete" id="delete-status">Xoá</button>  
+                                echo '<td class="actions">
+                                        <button class="actions--edit" id="edit-status">Sửa</button>
+                                        <button class="actions--delete" id="delete-status">Xoá</button>
                                       </td>';
                             }
                             echo '</tr>';
                         }
-                        echo ' 
+                        echo '
                     </tbody>
                     </table>
                     </div>';
@@ -281,7 +281,7 @@ class pagnation
                             </tr>';
                         }
 
-                        echo ' 
+                        echo '
                             </tbody>
                         </table>
                     </div>';
@@ -342,7 +342,7 @@ class pagnation
                         </td>
                         </tr>';
                         }
-                        echo ' 
+                        echo '
                     </tbody>
                     </table>
                     </div>';
@@ -379,7 +379,7 @@ class pagnation
                             if ($row['status'] == 0) $status = "Không hoạt động";
 
                             echo '<td class="status" value="active">' . $status . '</td>';
-                            if ($row['username'] == "adminfahasa") {
+                            if ($row['username'] == "admin") {
                                 echo '<td class="actions">
                                 <button class="actions--pass">Đổi mật khẩu</button>
                                 </td>
@@ -392,7 +392,7 @@ class pagnation
                         </tr>';
                             }
                         }
-                        echo ' 
+                        echo '
                     </tbody>
                     </table>
                     </div>';
@@ -407,7 +407,7 @@ class pagnation
                             <th data-order="id">Mã tác giả</th>
                             <th data-order="name">Tên tác giả</th>
                             <th  data-order="email">Email tác giả</th>
-                            <th>Trạng thái</th>                                    
+                            <th>Trạng thái</th>
                             <th>Hành động</th>
                             </tr>
                         </thead>
@@ -429,11 +429,11 @@ class pagnation
                             <button class="actions--edit">Sửa</button>';
                             if ($row['status'] == 1)
                                 echo '<button class="actions--delete">Xoá</button>
-                            
+
                         </td>
                         </tr>';
                         }
-                        echo ' 
+                        echo '
                     </tbody>
                     </table>
                     </div>';
@@ -481,20 +481,20 @@ class pagnation
 
                             if ($row['status'] == 1) {
                                 echo '<td class="status">Đang hoạt động</td>';
-                                echo '<td class="actions">  
-                                        <button class="actions--edit">Sửa</button>  
-                                        <button class="actions--delete">Xoá</button>  
+                                echo '<td class="actions">
+                                        <button class="actions--edit">Sửa</button>
+                                        <button class="actions--delete">Xoá</button>
                                       </td>';
                             } else {
                                 echo '<td class="status">Không hoạt động</td>';
-                                echo '<td class="actions">  
-                                        <span>Không thể sửa/Xoá</span>  
+                                echo '<td class="actions">
+                                        <span>Không thể sửa/Xoá</span>
                                       </td>';
                             }
 
                             echo '</tr>';
                         }
-                        echo ' 
+                        echo '
                     </tbody>
                     </table>
                     </div>';
@@ -507,11 +507,11 @@ class pagnation
                     <table id="content-product">
                         <thead class="menu">
                             <tr>
-                            <th  data-order="id">Mã thể loại</th>                 
+                            <th  data-order="id">Mã thể loại</th>
                             <th data-order="name">Tên thể loại</th>
                             <th>Số lượng sách</th>
                             <th>Trạng thái</th>
-                                      
+
                             <th>Hành động</th>
                             </tr>
                         </thead>
@@ -524,8 +524,8 @@ class pagnation
                             echo '<td class="id">'  . $row['id'] . '</td>';
                             echo '<td class="name">' . $row['name'] . '</td>';
                             $sql_amount =
-                                "SELECT SUM(quantity) as total 
-                                FROM `products`  as p 
+                                "SELECT SUM(quantity) as total
+                                FROM `products`  as p
                                 INNER JOIN category_details as cd ON cd.category_id = " . $row['id'] . "
                                 WHERE p.id = cd.product_id";
                             $result_amount = $database->query($sql_amount);
@@ -540,20 +540,20 @@ class pagnation
 
                             if ($row['status'] == 1) {
                                 echo '<td class="status">Đang hoạt động</td>';
-                                echo '<td class="actions">  
-                                        <button class="actions--edit">Sửa</button>  
-                                        <button class="actions--delete">Xoá</button>  
+                                echo '<td class="actions">
+                                        <button class="actions--edit">Sửa</button>
+                                        <button class="actions--delete">Xoá</button>
                                       </td>';
                             } else {
                                 echo '<td class="status">Không hoạt động</td>';
-                                echo '<td class="actions">  
-                                        <span>Không thể sửa/Xoá</span>  
+                                echo '<td class="actions">
+                                        <span>Không thể sửa/Xoá</span>
                                       </td>';
                             }
 
                             echo '</tr>';
                         }
-                        echo ' 
+                        echo '
                     </tbody>
                     </table>
                     </div>';
@@ -565,12 +565,12 @@ class pagnation
                     <table id="content-product">
                         <thead class="menu">
                             <tr>
-                            <th data-order="discount_code">Tên mã giảm giá</th>                 
+                            <th data-order="discount_code">Tên mã giảm giá</th>
                             <th>Loại mã giảm giá</th>
                             <th data-order="discount_value">Giá trị mã giảm giá</th>
                             <th data-order="start_date">Ngày bắt đầu</th>
                             <th data-order="end_date">Ngày kết thúc</th>
-                            <th>Trạng thái</th>                                    
+                            <th>Trạng thái</th>
                             <th>Hành động</th>
                             </tr>
                         </thead>
@@ -606,7 +606,7 @@ class pagnation
                             echo '</td>
                         </tr>';
                         }
-                        echo ' 
+                        echo '
                     </tbody>
                     </table>
                     </div>';
@@ -618,8 +618,8 @@ class pagnation
                     <table id="content-product">
                         <thead class="menu">
                             <tr>
-                            <th data-order="id">Mã quyền</th>                 
-                            <th data-order="name">Tên quyền</th>      
+                            <th data-order="id">Mã quyền</th>
+                            <th data-order="name">Tên quyền</th>
                             </tr>
                         </thead>
                         <tbody class="table-content" id="content">
@@ -639,7 +639,7 @@ class pagnation
                             // </td>
                             echo '</tr>';
                         }
-                        echo ' 
+                        echo '
                     </tbody>
                     </table>
                     </div>';
@@ -1034,7 +1034,7 @@ function getUserFilterSQL($data)
 // function getOrderFilterSQL($data)
 // {
 //     $filter = "";
-//     $join = ""; 
+//     $join = "";
 
 //     if (!empty($data)) {
 //         if (!empty($data['id_customer'])) {
@@ -1042,11 +1042,11 @@ function getUserFilterSQL($data)
 //             if ($filter != "") $filter .= " AND ";
 //             $filter = $filter . "di.user_id LIKE '%" . $data['id_customer'] . "%'";
 //         }
-//         if (!empty($data['id_staff'])) {     
+//         if (!empty($data['id_staff'])) {
 //             if ($filter != "") $filter .= " AND ";
 //             $filter = $filter . "`staff_id` LIKE '%" . $data['id_staff'] . "%'";
 //         }
-//         if (!empty($data['id_Order'])) {     
+//         if (!empty($data['id_Order'])) {
 //             if ($filter != "") $filter .= " AND ";
 //             $filter .= "id = " . $data['id_Order'];
 //         }

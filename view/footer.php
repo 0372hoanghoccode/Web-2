@@ -30,7 +30,7 @@
             </div>
             <div>
               <a style="text-decoration: none; display: flex">
-                Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG
+                Boocify.com nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG
                 hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất
                 cả Hệ Thống Fahasa trên toàn quốc.
               </a>

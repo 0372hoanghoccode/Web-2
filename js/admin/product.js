@@ -248,7 +248,7 @@ function filterBtn() {
     } else {
       message_price_end.innerHTML = "";
     }
-    
+
     if (check == true) {
       message_productId.innerHTML = "";
       message_start.innerHTML = "";
@@ -408,7 +408,7 @@ var js = function () {
                     <div class="modal-body-2">
                         <div class="flex">
                             <label for="name">Tên sản phẩm</label>
-                            <input id="name" type="text" add-index="2" placeholder="Tên sản phẩm" disabled>
+                            <input id="name" type="text" add-index="2" placeholder="Tên sản phẩm" >
                             <span class="error-message name hidden"></span>
                         </div>
                         <div class="flex">
@@ -460,6 +460,8 @@ var js = function () {
             </div>
         </div>
     </div>`;
+
+    // code ấn disabled các nút sửa
   // document.querySelector(".actions--edit").addEventListener("click", (e) => {
 
   //     modal.innerHTML = modal_html;
@@ -472,46 +474,46 @@ var js = function () {
   //  });
 
   // Lấy tất cả các nút sửa
-  const editButtons = document.querySelectorAll(".actions--edit");
+  // const editButtons = document.querySelectorAll(".actions--edit");
 
   // Duyệt qua từng nút và gán sự kiện
-  editButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      // Thay thế nội dung của modal
-      modal.innerHTML = modal_html;
+  // editButtons.forEach((button) => {
+  //   button.addEventListener("click", (e) => {
+  //     // Thay thế nội dung của modal
+  //     modal.innerHTML = modal_html;
 
-      // Chờ một chút để đảm bảo nội dung HTML mới đã được thêm vào DOM
-      setTimeout(() => {
-        const selectStatus = document.querySelector("#status");
-        const priceInput = document.getElementById("price");
-        const supplier = document.getElementById("supplier_id");
-        const publisher = document.getElementById("publisher_id");
-        const category = document.getElementById("category-multiselect");
-        const author = document.getElementById("author-multiselect");
+  //     // Chờ một chút để đảm bảo nội dung HTML mới đã được thêm vào DOM
+  //     setTimeout(() => {
+  //       const selectStatus = document.querySelector("#status");
+  //       const priceInput = document.getElementById("price");
+  //       const supplier = document.getElementById("supplier_id");
+  //       const publisher = document.getElementById("publisher_id");
+  //       const category = document.getElementById("category-multiselect");
+  //       const author = document.getElementById("author-multiselect");
 
-        console.log("Price Input:", priceInput);
+  //       console.log("Price Input:", priceInput);
 
-        if (selectStatus && priceInput) {
-          console.log("Status Value:", selectStatus.value);
+  //       if (selectStatus && priceInput) {
+  //         console.log("Status Value:", selectStatus.value);
 
-          // Áp dụng thuộc tính disabled
-          if (selectStatus.value == 1 || selectStatus.value == 0) {
-            priceInput.disabled = true;
-            supplier.disabled = true;
-            publisher.disabled = true;
-            category.disabled = true;
-            author.disabled = true;
-            category.style.cursor = "default";
-            author.style.cursor = "default";
-          } else {
-            priceInput.disabled = false;
-          }
-        } else {
-          console.error("Select or Price Input not found");
-        }
-      }, 0); // Thực hiện sau khi HTML được thêm vào DOM
-    });
-  });
+  //         // Áp dụng thuộc tính disabled
+  //         if (selectStatus.value == 1 || selectStatus.value == 0) {
+  //           priceInput.disabled = true;
+  //           supplier.disabled = true;
+  //           publisher.disabled = true;
+  //           category.disabled = true;
+  //           author.disabled = true;
+  //           category.style.cursor = "default";
+  //           author.style.cursor = "default";
+  //         } else {
+  //           priceInput.disabled = false;
+  //         }
+  //       } else {
+  //         console.error("Select or Price Input not found");
+  //       }
+  //     }, 0); // Thực hiện sau khi HTML được thêm vào DOM
+  //   });
+  // });
 
   const modal = document.querySelector("#modal");
 
@@ -1377,7 +1379,7 @@ var js = function () {
       price_err.classList.remove("hidden");
       price_err.innerHTML = "Giá phải là số dương";
       success = false;
-    } 
+    }
     if (publisher.value == "") {
       publisher.classList.add("error-field");
       publisher_err.classList.remove("hidden");

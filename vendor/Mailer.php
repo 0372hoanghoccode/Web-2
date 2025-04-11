@@ -20,11 +20,11 @@ class Mailer
             $this->mail->Host = 'smtp.gmail.com';
             $this->mail->SMTPAuth = true;
             $this->mail->Username = 'vuh47009@gmail.com';
-            $this->mail->Password = 'bdlt focu ymok cvua';
-            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $this->mail->Port = 465;
+            $this->mail->Password = 'oeir xuhb lxrp qowt';
+            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $this->mail->Port = 587;
 
-            $this->mail->setFrom('fahasa.bookstore.official@gmail.com', 'Fahasa Bookstore');
+            $this->mail->setFrom('vuh47009@gmail.com', 'Boocify Bookstore');
         } catch (Exception $e) {
             echo "Mailer Error: " . $this->mail->ErrorInfo;
         }
@@ -41,7 +41,7 @@ class Mailer
         return true;
     } catch (Exception $e) {
         error_log("Mail error: " . $this->mail->ErrorInfo);
-        echo "Mail error: " . $this->mail->ErrorInfo; 
+        echo "Mail error: " . $this->mail->ErrorInfo;
         return false;
     }
 }
