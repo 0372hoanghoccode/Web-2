@@ -157,6 +157,7 @@ class pagnation
                             echo  money_format($row['price']) . '</td> <td class="amount">' . $row['quantity'] . '</td>';
                             // button
                             echo '<td class="actions ">
+                               <button class="actions--delete">Xoá</button>
                         <button class="actions--edit" >Sửa</button>
                         </td>';
                             echo '</tr>';
@@ -186,25 +187,25 @@ class pagnation
 
                     ';
 
-                        // while ($row = mysqli_fetch_array($result)) {
-                        //     echo '<tr>';
-                        //     echo '<td class="id">'  . $row['id'] . '</td>';
-                        //     echo '<td class="name">' . $row['name'] . '</td>';
-                        //     echo '<td class="email">' . $row['email'] . '</td>';
-                        //     echo '<td class="number_phone">' . $row['number_phone'] . '</td>';
-                        //     if ($row['status'] == 1) {
-                        //         echo '<td class="status" >Đang hoạt động</td>';
-                        //     } else {
-                        //         echo '<td class="status" >Không hoạt động</td>';
-                        //     }
-                        //     $disabled = ($row['status'] == 0) ? 'disabled' : '';
-                        //     // echo '<td class="status">' . $row['status'] . '</td>';
-                        //     echo '<td class="actions">
-                        //      <button class="actions--edit" id="edit-status" ' . $disabled . '>Sửa</button>
-                        //      <button class="actions--delete" id="delete-status" ' . $disabled . '>Xoá</button>
-                        // </td>
-                        // </tr>';
-                        // }
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo '<tr>';
+                            echo '<td class="id">'  . $row['id'] . '</td>';
+                            echo '<td class="name">' . $row['name'] . '</td>';
+                            echo '<td class="email">' . $row['email'] . '</td>';
+                            echo '<td class="number_phone">' . $row['number_phone'] . '</td>';
+                            if ($row['status'] == 1) {
+                                echo '<td class="status" >Đang hoạt động</td>';
+                            } else {
+                                echo '<td class="status" >Không hoạt động</td>';
+                            }
+                            $disabled = ($row['status'] == 0) ? 'disabled' : '';
+                            // echo '<td class="status">' . $row['status'] . '</td>';
+                            echo '<td class="actions">
+                             <button class="actions--edit" id="edit-status" ' . $disabled . '>Sửa</button>
+                             <button class="actions--delete" id="delete-status" ' . $disabled . '>Xoá</button>
+                        </td>
+                        </tr>';
+                        }
                         while ($row = mysqli_fetch_array($result)) {
                             echo '<tr>';
                             echo '<td class="id">'  . $row['id'] . '</td>';
@@ -456,22 +457,22 @@ class pagnation
 
                     ';
 
-                        // while ($row = mysqli_fetch_array($result)) {
-                        //     echo '<tr>';
-                        //     echo '<td class="id">'  . $row['id'] . '</td>';
-                        //     echo '<td class="name">' . $row['name'] . '</td>';
-                        //     echo '<td class="email">' . $row['email'] . '</td>';
-                        //     if ($row['status'] == 1) {
-                        //         echo '<td class="status" >Đang hoạt động</td>';
-                        //     } else {
-                        //         echo '<td class="status" >Không hoạt động</td>';
-                        //     }
-                        //     echo '<td class="actions">
-                        //     <button class="actions--edit">Sửa</button>
-                        //     <button class="actions--delete">Xoá</button>
-                        // </td>
-                        // </tr>';
-                        // }
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo '<tr>';
+                            echo '<td class="id">'  . $row['id'] . '</td>';
+                            echo '<td class="name">' . $row['name'] . '</td>';
+                            echo '<td class="email">' . $row['email'] . '</td>';
+                            if ($row['status'] == 1) {
+                                echo '<td class="status" >Đang hoạt động</td>';
+                            } else {
+                                echo '<td class="status" >Không hoạt động</td>';
+                            }
+                            echo '<td class="actions">
+                            <button class="actions--edit">Sửa</button>
+                            <button class="actions--delete">Xoá</button>
+                        </td>
+                        </tr>';
+                        }
 
                         while ($row = mysqli_fetch_array($result)) {
                             echo '<tr>';

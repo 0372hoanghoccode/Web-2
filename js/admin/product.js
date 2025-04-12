@@ -1256,80 +1256,80 @@ var js = function () {
     });
   }
 
-  // // delete
+  // delete
 
-  // const del_btns = document.getElementsByClassName("actions--delete");
+  const del_btns = document.getElementsByClassName("actions--delete");
 
-  // for (var i = 0; i < del_btns.length; i++) {
-  //     del_btns[i].addEventListener('click', function () {
-  //         let selected_content = this.parentNode.parentNode;
-  //         let product_id = selected_content.querySelector('.id').innerHTML;
-  //         let product_name = selected_content.querySelector('.name').innerHTML;
-  //         let img_link = selected_content.querySelector('img').src;
-  //         var del_html = `
-  //     <div class="modal-edit-product-container show" id="modal-edit-container">
-  //     <div class="modal-edit-product">
-  //         <div class="modal-header">
-  //             <h3>Xác nhận xóa sản phẩm</h3>
-  //             <button class="btn-close" id="btnClose"><i class="fa-solid fa-xmark"></i></button>
-  //         </div>
-  //         <div class="modal-body">
-  //             <div class="del-body">
-  //                 <div class="image">
-  //                     <img id="imagePreview" src="${img_link}" alt="image not found">
-  //                 </div>
-  //                 <div class="thongtin">
-  //                     <div><span style="font-weight: bold;">Mã sản phẩm :</span> <span id="product-delete-id">${product_id}</span> </div>
-  //                     <div><span style="font-weight: bold;">Tên sản phẩm :</span> <span>${product_name}</span> </div>
-  //                 </div>
-  //             </div>
-  //             <div class="del-btn-container">
-  //                 <input type="button" value="Hủy" class="del-cancel">
-  //                 <input type="button" value="Xác nhận" class="del-confirm">
-  //             </div>
-  //         </div>
-  //     </div>
-  // </div>
+  for (var i = 0; i < del_btns.length; i++) {
+      del_btns[i].addEventListener('click', function () {
+          let selected_content = this.parentNode.parentNode;
+          let product_id = selected_content.querySelector('.id').innerHTML;
+          let product_name = selected_content.querySelector('.name').innerHTML;
+          let img_link = selected_content.querySelector('img').src;
+          var del_html = `
+      <div class="modal-edit-product-container show" id="modal-edit-container">
+      <div class="modal-edit-product">
+          <div class="modal-header">
+              <h3>Xác nhận xóa sản phẩm</h3>
+              <button class="btn-close" id="btnClose"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="modal-body">
+              <div class="del-body">
+                  <div class="image">
+                      <img id="imagePreview" src="${img_link}" alt="image not found">
+                  </div>
+                  <div class="thongtin">
+                      <div><span style="font-weight: bold;">Mã sản phẩm :</span> <span id="product-delete-id">${product_id}</span> </div>
+                      <div><span style="font-weight: bold;">Tên sản phẩm :</span> <span>${product_name}</span> </div>
+                  </div>
+              </div>
+              <div class="del-btn-container">
+                  <input type="button" value="Hủy" class="del-cancel">
+                  <input type="button" value="Xác nhận" class="del-confirm">
+              </div>
+          </div>
+      </div>
+  </div>
 
-  //     `;
+      `;
 
-  //         modal.innerHTML = del_html;
-  //         $('.del-confirm').click(function (e) {
-  //             e.preventDefault();
-  //             var $id = $('#product-delete-id').html();
-  //             $.ajax({
-  //                 url: '../controller/admin/product.controller.php',
-  //                 type: "post",
-  //                 dataType: 'html',
-  //                 data: {
-  //                     function: "delete",
-  //                     id: $id
-  //                 }
-  //             }).done(function (result) {
-  //                 loadItem();
-  //                 $("#sqlresult").html(result);
-  //                 modal_edit_container.classList.remove('show');
-  //             })
-  //         })
+          modal.innerHTML = del_html;
+          $('.del-confirm').click(function (e) {
+              e.preventDefault();
+              var $id = $('#product-delete-id').html();
+              $.ajax({
+                  url: '../controller/admin/product.controller.php',
+                  type: "post",
+                  dataType: 'html',
+                  data: {
+                      function: "delete",
+                      id: $id
+                  }
+              }).done(function (result) {
+                  loadItem();
+                  $("#sqlresult").html(result);
+                  modal_edit_container.classList.remove('show');
+              })
+          })
 
-  //         // Button close
-  //         const modal_edit_container = document.querySelector("#modal-edit-container");
+          // Button close
+          const modal_edit_container = document.querySelector("#modal-edit-container");
 
-  //         const btnClose = document.querySelector("#btnClose");
-  //         // console.log(btnClose)
-  //         btnClose.addEventListener('click', () => {
-  //             // console.log(modal_edit_container)
-  //             modal_edit_container.classList.remove('show')
-  //         });
-  //         // Button cancel
-  //         const btnCancel = document.querySelector(".del-cancel");
-  //         // console.log(btnClose)
-  //         btnCancel.addEventListener('click', () => {
-  //             // console.log(modal_edit_container)
-  //             modal_edit_container.classList.remove('show')
-  //         });
-  //     });
-  // }
+          const btnClose = document.querySelector("#btnClose");
+          // console.log(btnClose)
+          btnClose.addEventListener('click', () => {
+              // console.log(modal_edit_container)
+              modal_edit_container.classList.remove('show')
+          });
+          // Button cancel
+          const btnCancel = document.querySelector(".del-cancel");
+          // console.log(btnClose)
+          btnCancel.addEventListener('click', () => {
+              // console.log(modal_edit_container)
+              modal_edit_container.classList.remove('show')
+          });
+      });
+  }
   function checkInput() {
     var success = true;
 

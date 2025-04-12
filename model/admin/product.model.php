@@ -7,21 +7,58 @@ function product_delete($id)
 {
   $database = new connectDB();
 
-  $sql = 'UPDATE products SET status="0" WHERE id="' . $id . '"';
-  $result = $database->query($sql);
+  // Kiểm tra xem sản phẩm có trong bảng order_details hay không
+  $sql_check = "SELECT COUNT(*) as count FROM order_details WHERE product_id = '" . $id . "'";
+  $result_check = $database->query($sql_check);
+  $row_check = mysqli_fetch_array($result_check);
+  $is_sold = $row_check['count'] > 0;
 
-  $database->close();
-  if ($result) {
-    return (object) array(
-      'success' => true,
-      'message' => "<span class='success'>Xóa sản phẩm với mã $id thành công</span>"
-    );
+  if ($is_sold) {
+    // Nếu sản phẩm đã được bán (tồn tại trong order_details), chỉ cập nhật trạng thái (soft delete)
+    $sql = 'UPDATE products SET status="0" WHERE id="' . $id . '"';
+    $result = $database->query($sql);
+
+    $database->close();
+    if ($result) {
+      return (object) array(
+        'success' => true,
+        'message' => "<span class='success'>Đã chuyển trạng thái sản phẩm với mã $id thành Ngừng kinh doanh</span>"
+      );
+    } else {
+      $error = "<span class='failed'>Không thể chuyển trạng thái sản phẩm với mã $id</span>";
+      return (object) array(
+        'success' => false,
+        'message' => $error
+      );
+    }
   } else {
-    $error = "<span class='failed'>Xóa sản phẩm với mã $id KHÔNG thành công</span>";
-    return (object) array(
-      'success' => false,
-      'message' => $error
-    );
+    // Nếu sản phẩm chưa được bán (không tồn tại trong order_details), xóa thật (hard delete)
+
+    // Xóa các bản ghi liên quan trong category_details
+    $sql = 'DELETE FROM category_details WHERE product_id="' . $id . '"';
+    $database->execute($sql);
+
+    // Xóa các bản ghi liên quan trong author_details
+    $sql = 'DELETE FROM author_details WHERE product_id="' . $id . '"';
+    $database->execute($sql);
+
+    // Xóa bản ghi trong bảng products
+    $sql = 'DELETE FROM products WHERE id="' . $id . '"';
+    $result = $database->query($sql);
+
+    $database->close();
+    if ($result) {
+      return (object) array(
+        'success' => true,
+        'message' => "<span class='success'>Xóa sản phẩm với mã $id thành công</span>"
+      );
+    } else {
+      $error = "<span class='failed'>Xóa sản phẩm với mã $id KHÔNG thành công</span>";
+      return (object) array(
+        'success' => false,
+        'message' => $error
+      );
+    }
   }
 }
 
