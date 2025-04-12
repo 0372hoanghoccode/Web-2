@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -83,11 +83,11 @@
                 echo '
                     </div>
                     <div class="see-more" >
-                        <a href="index.php?page=product" class="see-more-btn">Xem thêm </a>
+                        <a href="index.php" class="see-more-btn">Xem thêm </a>
                     </div>
                 </div>';
         ?>
         <!-- END -->
     </div>
 </body>
-</html>
+</html> -->

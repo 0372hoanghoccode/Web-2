@@ -62,18 +62,20 @@ if (isset($_POST['getStats']) && $_POST['getStats'] && !empty($_POST["date_start
     echo getStats($_POST["date_start"], $_POST["date_end"]);
 }
 
-if (isset($_POST['getStatDetails']) && $_POST['getStatDetails'] && !empty($_POST["category_id"]) && !empty($_POST["date_start"]) && !empty($_POST["date_end"])) {
-    if (empty($_POST["orderby"])) {
-        echo getStatDetails($_POST["category_id"], $_POST["date_start"], $_POST["date_end"], "id", "ASC");
-    } else {
-        echo getStatDetails($_POST["category_id"], $_POST["date_start"], $_POST["date_end"], $_POST["orderby"], $_POST["order_type"]);
-    }
-}
-
 if (isset($_POST['checkFunction']) && $_POST['checkFunction'] && isset($_POST['function_id'])) {
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
     echo checkFunction($_SESSION['usernameAdmin'], $_POST['function_id']);
+}
+
+// Add handling for getUserOrderDetails
+if (isset($_POST['getUserOrderDetails']) && $_POST['getUserOrderDetails'] && !empty($_POST["username"]) && !empty($_POST["date_start"]) && !empty($_POST["date_end"])) {
+    echo getUserOrderDetails($_POST["username"], $_POST["date_start"], $_POST["date_end"]);
+}
+
+// Add handling for getOrderProducts
+if (isset($_POST['getOrderProducts']) && $_POST['getOrderProducts'] && !empty($_POST["order_id"])) {
+    echo getOrderProducts($_POST["order_id"]);
 }
 ?>

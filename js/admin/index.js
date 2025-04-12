@@ -23,27 +23,13 @@ $(document).ready(function () {
       }
     });
   });
+
   if (atHome) checkFunction();
-  $("#close").click(function () {
-    document.querySelector("#chitiet").classList.toggle("show");
-  });
+
   $("#filter").click(function () {
     $.ajax({
       url: "../controller/admin/index.controller.php",
       type: "post",
-      dataType: "html",
-      data: {
-        getBestSellers: true,
-        date_start: document.querySelector("#startdate").value,
-        date_end: document.querySelector("#enddate").value,
-      },
-    }).done(function (result) {
-      $(".result").html(result);
-      console.log(result);
-    });
-    $.ajax({
-      type: "post",
-      url: "../controller/admin/index.controller.php",
       dataType: "html",
       data: {
         getStats: true,
@@ -51,23 +37,67 @@ $(document).ready(function () {
         date_end: document.querySelector("#enddate").value,
       },
     }).done(function (result) {
-      if (result) {
-        $("#thongke-container").html(result);
-        document.querySelectorAll(".chitietbtn").forEach((btn) =>
-          btn.addEventListener("click", function () {
-            document.querySelector("#chitiet").classList.toggle("show");
-            document.querySelector("#title").querySelector("span").innerHTML =
-              btn.parentNode.querySelector(".sanpham").innerHTML;
-            title = btn.getAttribute("data-id");
-            orderby = "id";
-            order_type = "ASC";
-            StatDetail();
-          })
-        );
-      } else {
-        alert("Hệ thống gặp sự cố!");
-      }
+      $("#thongke-container").html(result);
+
+      // Set up event listeners for the detail buttons
+      document.querySelectorAll(".chitietbtn").forEach((btn) =>
+        btn.addEventListener("click", function () {
+          var username = btn.getAttribute("data-username");
+          var detailsRow = document.querySelector("#details-" + username);
+          var ordersContent = document.querySelector("#orders-content-" + username);
+
+          if (detailsRow.classList.contains("show")) {
+            detailsRow.classList.remove("show");
+          } else {
+            // Show the row
+            detailsRow.classList.add("show");
+
+            // Load order details immediately
+            $.ajax({
+              type: "post",
+              url: "../controller/admin/index.controller.php",
+              dataType: "html",
+              data: {
+                getUserOrderDetails: true,
+                username: username,
+                date_start: document.querySelector("#startdate").value,
+                date_end: document.querySelector("#enddate").value,
+              },
+            }).done(function (result) {
+              ordersContent.innerHTML = result;
+            });
+          }
+        })
+      );
     });
+  });
+
+  // Handle order products detail view via event delegation
+  $(document).on("click", ".xemchitiet", function () {
+    var orderId = $(this).data("order");
+    var productsRow = $("#products-row-" + orderId);
+    var productsContent = $("#products-content-" + orderId);
+
+    if (productsRow.is(":hidden")) {
+      productsRow.show();
+
+      // Load products if not already loaded
+      if (productsContent.find(".loading").length) {
+        $.ajax({
+          type: "post",
+          url: "../controller/admin/index.controller.php",
+          dataType: "html",
+          data: {
+            getOrderProducts: true,
+            order_id: orderId,
+          },
+        }).done(function (result) {
+          productsContent.html(result);
+        });
+      }
+    } else {
+      productsRow.hide();
+    }
   });
 
   $.ajax({
@@ -110,83 +140,71 @@ function renderSiderBars(data) {
       page: "home",
       name: "Trang chủ",
       icon: "fa-house",
-      page: "home",
       fncid: 1,
     },
     {
       page: "product",
       name: "Sản phẩm",
       icon: "fa-book",
-      page: "product",
       fncid: 2,
     },
     {
       page: "order",
       name: "Đơn hàng",
       icon: "fa-cart-shopping",
-      page: "order",
       fncid: 3,
     },
     {
       page: "account",
       name: "Thành viên",
       icon: "fa-user",
-      page: "account",
       fncid: 4,
     },
     {
       page: "publisher",
       name: "Nhà xuất bản",
       icon: "fa-upload",
-      page: "publisher",
       fncid: 5,
     },
     {
       page: "author",
       name: "Tác giả",
       icon: "fa-book-open-reader",
-      page: "author",
       fncid: 6,
     },
     {
       page: "category",
       name: "Thể loại sách",
       icon: "fa-list",
-      page: "category",
       fncid: 7,
     },
     {
       page: "supplier",
       name: "Nhà cung cấp",
       icon: "fa-industry",
-      page: "supplier",
       fncid: 8,
     },
     {
       page: "receipt",
       name: "Nhập hàng",
       icon: "fa-file-invoice",
-      page: "receipt",
       fncid: 9,
     },
-
     {
       page: "role",
       name: "Phân quyền",
       icon: "fa-gavel",
-      page: "role",
       fncid: 10,
     },
     {
       page: "discount",
-      name: "Khuyễn mãi",
+      name: "Khuyến mãi",
       icon: "fa-file-invoice",
-      page: "discount",
       fncid: 11,
     },
   ];
 
-  let html = ""; // Khởi tạo biến html ở đây
+  let html = "";
 
   sidebarItems.forEach((siderbarItem, index) => {
     let active = "";
@@ -202,14 +220,13 @@ function renderSiderBars(data) {
     active = page == siderbarItem.page ? "active" : "";
     if (page == null && siderbarItem.page == "home") {
       active = "active";
-      // return;
     }
 
     if (href == "#" && siderbarItem.fncid != 1) {
       nonActive = "nonActive";
     }
 
-    html += `<li class="sidebar__item ${active} ${nonActive}"  fncid="${siderbarItem.fncid}" page="${siderbarItem.page}">
+    html += `<li class="sidebar__item ${active} ${nonActive}" fncid="${siderbarItem.fncid}" page="${siderbarItem.page}">
               <a href="${href}"><i class="fa-solid ${siderbarItem.icon}"></i>${siderbarItem.name}</a>
             </li>`;
   });
@@ -255,51 +272,6 @@ function updateData4Boxes(data) {
   thanhvien.innerHTML = data.totalAccounts;
 }
 
-function StatDetail() {
-  $.ajax({
-    type: "post",
-    url: "../controller/admin/index.controller.php",
-    dataType: "html",
-    data: {
-      getStatDetails: true,
-      category_id: title,
-      date_start: document.querySelector("#startdate").value,
-      date_end: document.querySelector("#enddate").value,
-      orderby: orderby,
-      order_type: order_type,
-    },
-  }).done(function (result) {
-    $(".table-container").html(result);
-    var chitiet_table = document.querySelector("#chitiet-table");
-    chitiet_table
-      .querySelector("[data-order=" + "'" + orderby + "']")
-      .querySelector("." + order_type)
-      .classList.remove("hidden");
-
-    chitiet_table
-      .querySelector(".table-container")
-      .querySelectorAll("th")
-      .forEach((th) => {
-        if (th.hasAttribute("data-order"))
-          th.addEventListener("click", () => {
-            if (orderby == "")
-              orderby = chitiet_table
-                .querySelector("[data-order]")
-                .getAttribute("data-order");
-            if (
-              orderby == th.getAttribute("data-order") &&
-              order_type == "ASC"
-            ) {
-              order_type = "DESC";
-            } else {
-              order_type = "ASC";
-            }
-            orderby = th.getAttribute("data-order");
-            StatDetail();
-          });
-      });
-  });
-}
 function checkFunction() {
   $.ajax({
     type: "post",
