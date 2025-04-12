@@ -96,11 +96,23 @@ function getStats($date_start, $date_end)
         return;
     }
 
-    // Truy vấn để lấy danh sách khách hàng dựa trên user_id từ delivery_infoes
+    // Truy vấn để lấy top 5 khách hàng theo tổng doanh thu
     $sql = "SELECT
                 a.username,
                 di.user_id,
-                SUM(od.quantity) AS total_quantity
+                SUM(od.quantity * (
+                    CASE
+                        WHEN d.type = 'PR' THEN p.price * (1 - d.discount_value / 100)
+                        WHEN d.type = 'AR' THEN p.price - (
+                            d.discount_value / (
+                                SELECT SUM(od2.quantity)
+                                FROM order_details od2
+                                WHERE od2.order_id = o.id
+                            )
+                        )
+                        ELSE p.price
+                    END
+                )) AS total_revenue
             FROM
                 accounts a
             INNER JOIN
@@ -109,13 +121,20 @@ function getStats($date_start, $date_end)
                 orders o ON di.user_info_id = o.delivery_info_id
             INNER JOIN
                 order_details od ON o.id = od.order_id
+            INNER JOIN
+                products p ON od.product_id = p.id
+            LEFT JOIN
+                discounts d ON o.discount_code = d.discount_code
             WHERE
                 o.status_id = 5
                 AND o.date_create BETWEEN ? AND DATE_ADD(?, INTERVAL 0 DAY)
             GROUP BY
                 a.username, di.user_id
             HAVING
-                total_quantity > 0";
+                total_revenue > 0
+            ORDER BY
+                total_revenue DESC
+            LIMIT 5";
 
     $stmt = $database->conn->prepare($sql);
     if ($stmt === false) {
