@@ -1,8 +1,8 @@
 <?php
-  include_once("controller/category.controller.php");
-  include_once("controller/product.controller.php");
-  $items_per_page = 8;
-  $current_page = 1;
+include_once("controller/category.controller.php");
+include_once("controller/product.controller.php");
+$items_per_page = 8;
+$current_page = 1;
 ?>
 
 <!DOCTYPE html>
@@ -35,19 +35,19 @@
         <div class="sidebar-item">
           <div class="sidebar-item__title">
             <h2>Thể loại</h2>
-            <a href="index.php?page=product" class="reset_theloai"><i class="fa-solid fa-rotate-right"></i> Reset</a>
+            <a href="index.php" class="reset_theloai"><i class="fa-solid fa-rotate-right"></i> Reset</a>
           </div>
           <ul class="sidebar-item__list">
             <?php
-              $categories = getCategoryList();
-              foreach ($categories as $category) {
-                echo '
-                  <li>
-                    <input type="checkbox" id="theloai_'.$category['id'].'" data="'.$category['id'].'" name="theloai"/><label for="theloai_'.$category['id'].'">'.$category['name'].'</label>
-                  </li>';
-              }
+            $categories = getCategoryList();
+            foreach ($categories as $category) {
+              echo '
+                <li>
+                  <input type="checkbox" id="theloai_' . $category['id'] . '" data="' . $category['id'] . '" name="theloai"/><label for="theloai_' . $category['id'] . '">' . $category['name'] . '</label>
+                </li>';
+            }
             ?>
-            
+          </ul>
         </div>
         <div class="sidebar-item">
           <div class="sidebar-item__title">

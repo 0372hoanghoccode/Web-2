@@ -6,16 +6,12 @@ if (session_status() === PHP_SESSION_NONE) {
 include_once('model/connect.php');
 // Header
 require_once("view/header.php");
-// connectDB();
 // Content
 if (isset($_GET['page']) && $_GET['page'] != '') {
   $page = $_GET['page'];
 
   switch ($page) {
-    // Main page
-    case 'product':
-      require_once('view/pages/product.php');
-      break;
+    // Các trang khác
     case 'cart':
       require_once('view/pages/cart.php');
       break;
@@ -40,8 +36,8 @@ if (isset($_GET['page']) && $_GET['page'] != '') {
       break;
   }
 } else {
-  // Trang chủ
-  require_once('view/pages/home.php');
+  // Tải trang sản phẩm làm trang chủ
+  require_once('view/pages/product.php');
 }
 
 // Footer
