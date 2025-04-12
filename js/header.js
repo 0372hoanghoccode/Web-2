@@ -99,7 +99,7 @@ document.querySelector("#searchButton").addEventListener("click", (e) => {
   localStorage.setItem("priceRange", priceRange);
 
   if (currentPage != "product") {
-    window.location.href = "index.php?page=product";
+    window.location.href = "index.php?page=index";
   } else {
     location.reload();
   }

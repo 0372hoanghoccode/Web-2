@@ -30,7 +30,7 @@
       $show = "has-items";
       $cartQnt = count($_SESSION['cart']);
     } else {
-      $show = "no-items";  
+      $show = "no-items";
     }
   ?>
 
@@ -41,7 +41,7 @@
         <span class="cart-title-numbers">(<?=$cartQnt?> sản phẩm)</span>
       </div>
     </div>
-    
+
 
     <div class="cart-content <?php echo $show?>">
       <div class="cart-empty-wrapper">
@@ -52,7 +52,7 @@
             </div>
             <p>Chưa có sản phẩm trong giỏ hàng của bạn</p>
             <button class="button-shopping" title="Mua sắm ngay">
-              <a href="index.php?page=product">Mua sắm ngay</a>
+              <a href="index.php">Mua sắm ngay</a>
             </button>
           </div>
         </div>
@@ -67,7 +67,7 @@
             </div>
             <div>
               <span>Chọn tất cả
-                ( 
+                (
                 <span class="num-items-checkbox">0</span>
                 sản phẩm)
               </span>
@@ -90,13 +90,13 @@
 
                   if ($counter == $totalProducts) {
                     $closeDatabase = true;
-                  }         
-                  
+                  }
+
                   $productDetail = getProductDetailById($product['id'], $closeDatabase);
-                  
+
                   // Nếu sản phẩm có status = 0 thì không render và xoá khỏi cart
                   if ($productDetail['status'] == 0) {
-                  
+
                     foreach ($_SESSION['cart'] as $key => $cartProduct) {
                       if ($product['id'] == $cartProduct['id']) {
                         unset($_SESSION['cart'][$key]);
@@ -106,7 +106,7 @@
                     $autoReload = true;
                     continue;
                   }
-                  
+
                   $formatPrice = number_format($productDetail['price'], 0, ',', '.').' ₫';
 
                   $totalPrice = $productDetail['price'] * $product['amount'];
@@ -214,7 +214,7 @@
   </div>
   <script>
     $(document).ready(function () {
-      $('.checkout-button').click(function (e) { 
+      $('.checkout-button').click(function (e) {
         e.preventDefault();
 
         const selectedProducts = [];
@@ -240,7 +240,7 @@
           data: {
             abate: true,
             selectedProducts
-            
+
           }
         }).done(function(result) {
           window.location.href = "index.php?page=checkout";

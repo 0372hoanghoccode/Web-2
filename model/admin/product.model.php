@@ -1,8 +1,8 @@
-
 <?php
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__)  . $ds . '..') . $ds;
 include_once("{$base_dir}connect.php");
+
 function product_delete($id)
 {
   $database = new connectDB();
@@ -24,6 +24,7 @@ function product_delete($id)
     );
   }
 }
+
 function product_getCategories()
 {
   $database = new connectDB();
@@ -31,11 +32,12 @@ function product_getCategories()
   $result = $database->query($sql);
   $ans = "<option value=''>Chọn thể loại</option>";
   while ($row = mysqli_fetch_array($result)) {
-    if($row['status']==1)$ans = $ans . "<option value=" . $row["id"] . ">" . $row["name"] . "</option>\n";
+    if($row['status']==1) $ans = $ans . "<option value=" . $row["id"] . ">" . $row["name"] . "</option>\n";
   }
   $database->close();
   return $ans;
 }
+
 function product_getAuthors()
 {
   $database = new connectDB();
@@ -43,11 +45,12 @@ function product_getAuthors()
   $result = $database->query($sql);
   $ans = "<option value=''>Chọn tác giả</option>";
   while ($row = mysqli_fetch_array($result)) {
-    if($row['status']==1)$ans = $ans . "<option value=" . $row["id"] . ">" . $row["name"] . "</option>\n";
+    if($row['status']==1) $ans = $ans . "<option value=" . $row["id"] . ">" . $row["name"] . "</option>\n";
   }
   $database->close();
   return $ans;
 }
+
 function product_getPublishers()
 {
   $database = new connectDB();
@@ -60,6 +63,7 @@ function product_getPublishers()
   $database->close();
   return $ans;
 }
+
 function product_getSuppliers()
 {
   $database = new connectDB();
@@ -72,6 +76,7 @@ function product_getSuppliers()
   $database->close();
   return $ans;
 }
+
 function product_create($field)
 {
   $database = new connectDB();
@@ -108,29 +113,35 @@ function product_create($field)
     fwrite($ifp, base64_decode($data[1]));
     // clean up the file resource
     fclose($ifp);
-    $sql = "INSERT INTO products (id, name, publisher_id, image_path, create_date, update_date, price, quantity,supplier_id,status) 
-          VALUES ('" . $field['id'] . "', '" . $field['name'] . "', '" . $field['publisher_id'] . "', '" . $image_path .
-      "', '" . $date  . "', '" . $date  . "', '" . $field['price'] . "', '0','".$field['supplier_id']."','2') ";
+    // Sử dụng giá trị status từ dữ liệu gửi lên ($field['status'])
+    $sql = "INSERT INTO products (id, name, publisher_id, image_path, create_date, update_date, price, quantity, supplier_id, status)
+            VALUES ('" . $field['id'] . "', '" . $field['name'] . "', '" . $field['publisher_id'] . "', '" . $image_path .
+            "', '" . $date  . "', '" . $date  . "', '" . $field['price'] . "', '0','".$field['supplier_id']."','" . $field['status'] . "') ";
     $result = $database->execute($sql);
     if ($result) {
       $result = "<span class='success'>Tạo sản phẩm thành công</span>";
-      if(isset($field['category'])&& count($field['category'])>0){
+      if(isset($field['category']) && count($field['category']) > 0){
         foreach ($field['category'] as $category_id) {
           $sql = "INSERT INTO `category_details` (`product_id`, `category_id`) VALUES ('" . $field['id'] . "', '" . $category_id . "'); ";
           $database->execute($sql);
         }
       }
-      if(isset($field['author'])&& count($field['author'])>0){
+      if(isset($field['author']) && count($field['author']) > 0){
         foreach ($field['author'] as $author_id) {
           $sql = "INSERT INTO `author_details` (`product_id`, `author_id`) VALUES ('" . $field['id'] . "', '" . $author_id . "'); ";
           $database->execute($sql);
         }
       }
-    } else $result = "<span class='failed'>Tạo sản phẩm không thành công</span>";
+    } else {
+      $result = "<span class='failed'>Tạo sản phẩm không thành công</span>";
+    }
     $database->close();
     return ($result);
-  } else return "<span class='failed'>Sản phẩm" . $row['id'] . " đã tồn tại</span>";
+  } else {
+    return "<span class='failed'>Sản phẩm " . $row['id'] . " đã tồn tại</span>";
+  }
 }
+
 function product_edit($field)
 {
   $database = new connectDB();
@@ -164,28 +175,30 @@ function product_edit($field)
   $database->execute($sql);
   $sql = 'DELETE FROM author_details WHERE product_id="' . $field['id'] . '"';
   $database->execute($sql);
-  if(isset($field['category'])&&count($field['category'])>0){
+  if(isset($field['category']) && count($field['category']) > 0){
     foreach ($field['category'] as $category_id) {
       $sql = "INSERT INTO `category_details` (`product_id`, `category_id`) VALUES ('" . $field['id'] . "', '" . $category_id . "'); ";
       $database->execute($sql);
     }
   }
-  if(isset($field['author'])&&count($field['author'])>0){
+  if(isset($field['author']) && count($field['author']) > 0){
     foreach ($field['author'] as $author_id) {
       $sql = "INSERT INTO `author_details` (`product_id`, `author_id`) VALUES ('" . $field['id'] . "', '" . $author_id . "'); ";
       $database->execute($sql);
     }
   }
   $sql = "UPDATE products
-          SET name= '" . $field['name'] . "',publisher_id= '" . $field['publisher_id'] . "',image_path= '" . $image_path .
-    "',update_date= '" . $date  . "',price= '" . $field['price'] . "',supplier_id= '" . $field['supplier_id']. "',status= '" . $field['status']. "' WHERE id=" . $field['id'];
+          SET name= '" . $field['name'] . "', publisher_id= '" . $field['publisher_id'] . "', image_path= '" . $image_path .
+          "', update_date= '" . $date  . "', price= '" . $field['price'] . "', supplier_id= '" . $field['supplier_id']. "', status= '" . $field['status']. "' WHERE id=" . $field['id'];
 
   $result = $database->execute($sql);
-  
+
   $database->close();
   if ($result) {
     $result = "<span class='success'>Sửa sản phẩm thành công</span>";
-  } else $result = "<span class='failed'>Sửa sản phẩm không thành công</span>";
+  } else {
+    $result = "<span class='failed'>Sửa sản phẩm không thành công</span>";
+  }
 
   return ($result);
 }

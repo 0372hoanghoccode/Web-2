@@ -525,7 +525,6 @@ var js = function () {
       function: "getCategories",
     },
   }).done(function (result) {
-    // <span class="multiselect-content" value=1>Tâm lý học<i class="fa-solid fa-xmark cancel-multiselect"></i></span>
     category_content = result
       .replace("<option value=''>Chọn thể loại</option>", "")
       .replace(/option/gi, "span")
@@ -535,6 +534,7 @@ var js = function () {
         '<i class="fa-solid fa-xmark cancel-multiselect"></i></span>'
       );
   });
+
   $.ajax({
     url: "../controller/admin/product.controller.php",
     type: "post",
@@ -576,17 +576,16 @@ var js = function () {
                             <input type="file" name="choose-img" id="fileInput" accept="image/*">
                         </div>
                         <span class="error-message fileInput hidden"></span>
-
                     </div>
                     <div class="modal-body-2">
                         <div class="flex">
                             <label for="name">Tên sản phẩm</label>
-                            <input id="name" type="text" add-index="2" placeholder="Tên sản phẩm" >
+                            <input id="name" type="text" add-index="2" placeholder="Tên sản phẩm">
                             <span class="error-message name hidden"></span>
                         </div>
                         <div class="flex">
                             <label for="price">Giá sản phẩm</label>
-                            <input id="price" class = "priceClass" type="text" add-index="3" placeholder="Giá sản phẩm" >
+                            <input id="price" class="priceClass" type="text" add-index="3" placeholder="Giá sản phẩm">
                             <span class="error-message price hidden"></span>
                         </div>
                         <div class="flex">
@@ -609,26 +608,23 @@ var js = function () {
                             <span id="category-amount" style="padding:5px 0px 0px 5px;">Đã chọn 0 thể loại</span>
                         </div>
                         <div class="flex">
-                        <span style="display:flex;">
+                            <span style="display:flex;">
                                 <label for="categorySelect" style="flex: 50%">Tác giả</label>
                                 <button type="button" class="open-multiselect" id="author-multiselect">Thêm</button>
                             </span>
                             <span id="author-amount" style="padding:5px 0px 0px 5px;">Đã chọn 0 tác giả</span>
-                            <!-- <label for="author">Tác giả</label>
-                            <select id="author">
-                            </select> -->
                         </div>
                         <div class="flex">
                             <label for="status">Trạng thái</label>
                             <select id="status">
                                 <option value="1" selected>Đang kinh doanh</option>
-                                <option value="2" disabled>Chưa kinh doanh</option>
+                                <option value="2" >Chưa kinh doanh</option>
                                 <option value="0">Ngừng kinh doanh</option>
                             </select>
                         </div>
                     </div>
                     <input type="reset" value="Hủy" class="button-cancel">
-                    <input type="submit" value="Xác nhận" class="button-confirm" >
+                    <input type="submit" value="Xác nhận" class="button-confirm">
                 </form>
             </div>
         </div>
@@ -644,8 +640,12 @@ var js = function () {
       const modal_edit_container = modal.querySelector("#modal-edit-container");
       modal.querySelector("#choose-img-select").remove();
       modal.querySelector(".choose-img").classList.remove("hidden");
-      modal.querySelector("#status").parentElement.classList.add("hidden");
+      // Xóa dòng ẩn ô "Trạng thái"
+      // modal.querySelector("#status").parentElement.classList.add("hidden");
       modal.querySelector("#modal-header").innerHTML = "Thêm sản phẩm";
+
+      // Đặt giá trị mặc định cho ô "Trạng thái" khi thêm sản phẩm mới
+      modal.querySelector("#status").value = "1"; // "Đang kinh doanh"
 
       $.ajax({
         url: "../controller/admin/product.controller.php",
@@ -659,6 +659,7 @@ var js = function () {
           .querySelector("#modal")
           .querySelector("#publisher_id").innerHTML = result;
       });
+
       $.ajax({
         url: "../controller/admin/product.controller.php",
         type: "post",
@@ -671,6 +672,7 @@ var js = function () {
           .querySelector("#modal")
           .querySelector("#supplier_id").innerHTML = result;
       });
+
       modal
         .querySelector(".button-confirm")
         .addEventListener("click", function (e) {
@@ -691,6 +693,7 @@ var js = function () {
                 supplier_id: modal.querySelector("#supplier_id").value,
                 category: multiselect_array["category"],
                 author: multiselect_array["author"],
+                status: modal.querySelector("#status").value,
               },
             },
           }).done(function (result) {

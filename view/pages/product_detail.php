@@ -15,13 +15,13 @@
     <!-- Start: Detail product -->
     <div class="modal">
       <div class="prev_page">
-        <a href="?page=product">
+        <a href="index.php">
           <i class="fa-solid fa-left-long"></i>Trở về
         </a>
       </div>
       <div class="modal-container">
         <div class="modal-content">
-          <?php 
+          <?php
             if (isset($_GET['pid']) && (($_GET['pid']) != '')) {
               $productId = $_GET['pid'];
               $isAllowed = "";
@@ -59,7 +59,7 @@
               if ($publisherName == null) {
                 $publisherName = 'Đang cập nhật...';
               }
-              
+
               echo '
               <div class="modal-content__model-left">
                 <img src="'.$productDetail['image_path'].'" alt="'.$productDetail['product_name'].'" />
