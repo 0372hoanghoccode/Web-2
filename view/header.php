@@ -48,32 +48,32 @@
           </a>
         </div>
         <div class="headerCenter">
-          <div class="search-container">
-            <div class="input-wrapper">
-              <div class="searchInputContainer">
-                <input
-                  type="text"
-                  placeholder="Tìm kiếm sách ở đây nè..."
-                  name="search"
-                  id="searchInput"
-                />
-                <i class="fa-solid fa-circle-xmark hide"></i>
-              </div>
-              <button type="submit" id="searchButton">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
-            <div class="notification">
-              <div class="notification-title hide">
-                <h2>Kết quả tìm kiếm: </h2>
-              </div>
-              <div class="book-section">
-                <div class="books">
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="search-container">
+    <form action="index.php" method="GET" class="input-wrapper">
+      <div class="searchInputContainer">
+        <input
+          type="text"
+          placeholder="Tìm kiếm sách ở đây nè..."
+          name="search"
+          id="searchInput"
+        />
+        <i class="fa-solid fa-circle-xmark hide"></i>
+      </div>
+      <button type="submit" id="searchButton">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+    <div class="notification">
+      <div class="notification-title hide">
+        <h2>Kết quả tìm kiếm: </h2>
+      </div>
+      <div class="book-section">
+        <div class="books">
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
         <div class="headerRight">
           <?php

@@ -37,6 +37,9 @@ if (isset($_GET['page']) && $_GET['page'] != '') {
   }
 } else {
   // Tải trang sản phẩm làm trang chủ
+  if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $_SESSION['search_keyword'] = $_GET['search']; // Store search keyword in session
+  }
   require_once('view/pages/product.php');
 }
 

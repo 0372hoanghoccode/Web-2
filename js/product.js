@@ -161,9 +161,11 @@ $(document).ready(function () {
     renderProductsPerPage(current_page, listCategoryIds, priceRange, keyword);
   });
 
-  // Xử lý click nút search trong product.js (nếu có)
-  $("#searchButton").click(function () {
+  // Xử lý click nút search trong product.js
+  $("#searchButton").click(function (e) {
+    e.preventDefault(); // Prevent default if form submission handles it
     keyword = document.querySelector("#searchInput").value;
+    localStorage.setItem("keyword", keyword); // Store keyword
     renderProductsPerPage(1, listCategoryIds, priceRange, keyword);
   });
 

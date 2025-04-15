@@ -52,7 +52,6 @@ $current_page = 1;
         <div class="sidebar-item">
           <div class="sidebar-item__title">
             <h2>Giá bán</h2>
-            <!-- <button class="reset_giaban"><i class="fa-solid fa-rotate-right"></i> Reset</button> -->
           </div>
           <ul class="sidebar-item__list">
             <li>
@@ -80,6 +79,18 @@ $current_page = 1;
     </div>
     <!-- End: Collection section -->
   </div>
+
+  <script>
+    // Initialize search input with keyword from session
+    document.addEventListener('DOMContentLoaded', function() {
+      <?php if (isset($_SESSION['search_keyword']) && !empty($_SESSION['search_keyword'])): ?>
+        document.querySelector('#searchInput').value = '<?php echo htmlspecialchars($_SESSION['search_keyword']); ?>';
+        localStorage.setItem('keyword', '<?php echo htmlspecialchars($_SESSION['search_keyword']); ?>');
+        // Clear session after using
+        <?php unset($_SESSION['search_keyword']); ?>
+      <?php endif; ?>
+    });
+  </script>
 </body>
 
 </html>
