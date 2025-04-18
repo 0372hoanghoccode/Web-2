@@ -809,8 +809,8 @@ function getAuthorFilterSQL($data)
             } elseif ($data['author_status'] == "inactive") {
                 $filter = $filter . "status = 0 ";
             }
-        }
-
+        } 
+      
 
         if ($filter != "") $filter = "WHERE " . $filter;
     }
@@ -1071,59 +1071,75 @@ function getUserFilterSQL($data)
 //     }
 //     return $filter;
 // }
-
 function getOrderFilterSQL($data)
 {
-    $filter = "";  // Biến lưu trữ câu lệnh WHERE
-    $join = "";    // Biến lưu trữ câu lệnh JOIN
+    $filter = "";
+    $join = "";
+
+    $needJoinDeliveryInfo = false;
 
     if (!empty($data)) {
-        // Điều kiện kiểm tra và thiết lập JOIN nếu có id_customer
-        if (!empty($data['id_customer'])) {
-            // Thêm JOIN để kết nối với bảng delivery_infoes
-            $join = " INNER JOIN delivery_infoes di ON di.user_info_id = orders.delivery_info_id";
-
-            if ($filter != "") $filter .= " AND ";
-            $filter .= "di.user_id LIKE '%" . $data['id_customer'] . "%'";
+        if (!empty($data['id_customer']) || !empty($data['address'])) {
+            $needJoinDeliveryInfo = true;
         }
 
-        // Điều kiện lọc cho staff_id
+        if ($needJoinDeliveryInfo) {
+            $join = " INNER JOIN delivery_infoes di ON di.user_info_id = orders.delivery_info_id";
+        }
+
+        if (!empty($data['id_customer'])) {
+            if ($filter != "") $filter .= " AND ";
+            $filter .= "di.user_id LIKE '%" . addslashes($data['id_customer']) . "%'";
+        }
+
         if (!empty($data['id_staff'])) {
             if ($filter != "") $filter .= " AND ";
-            $filter .= "orders.staff_id LIKE '%" . $data['id_staff'] . "%'";
+            $filter .= "orders.staff_id LIKE '%" . addslashes($data['id_staff']) . "%'";
         }
 
-        // Điều kiện lọc theo id_Order
         if (!empty($data['id_Order'])) {
             if ($filter != "") $filter .= " AND ";
-            $filter .= "orders.id = " . $data['id_Order'];
+            $filter .= "orders.id = " . (int)$data['id_Order'];
         }
 
-        // Điều kiện lọc theo Order_status
         if (!empty($data['Order_status']) && $data['Order_status'] != "all") {
             if ($filter != "") $filter .= " AND ";
-            $filter .= "orders.status_id = " . $data['Order_status'];
+            $filter .= "orders.status_id = " . (int)$data['Order_status'];
         }
 
-        // Điều kiện lọc theo date_begin
         if (!empty($data['date_begin'])) {
             if ($filter != "") $filter .= " AND ";
-            $filter .= "orders.date_create >= '" . $data['date_begin'] . "'";
+            $filter .= "orders.date_create >= '" . addslashes($data['date_begin']) . "'";
         }
 
-        // Điều kiện lọc theo date_end
         if (!empty($data['date_end'])) {
             if ($filter != "") $filter .= " AND ";
-            $filter .= "orders.date_create <= '" . $data['date_end'] . "'";
+            $filter .= "orders.date_create <= '" . addslashes($data['date_end']) . "'";
+        }
+
+        if (!empty($data['address'])) {
+            $addr = addslashes($data['address']);
+            if ($filter != "") $filter .= " AND ";
+            $filter .= "(
+                di.address LIKE '%{$addr}%' OR
+                di.ward LIKE '%{$addr}%' OR
+                di.district LIKE '%{$addr}%' OR
+                di.city LIKE '%{$addr}%'
+            )";
         }
     }
 
-    // Kết hợp JOIN và WHERE nếu cần
     if ($filter != "") $filter = " WHERE " . $filter;
 
-    // Trả về chuỗi JOIN và WHERE kết hợp để hàm render() sử dụng
+    // // Debug xem join và filter
+    // echo "<pre>JOIN: $join\nFILTER: $filter</pre>";
+    // error_log("JOIN: " . $join);
+    // error_log("FILTER: " . $filter);
+
     return $join . $filter;
 }
+
+
 
 
 function money_format($money)

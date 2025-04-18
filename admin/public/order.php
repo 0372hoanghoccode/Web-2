@@ -38,6 +38,11 @@ $_SESSION["render"]->setTable("orders");
                 <input id="idStaff" type="text" placeholder="Nhập mã khách hàng" />
                 <p id="message_idStaff" class = "message"></p>
             </div>
+                <div class="body__filter--field body__filter--address">
+        <p>Địa chỉ giao</p>
+        <input id="address" type="text" placeholder="Nhập địa chỉ giao hàng" />
+        <p id="message_address" class="message"></p>
+    </div>
         </div>
 
         <div class="admin__content--body__filter--gr1">

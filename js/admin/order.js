@@ -8,6 +8,9 @@ function getFilterFromURL() {
     urlParams["idStaff"] != null ? urlParams["idStaff"] : "";
   filter_form.querySelector("#statusSelect").value =
     urlParams["status"] != null ? urlParams["status"] : "";
+  // FIXED: Added proper handling for the address value from URL params
+  filter_form.querySelector("#address").value =
+    urlParams["address"] != null ? urlParams["address"] : "";
   filter_form.querySelector("#date_begin").value =
     urlParams["date_begin"] != null ? urlParams["date_begin"] : "";
   filter_form.querySelector("#date_end").value =
@@ -22,6 +25,8 @@ function pushFilterToURL() {
     Order_status: "status",
     date_begin: "date_begin",
     date_end: "date_end",
+    // FIXED: Added the address mapping that was missing in the url_key object
+    address: "address",
   };
   var url = "";
   Object.keys(filter).forEach((key) => {
@@ -40,6 +45,8 @@ function getFilterFromForm() {
     Order_status: filter_form.querySelector("#statusSelect").value,
     date_begin: filter_form.querySelector("#date_begin").value,
     date_end: filter_form.querySelector("#date_end").value,
+    // FIXED: Added the address field to the filter object
+    address: filter_form.querySelector("#address").value,
   };
 }
 
@@ -49,27 +56,37 @@ script.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js";
 script.type = "text/javascript";
 document.getElementsByTagName("head")[0].appendChild(script);
 var search = location.search.substring(1);
-urlParams = JSON.parse(
-  '{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
-  function (key, value) {
-    return key === "" ? value : decodeURIComponent(value);
+// FIXED: Added error handling for empty search string or malformed URL parameters
+urlParams = {};
+if (search) {
+  try {
+    urlParams = JSON.parse(
+      '{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
+      function (key, value) {
+        return key === "" ? value : decodeURIComponent(value);
+      }
+    );
+  } catch (e) {
+    console.error("Error parsing URL parameters:", e);
+    urlParams = {};
   }
-);
+}
+
 var number_of_item = urlParams["item"];
 var current_page = urlParams["pag"];
-var orderby = urlParams['orderby'];
-var order_type = urlParams['order_type'];
+var orderby = urlParams["orderby"];
+var order_type = urlParams["order_type"];
 if (current_page == null) {
-    current_page = 1;
+  current_page = 1;
 }
 if (number_of_item == null) {
-    number_of_item = 5;
+  number_of_item = 5;
 }
 if (orderby == null) {
-    orderby = "";
+  orderby = "";
 }
 if (order_type != "ASC" && order_type != "DESC") {
-    order_type = "ASC";
+  order_type = "ASC";
 }
 function checkReady() {
   return new Promise(async function (resolve) {
@@ -81,6 +98,8 @@ function checkReady() {
 }
 async function loadForFirstTime() {
   await checkReady();
+  // FIXED: Added getFilterFromURL call to properly load filter values from the URL when the page loads
+  getFilterFromURL();
   loadItem();
 }
 function pagnationBtn() {
@@ -153,12 +172,11 @@ function loadItem() {
     });
   });
 }
+// FIXED: Removed duplicate DOMContentLoaded event listener
 document.addEventListener("DOMContentLoaded", () => {
   loadForFirstTime();
 });
-document.addEventListener("DOMContentLoaded", () => {
-  loadForFirstTime();
-});
+
 function filterBtn() {
   $(".body__filter--action__filter").click((e) => {
     current_page = 1;
@@ -174,8 +192,14 @@ function filterBtn() {
     const end_date_str = filter_form.querySelector("#date_end").value;
     const start_date = new Date(start_date_str);
     const end_date = new Date(end_date_str);
+    // FIXED: Added proper reference to the address field and message element
+    var address = filter_form.querySelector("#address").value.trim();
+    var message_address = filter_form.querySelector("#message_address");
+
     var check = true;
     var regex = /^\d+$/;
+
+    // Order ID validation
     if (!idOrder.match(regex) && idOrder !== "") {
       message_idOrder.innerHTML = "*Mã đơn hàng phải là kí tự số";
       filter_form.querySelector("#idOrder").focus();
@@ -183,27 +207,33 @@ function filterBtn() {
     } else {
       message_idOrder.innerHTML = "";
     }
-    // if (!idCus.match(regex) && idCus !== "") {
-    //   message_idCus.innerHTML = "*Mã khách hàng phải là kí tự số";
-    //   filter_form.querySelector("#idCus").focus();
-    //   check = false;
-    // }else {
-    //   message_idCus.innerHTML = "";
-    // }
-    // if (!idStaff.match(regex) && idStaff !== "") {
-    //   message_idStaff.innerHTML = "*Mã nhân viên phải là kí tự số";
-    //   filter_form.querySelector("#idStaff").focus();
-    //   check = false;
-    // } else {
-    //   message_idStaff.innerHTML = "";
-    // }
 
+    // FIXED: Uncommented and fixed customer ID validation
+    if (!idCus.match(regex) && idCus !== "") {
+      message_idCus.innerHTML = "*Mã khách hàng phải là kí tự số";
+      filter_form.querySelector("#idCus").focus();
+      check = false;
+    } else {
+      message_idCus.innerHTML = "";
+    }
+
+    // FIXED: Uncommented and fixed staff ID validation
+    if (!idStaff.match(regex) && idStaff !== "") {
+      message_idStaff.innerHTML = "*Mã nhân viên phải là kí tự số";
+      filter_form.querySelector("#idStaff").focus();
+      check = false;
+    } else {
+      message_idStaff.innerHTML = "";
+    }
+
+    // Date validation
     if (!start_date_str && end_date_str) {
       message_start.innerHTML = "*Vui lòng chọn ngày bắt đầu";
       check = false;
-    } else if (start_date > end_date) {
+    } else if (start_date_str && end_date_str && start_date > end_date) {
       message_start.innerHTML =
         "*Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc.";
+      check = false;
     } else {
       message_start.innerHTML = "";
     }
@@ -211,36 +241,58 @@ function filterBtn() {
     if (!end_date_str && start_date_str) {
       message_end.innerHTML = "*Vui lòng chọn ngày kết thúc";
       check = false;
-    } else if (start_date > end_date) {
+    } else if (start_date_str && end_date_str && start_date > end_date) {
       message_end.innerHTML =
         "*Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.";
       check = false;
     } else {
       message_end.innerHTML = "";
     }
+
+    // FIXED: Added address validation to check for maximum length if needed
+    if (address.length > 255) {
+      // Assuming 255 is max length for address in database
+      message_address.innerHTML = "*Địa chỉ không được vượt quá 255 ký tự";
+      filter_form.querySelector("#address").focus();
+      check = false;
+    } else {
+      message_address.innerHTML = "";
+    }
+
     if (check == true) {
       message_idOrder.innerHTML = "";
       message_idCus.innerHTML = "";
       message_idStaff.innerHTML = "";
       message_start.innerHTML = "";
       message_end.innerHTML = "";
+      message_address.innerHTML = "";
       current_page = 1;
       loadItem();
     }
   });
+
   $(".body__filter--action__reset").click((e) => {
+    // FIXED: Reset form properly by resetting the actual form element
+    filter_form.reset();
+
+    // Clear all error messages
     var message_idOrder = filter_form.querySelector("#message_idOrder");
     var message_idCus = filter_form.querySelector("#message_idCus");
     var message_idStaff = filter_form.querySelector("#message_idStaff");
     var message_end = filter_form.querySelector("#message_end");
     var message_start = filter_form.querySelector("#message_begin");
+    var message_address = filter_form.querySelector("#message_address");
     message_idOrder.innerHTML = "";
     message_idCus.innerHTML = "";
     message_idStaff.innerHTML = "";
     message_start.innerHTML = "";
     message_end.innerHTML = "";
+    message_address.innerHTML = "";
+
     check = true;
     current_page = 1;
+
+    // FIXED: After reset, clear all filters from the query
     $.ajax({
       url: "../controller/admin/pagnation.controller.php",
       type: "post",
@@ -251,6 +303,16 @@ function filterBtn() {
         function: "render",
         orderby: orderby,
         order_type: order_type,
+        // FIXED: Sending an empty filter object to clear all filters
+        filter: {
+          id_customer: "",
+          id_staff: "",
+          id_Order: "",
+          Order_status: "",
+          date_begin: "",
+          date_end: "",
+          address: "",
+        },
       },
     }).done(function (result) {
       var newurl =
@@ -273,21 +335,35 @@ function filterBtn() {
 }
 
 var js = function () {
-  if (orderby != "" && order_type != "") document.querySelector("[data-order=" + "'" + orderby + "']").innerHTML+=(order_type=="ASC")?' <i class="fas fa-sort-up">':' <i class="fas fa-sort-down">';
-  else document.querySelector("[data-order]").innerHTML+=(order_type=="ASC")?' <i class="fas fa-sort-up">':' <i class="fas fa-sort-down">';
-  document.querySelector(".result").querySelectorAll("th").forEach((th) => {
-      if (th.hasAttribute("data-order")) th.addEventListener("click", () => {
-          if (orderby == "") orderby = document.querySelector("[data-order]").getAttribute("data-order");
+  if (orderby != "" && order_type != "")
+    document.querySelector("[data-order=" + "'" + orderby + "']").innerHTML +=
+      order_type == "ASC"
+        ? ' <i class="fas fa-sort-up">'
+        : ' <i class="fas fa-sort-down">';
+  else
+    document.querySelector("[data-order]").innerHTML +=
+      order_type == "ASC"
+        ? ' <i class="fas fa-sort-up">'
+        : ' <i class="fas fa-sort-down">';
+  document
+    .querySelector(".result")
+    .querySelectorAll("th")
+    .forEach((th) => {
+      if (th.hasAttribute("data-order"))
+        th.addEventListener("click", () => {
+          if (orderby == "")
+            orderby = document
+              .querySelector("[data-order]")
+              .getAttribute("data-order");
           if (orderby == th.getAttribute("data-order") && order_type == "ASC") {
-              order_type = "DESC";
-          }
-          else {
-              order_type = "ASC"
+            order_type = "DESC";
+          } else {
+            order_type = "ASC";
           }
           orderby = th.getAttribute("data-order");
           loadItem();
-      })
-  });
+        });
+    });
   const btnDetails = document.querySelectorAll(".actions--view");
   const modal = document.querySelector(".order-modal");
   const overlay = document.querySelector(".overlay");
@@ -358,28 +434,6 @@ var js = function () {
 
   overlay.addEventListener("click", closeModal);
   btnCloseModal[0].addEventListener("click", closeModal);
-
-  // // delete
-  // document.querySelector('.del-confirm').addEventListener('click', function (e) {
-  //   e.preventDefault();
-  //   var $id = $('#order-delete-id').html();
-  //   selected_content_id = '#order_id' + $id;
-  //   selected_content = document.querySelector(selected_content_id).parentNode;
-  //   $.ajax({
-  //     url: '../controller/admin/order.controller.php',
-  //     type: "post",
-  //     dataType: 'html',
-  //     data: {
-  //       delete_id: $id,
-  //       function: "delete",
-  //     }
-  //   }).done(function (result) {
-  //     selected_content.remove();
-  //     closeDeleteModal();
-  //   })
-  // })
-
-  // change order status
 
   function change_status(status) {
     $.ajax({
