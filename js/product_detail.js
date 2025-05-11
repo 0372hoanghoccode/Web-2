@@ -26,9 +26,9 @@ btnIncreaseQnt.addEventListener("click", (e) => {
 $(document).ready(function () {
   $(".themVaoGio").click(function (e) {
     // Ngăn chặn thêm sp vào giỏ hàng khi kho hết
-    if ($(".themVaoGio.notAllowed")[0]) {
-      return;
-    }
+    // if ($(".themVaoGio.notAllowed")[0]) {
+    //   return;
+    // }
 
     e.preventDefault();
 
@@ -45,9 +45,9 @@ $(document).ready(function () {
 
   $(".muaNgay").click(function (e) {
     // Ngăn chặn thêm sp vào giỏ hàng khi kho hết
-    if ($(".muaNgay.notAllowed")[0]) {
-      return;
-    }
+    // if ($(".muaNgay.notAllowed")[0]) {
+    //   return;
+    // }
 
     e.preventDefault();
 

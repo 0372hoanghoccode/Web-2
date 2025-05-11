@@ -77,114 +77,109 @@
             <div></div>
           </div>
           <div class="cart-item-wrapper">
-            <?php
-              if (isset($_SESSION['cart']) && ($_SESSION['cart'])) {
-                include_once('controller/product_detail.controller.php');
+   <?php
+if (isset($_SESSION['cart']) && ($_SESSION['cart'])) {
+  include_once('controller/product_detail.controller.php');
 
-                $totalProducts = count($_SESSION['cart']);
-                $counter = 0;
+  $totalProducts = count($_SESSION['cart']);
+  $counter = 0;
 
-                foreach($_SESSION['cart'] as $product) {
-                  $counter++;
-                  $closeDatabase = false;
+  foreach($_SESSION['cart'] as $product) {
+    $counter++;
+    $closeDatabase = false;
 
-                  if ($counter == $totalProducts) {
-                    $closeDatabase = true;
-                  }
+    if ($counter == $totalProducts) {
+      $closeDatabase = true;
+    }
 
-                  $productDetail = getProductDetailById($product['id'], $closeDatabase);
+    $productDetail = getProductDetailById($product['id'], $closeDatabase);
 
-                  // Nếu sản phẩm có status = 0 thì không render và xoá khỏi cart
-                  if ($productDetail['status'] == 0) {
+    // Bỏ kiểm tra status để không xóa sản phẩm hết hàng
+    // if ($productDetail['status'] == 0) {
+    //   foreach ($_SESSION['cart'] as $key => $cartProduct) {
+    //     if ($product['id'] == $cartProduct['id']) {
+    //       unset($_SESSION['cart'][$key]);
+    //     }
+    //   }
+    //   $autoReload = true;
+    //   continue;
+    // }
 
-                    foreach ($_SESSION['cart'] as $key => $cartProduct) {
-                      if ($product['id'] == $cartProduct['id']) {
-                        unset($_SESSION['cart'][$key]);
-                      }
-                    }
+    $formatPrice = number_format($productDetail['price'], 0, ',', '.') . ' ₫';
+    $totalPrice = $productDetail['price'] * $product['amount'];
+    $formatTotalPrice = number_format($totalPrice, 0, ',', '.') . ' ₫';
 
-                    $autoReload = true;
-                    continue;
-                  }
+    $hidden = "hidden";
+    if ($productDetail['quantity'] <= 0) {
+      $hidden = "";
+    }
 
-                  $formatPrice = number_format($productDetail['price'], 0, ',', '.').' ₫';
-
-                  $totalPrice = $productDetail['price'] * $product['amount'];
-                  $formatTotalPrice =  number_format($totalPrice, 0, ',', '.').' ₫';
-
-                  $hidden = "hidden";
-                  if($productDetail['quantity'] <= 0){
-                    $hidden = "";
-                  }
-                  echo '
-                  <div class="not-selectable-container">
-                  <div class="cart-item">
-                    <div class="checked-product-cart">
-                      <input type="checkbox" class="checkbox-add-cart" value="'.$product['id'].'" />
-                    </div>
-                    <div class="img-product-cart">
-                      <div class="product-image">
-                        <img src="'.$productDetail['image_path'].'" alt="'.$productDetail['product_name'].'" />
-                      </div>
-                    </div>
-                    <div class="group-product-info">
-                      <div class="info-product-cart">
-                        <div>
-                          <h2 class="product-name">
-                            <a href="index.php?page=product_detail&pid='.$product['id'].'">'.$productDetail['product_name'].'</a>
-                          </h2>
-                        </div>
-                        <div class="price-original">
-                          <div class="cart-price">
-                            <div class="cart-item-price">
-                              <div>
-                                <span class="price">'.$formatPrice.'</span>
-                                <input type="hidden" class="price-hidden" value="'.$productDetail['price'].'"/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                        <div>(Còn '.$productDetail['quantity'].' sản phẩm)</div>
-                      </div>
-                      </div>
-                      <div class="number-product-cart">
-                        <div class="product-view-quantity-box">
-                          <div class="product-view-quantity-box-block">
-                            <a href="#!" class="btn-substract-qty">
-                              -
-                            </a>
-                            <input type="text" class="qty-cart" value="'.$product['amount'].'" readonly />
-                            <a href="#!" class="btn-add-qty" data-max-quantity="'.$productDetail['quantity'].'">
-                              +
-                            </a>
-                          </div>
-                        </div>
-                        <div class="cart-total-price">
-                          <span class="cart-price">
-                            <span class="price">'.$formatTotalPrice.'</span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <form action="controller/cart.controller.php" method="post" class="btn-remove-cart">
-                      <input type="hidden" name="product_id" value="'.$product['id'].'">
-                      <input type="hidden" name="product-action__removeFromCart" value="Xoá"></input>
-                      <button class="btn-remove-desktop-cart">
-                        <i class="fa-regular fa-trash-can"></i>
-                      </button>
-                    </form>
-                  <div class="not-selectable '.$hidden.'">Hết hàng</div>
+    echo '
+    <div class="not-selectable-container">
+      <div class="cart-item">
+        <div class="checked-product-cart">
+          <input type="checkbox" class="checkbox-add-cart" value="'.$product['id'].'" />
+        </div>
+        <div class="img-product-cart">
+          <div class="product-image">
+            <img src="'.$productDetail['image_path'].'" alt="'.$productDetail['product_name'].'" />
+          </div>
+        </div>
+        <div class="group-product-info">
+          <div class="info-product-cart">
+            <div>
+              <h2 class="product-name">
+                <a href="index.php?page=product_detail&pid='.$product['id'].'">'.$productDetail['product_name'].'</a>
+              </h2>
+            </div>
+            <div class="price-original">
+              <div class="cart-price">
+                <div class="cart-item-price">
+                  <div>
+                    <span class="price">'.$formatPrice.'</span>
+                    <input type="hidden" class="price-hidden" value="'.$productDetail['price'].'"/>
                   </div>
-                  </div>';
-                }
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>(Còn '.$productDetail['quantity'].' sản phẩm)</div>
+            </div>
+          </div>
+          <div class="number-product-cart">
+            <div class="product-view-quantity-box">
+              <div class="product-view-quantity-box-block">
+                <a href="#!" class="btn-substract-qty">-</a>
+                <input type="text" class="qty-cart" value="'.$product['amount'].'" readonly />
+                <a href="#!" class="btn-add-qty" data-max-quantity="'.$productDetail['quantity'].'">+</a>
+              </div>
+            </div>
+            <div class="cart-total-price">
+              <span class="cart-price">
+                <span class="price">'.$formatTotalPrice.'</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <form action="controller/cart.controller.php" method="post" class="btn-remove-cart">
+          <input type="hidden" name="product_id" value="'.$product['id'].'">
+          <input type="hidden" name="product-action__removeFromCart" value="Xoá"></input>
+          <button class="btn-remove-desktop-cart">
+            <i class="fa-regular fa-trash-can"></i>
+          </button>
+        </form>
+      
+      </div>
+    </div>';
+  }
 
-                if ($autoReload) {
-                  echo '<script>window.location.reload();</script>';
-                  $autoReload = false;
-                }
-              }
-            ?>
+  if (isset($autoReload) && $autoReload) {
+    echo '<script>window.location.reload();</script>';
+    $autoReload = false;
+  }
+}
+?>
+
           </div>
         </div>
       </div>

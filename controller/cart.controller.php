@@ -26,46 +26,47 @@ if (isset($_POST["product-action__addToCart"]) && $_POST['product-action__addToC
 
   // Kiểm tra sản phẩm đã tồn tại trong cart chưa
   $isExistProduct = false;
-  $isAmountExceed = true;
+  // $isAmountExceed = true;
 
-  $product_quantity = getProductDetailByIdModel($productId)->fetch_assoc();
-  $product_quantity = $product_quantity['quantity'];
+  // $product_quantity = getProductDetailByIdModel($productId)->fetch_assoc();
+  // $product_quantity = $product_quantity['quantity'];
+
   foreach ($_SESSION['cart'] as $key => $product) {
     if ($product['id'] == $productId) {
-      if ($_SESSION['cart'][$key]['amount'] + $amount <= $product_quantity) {
-        $_SESSION['cart'][$key]['amount'] += $amount;
-        $isAmountExceed = false;
-      }
+      // if ($_SESSION['cart'][$key]['amount'] + $amount <= $product_quantity) {
+      //   $_SESSION['cart'][$key]['amount'] += $amount;
+      //   $isAmountExceed = false;
+      // }
+      $_SESSION['cart'][$key]['amount'] += $amount; // luôn cho phép cộng thêm
       $isExistProduct = true;
       break;
     }
   }
 
   // Nếu chưa tồn tại thì add vào cart
-  
   if (!$isExistProduct) {
-    if($amount <= $product_quantity){
+    // if($amount <= $product_quantity){
       $product = [
         'id' => $productId,
         'amount' => $amount
       ];
       $_SESSION['cart'][] = $product;
-
-      $isAmountExceed = false;
-    }
+      // $isAmountExceed = false;
+    // }
   }
 
   // Đếm số lượng sản phẩm trong giỏ hàng
-
   $result = array(
     'success' => true,
     'message' => "Đã thêm sản phẩm thành công!",
     'quantity' => count($_SESSION['cart'])
   );
-  if ($isAmountExceed){
-    $result['success'] = false;
-    $result['message'] = "Thêm sản phẩm thất bại vì vuọt quá số lượng tồn kho!";
-  }
+
+  // if ($isAmountExceed){
+  //   $result['success'] = false;
+  //   $result['message'] = "Thêm sản phẩm thất bại vì vượt quá số lượng tồn kho!";
+  // }
+
   echo json_encode($result);
 }
 

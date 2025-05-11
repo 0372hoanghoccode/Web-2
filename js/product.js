@@ -14,21 +14,23 @@ function renderProductHTML(data) {
       currency: "VND",
     });
 
-    let notAllowed = "";
-    if (product.quantity <= 0) {
-      notAllowed = "notAllowed";
-    }
+    // let notAllowed = "";
+    // if (product.quantity <= 0) {
+    //   notAllowed = "notAllowed";
+    // }
     productHTML += `
       <div class="product-item--wrapper">
         <div class="product-item">
           <div class="product-img">
             <div class="product-action">
               <div class="product-action--wrapper">
-                <a href="index.php?page=product_detail&pid=${product.id || product.product_id
-      }" class="product-action--btn product-action__detail">Chi tiết</a>
-                <input type="hidden" class="productId" value="${product.id || product.product_id
-      }"/>
-                <button class="product-action--btn product-action__addToCart ${notAllowed}">Thêm vào giỏ</button>
+                <a href="index.php?page=product_detail&pid=${
+                  product.id || product.product_id
+                }" class="product-action--btn product-action__detail">Chi tiết</a>
+                <input type="hidden" class="productId" value="${
+                  product.id || product.product_id
+                }"/>
+                <button class="product-action--btn product-action__addToCart ">Thêm vào giỏ</button>
               </div>
             </div>
             <div class="img-resize">
@@ -37,11 +39,13 @@ function renderProductHTML(data) {
                 alt="${product.product_name || product.name}" />
             </div>
           </div>
-          <a href="index.php?page=product_detail&pid=${product.id || product.product_id
-      }" >
+          <a href="index.php?page=product_detail&pid=${
+            product.id || product.product_id
+          }" >
             <div class="product-detail">
-                <p class="product-title">${product.name || product.product_name
-      }</p>
+                <p class="product-title">${
+                  product.name || product.product_name
+                }</p>
                 <p class="product-price">${formatPrice}</p>
             </div>
           </a>
@@ -140,7 +144,9 @@ $(document).ready(function () {
   }
   if (localStorage.getItem("priceRange")) {
     priceRange = localStorage.getItem("priceRange");
-    $(`input[name="giaban"][data="${priceRange}"]`).prop("checked", true).attr("checked", "checked");
+    $(`input[name="giaban"][data="${priceRange}"]`)
+      .prop("checked", true)
+      .attr("checked", "checked");
   }
 
   // Tự load sản phẩm ở lần đầu vào trang

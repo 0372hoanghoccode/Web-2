@@ -18,7 +18,7 @@
     }
 
     // Nếu như không đủ 
-    if (!$isEnoughAll) {
+    if ($isEnoughAll) {
       $listDetailProductsNotEnough = [];
       foreach ($listProductsNotEnoughQuantity as $productId) {
         $productDetail = getProductDetailByIdModel($productId);

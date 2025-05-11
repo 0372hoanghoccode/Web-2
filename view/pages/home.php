@@ -48,38 +48,40 @@
 
                 $products = getNewProducts(1);
                 $index = 0;
-                foreach ($products as $product) {
-                    if ($index == 4) break;
-                    $index++;
-                    $price_formatted = number_format($product['price'], '0', ',', '.').'đ';
-                    $notAllowed = "";
-                    if($product["quantity"] <=0) $notAllowed = "notAllowed";
-                    echo '
-                    <div class="product-item--wrapper">
-                      <div class="product-item">
-                        <div class="product-img">
-                          <div class="product-action">
-                            <div class="product-action--wrapper">
-                              <a href="index.php?page=product_detail&pid='.$product['id'].'" class="product-action--btn product-action__detail">Chi tiết</a>
-                              <input type="hidden" class="productId" value="' . $product['id'] . '"/>
-                              <button class="product-action--btn product-action__addToCart '.$notAllowed.'">Thêm vào giỏ</button>
-                            </div>
-                          </div>
-                          <div class="img-resize">
-                            <img
-                              src="' . $product['image_path'] . '"
-                              alt="'.$product['name'].'" />
-                          </div>
-                        </div>
-                        <a href="index.php?page=product_detail&pid='.$product['id'].'" >
-                          <div class="product-detail">
-                              <p class="product-title">' . $product['name'] . '</p>
-                              <p class="product-price">' .  $price_formatted . '</p>
-                          </div>
-                        </a>
-                      </div>
-                    </div>';
-                }
+              foreach ($products as $product) {
+    if ($index == 4) break;
+    $index++;
+    $price_formatted = number_format($product['price'], '0', ',', '.') . 'đ';
+    //$notAllowed = "";
+
+    // Bỏ kiểm tra số lượng để luôn cho phép thêm vào giỏ hàng
+    // if($product["quantity"] <= -55) $notAllowed = "notAllowed";
+
+    echo '
+    <div class="product-item--wrapper">
+      <div class="product-item">
+        <div class="product-img">
+          <div class="product-action">
+            <div class="product-action--wrapper">
+              <a href="index.php?page=product_detail&pid=' . $product['id'] . '" class="product-action--btn product-action__detail">Chi tiết</a>
+              <input type="hidden" class="productId" value="' . $product['id'] . '"/>
+              <button class="product-action--btn product-action__addToCart">Thêm vào giỏ</button>
+            </div>
+          </div>
+          <div class="img-resize">
+            <img src="' . $product['image_path'] . '" alt="' . $product['name'] . '" />
+          </div>
+        </div>
+        <a href="index.php?page=product_detail&pid=' . $product['id'] . '" >
+          <div class="product-detail">
+            <p class="product-title">' . $product['name'] . '</p>
+            <p class="product-price">' . $price_formatted . '</p>
+          </div>
+        </a>
+      </div>
+    </div>';
+}
+
                 echo '
                     </div>
                     <div class="see-more" >

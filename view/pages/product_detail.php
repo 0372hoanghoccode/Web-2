@@ -39,10 +39,12 @@
               $priceFormat = number_format($productDetail['price'], 0, ',', '.').' ₫';
               $quantityStatus;
               if ($productDetail['quantity'] > 0) {
-                $quantityStatus = "(Còn ".$productDetail['quantity']." sản phẩm)";
+                // $quantityStatus = "(Còn ".$productDetail['quantity']." sản phẩm)";
+                  $quantityStatus = "(Còn)";
               } else {
-                $quantityStatus = "(Hết hàng)";
-                $isAllowed = "notAllowed";
+             //  $quantityStatus = "(Hết hàng)";
+                $quantityStatus = "(Còn)";
+             //  $isAllowed = "notAllowed";
               }
 
               $authorNames = $productDetail['author_names'];
