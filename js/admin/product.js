@@ -185,12 +185,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function filterBtn() {
-  document
-    .querySelector(".body__filter--actions")
-    .querySelector(
-      "div"
-    ).innerHTML = `<button type="reset" class="body__filter--action__reset">Reset</button>
-    <button class="body__filter--action__filter">Lọc</button>`;
+  // Thêm lại nút Reset và Lọc vào HTML
+  const actionsContainer = document.querySelector(".body__filter--actions");
+  if (actionsContainer) {
+    actionsContainer.querySelector("div").innerHTML = `
+      <button type="reset" class="body__filter--action__reset">Reset</button>
+      <button class="body__filter--action__filter">Lọc</button>`;
+  }
+
+  // Gán sự kiện khi nhấn nút "Lọc"
   $(".body__filter--action__filter").click((e) => {
     e.preventDefault();
     var message_productId = filter_form.querySelector("#message_productId");
@@ -207,6 +210,8 @@ function filterBtn() {
     const end_date = new Date(end_date_str);
     var check = true;
     var regex = /^\d+$/;
+
+    // Validate productId
     if (!productId.match(regex) && productId !== "") {
       message_productId.innerHTML = "*Mã sản phẩm phải là kí tự số";
       filter_form.querySelector("#productId").focus();
@@ -214,12 +219,15 @@ function filterBtn() {
     } else {
       message_productId.innerHTML = "";
     }
+
+    // Validate ngày bắt đầu và kết thúc
     if (!start_date_str && end_date_str) {
       message_start.innerHTML = "*Vui lòng chọn ngày bắt đầu";
       check = false;
     } else if (start_date > end_date) {
       message_start.innerHTML =
         "*Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc.";
+      check = false;
     } else {
       message_start.innerHTML = "";
     }
@@ -235,21 +243,29 @@ function filterBtn() {
       message_end.innerHTML = "";
     }
 
-    if(start_price.value !== "" && (isNaN(start_price.value)  || start_price.value <= 0)) {
+    // Validate giá
+    if (
+      start_price.value !== "" &&
+      (isNaN(start_price.value) || start_price.value <= 0)
+    ) {
       message_price_start.innerHTML = "*Giá bắt đầu phải là số dương";
       check = false;
     } else {
       message_price_start.innerHTML = "";
     }
 
-    if(end_price.value !== "" && (isNaN(end_price.value)  || end_price.value <= 0)) {
+    if (
+      end_price.value !== "" &&
+      (isNaN(end_price.value) || end_price.value <= 0)
+    ) {
       message_price_end.innerHTML = "*Giá kết thúc phải là số dương";
       check = false;
     } else {
       message_price_end.innerHTML = "";
     }
 
-    if (check == true) {
+    // Nếu hợp lệ thì load lại
+    if (check === true) {
       message_productId.innerHTML = "";
       message_start.innerHTML = "";
       message_end.innerHTML = "";
@@ -257,6 +273,8 @@ function filterBtn() {
       loadItem();
     }
   });
+
+  // Gán sự kiện khi nhấn nút Reset
   $(".body__filter--action__reset").click((e) => {
     var message_productId = filter_form.querySelector("#message_productId");
     var message_end = filter_form.querySelector("#message_end");
@@ -265,6 +283,7 @@ function filterBtn() {
     message_start.innerHTML = "";
     message_end.innerHTML = "";
     current_page = 1;
+
     $.ajax({
       url: "../controller/admin/pagnation.controller.php",
       type: "post",
@@ -275,7 +294,7 @@ function filterBtn() {
         function: "render",
       },
     }).done(function (result) {
-      var newurl =
+      const newurl =
         window.location.protocol +
         "//" +
         window.location.host +
@@ -296,6 +315,16 @@ function filterBtn() {
       js();
     });
   });
+
+  // Khi nhấn nút "Thêm sản phẩm" thì cũng trigger Reset
+  const addBtn = document.querySelector(".body__filter--action__add");
+  const resetBtn = document.querySelector(".body__filter--action__reset");
+
+  if (addBtn && resetBtn) {
+    addBtn.addEventListener("click", function () {
+      resetBtn.click(); // Gọi reset
+    });
+  }
 }
 
 //js
@@ -461,7 +490,7 @@ var js = function () {
         </div>
     </div>`;
 
-    // code ấn disabled các nút sửa
+  // code ấn disabled các nút sửa
   // document.querySelector(".actions--edit").addEventListener("click", (e) => {
 
   //     modal.innerHTML = modal_html;
@@ -699,9 +728,9 @@ var js = function () {
           }).done(function (result) {
             loadItem();
             $("#sqlresult").html(result);
-              setTimeout(() => {
-                $("#sqlresult").html(""); // Xóa nội dung sau 3 giây
-              }, 3000);
+            setTimeout(() => {
+              $("#sqlresult").html(""); // Xóa nội dung sau 3 giây
+            }, 3000);
           });
           modal_edit_container.classList.add("hidden");
         });
@@ -1247,9 +1276,9 @@ var js = function () {
           }).done(function (result) {
             loadItem();
             $("#sqlresult").html(result);
-              setTimeout(() => {
-                $("#sqlresult").html(""); // Xóa nội dung sau 3 giây
-              }, 3000);
+            setTimeout(() => {
+              $("#sqlresult").html(""); // Xóa nội dung sau 3 giây
+            }, 3000);
           });
           modal_edit_container.classList.add("hidden");
         });
@@ -1261,12 +1290,12 @@ var js = function () {
   const del_btns = document.getElementsByClassName("actions--delete");
 
   for (var i = 0; i < del_btns.length; i++) {
-      del_btns[i].addEventListener('click', function () {
-          let selected_content = this.parentNode.parentNode;
-          let product_id = selected_content.querySelector('.id').innerHTML;
-          let product_name = selected_content.querySelector('.name').innerHTML;
-          let img_link = selected_content.querySelector('img').src;
-          var del_html = `
+    del_btns[i].addEventListener("click", function () {
+      let selected_content = this.parentNode.parentNode;
+      let product_id = selected_content.querySelector(".id").innerHTML;
+      let product_name = selected_content.querySelector(".name").innerHTML;
+      let img_link = selected_content.querySelector("img").src;
+      var del_html = `
       <div class="modal-edit-product-container show" id="modal-edit-container">
       <div class="modal-edit-product">
           <div class="modal-header">
@@ -1293,42 +1322,44 @@ var js = function () {
 
       `;
 
-          modal.innerHTML = del_html;
-          $('.del-confirm').click(function (e) {
-              e.preventDefault();
-              var $id = $('#product-delete-id').html();
-              $.ajax({
-                  url: '../controller/admin/product.controller.php',
-                  type: "post",
-                  dataType: 'html',
-                  data: {
-                      function: "delete",
-                      id: $id
-                  }
-              }).done(function (result) {
-                  loadItem();
-                  $("#sqlresult").html(result);
-                  modal_edit_container.classList.remove('show');
-              })
-          })
-
-          // Button close
-          const modal_edit_container = document.querySelector("#modal-edit-container");
-
-          const btnClose = document.querySelector("#btnClose");
-          // console.log(btnClose)
-          btnClose.addEventListener('click', () => {
-              // console.log(modal_edit_container)
-              modal_edit_container.classList.remove('show')
-          });
-          // Button cancel
-          const btnCancel = document.querySelector(".del-cancel");
-          // console.log(btnClose)
-          btnCancel.addEventListener('click', () => {
-              // console.log(modal_edit_container)
-              modal_edit_container.classList.remove('show')
-          });
+      modal.innerHTML = del_html;
+      $(".del-confirm").click(function (e) {
+        e.preventDefault();
+        var $id = $("#product-delete-id").html();
+        $.ajax({
+          url: "../controller/admin/product.controller.php",
+          type: "post",
+          dataType: "html",
+          data: {
+            function: "delete",
+            id: $id,
+          },
+        }).done(function (result) {
+          loadItem();
+          $("#sqlresult").html(result);
+          modal_edit_container.classList.remove("show");
+        });
       });
+
+      // Button close
+      const modal_edit_container = document.querySelector(
+        "#modal-edit-container"
+      );
+
+      const btnClose = document.querySelector("#btnClose");
+      // console.log(btnClose)
+      btnClose.addEventListener("click", () => {
+        // console.log(modal_edit_container)
+        modal_edit_container.classList.remove("show");
+      });
+      // Button cancel
+      const btnCancel = document.querySelector(".del-cancel");
+      // console.log(btnClose)
+      btnCancel.addEventListener("click", () => {
+        // console.log(modal_edit_container)
+        modal_edit_container.classList.remove("show");
+      });
+    });
   }
   function checkInput() {
     var success = true;
@@ -1372,7 +1403,7 @@ var js = function () {
       name_err.innerHTML = "Không được để trống";
       success = false;
     }
-    console.log(typeof price.value)
+    console.log(typeof price.value);
     if (price.value.trim().length == 0) {
       price.classList.add("error-field");
       price_err.classList.remove("hidden");
