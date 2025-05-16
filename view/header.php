@@ -31,21 +31,15 @@
   <body>
     <header>
      <div class="headerTop">
-          <a href="index.php">
-            <img
-              src="assets/images/logoweb.jpg"
-              alt=""
-            />
-          </a>
+     <a href="index.php" class="logo-link">
+          <img src="assets/images/logoweb.jpg" alt="Logo" />
+        </a>
         </div>
       <div class="header">
         <div class="headerLeft">
-          <a href="index.php">
-            <img
-              src="assets/images/logoweb.jpg"
-              alt=""
-            />
-          </a>
+        <a href="index.php" class="logo-link">
+          <img src="assets/images/logoweb.jpg" alt="Logo" />
+        </a>
         </div>
         <div class="headerCenter">
   <div class="search-container">

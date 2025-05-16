@@ -178,6 +178,7 @@ $(document).ready(function () {
   // Xử lý nút Reset
   $(".reset_theloai").click(function (e) {
     e.preventDefault(); // Ngăn reload mặc định của thẻ <a>
+    console.log("Đã nhấn nút reset thể loại"); // Ghi log ra console
     resetFilter(); // Gọi hàm reset
     renderProductsPerPage(1); // Render lại danh sách sản phẩm không có bộ lọc
   });
@@ -223,6 +224,21 @@ $(document).ready(function () {
       .find(".productId")[0]
       .getAttribute("value");
     addToCart(productId, 1);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const logoLinks = document.querySelectorAll(".logo-link");
+
+  logoLinks.forEach((logo) => {
+    logo.addEventListener("click", function (e) {
+      e.preventDefault();
+      console.log("Logo clicked - resetting filter");
+      resetFilter(); // Gọi hàm reset
+      setTimeout(() => {
+        window.location.href = "index.php";
+      }, 50); // Chờ 1 chút để đảm bảo reset xong
+    });
   });
 });
 
