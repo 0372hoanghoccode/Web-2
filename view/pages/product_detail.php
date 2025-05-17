@@ -40,10 +40,10 @@
               $quantityStatus;
               if ($productDetail['quantity'] > 0) {
                 // $quantityStatus = "(Còn ".$productDetail['quantity']." sản phẩm)";
-                  $quantityStatus = "(Còn)";
+                  $quantityStatus = "";
               } else {
              //  $quantityStatus = "(Hết hàng)";
-                $quantityStatus = "(Còn)";
+                $quantityStatus = "";
              //  $isAllowed = "notAllowed";
               }
 

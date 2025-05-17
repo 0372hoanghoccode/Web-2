@@ -44,7 +44,9 @@ $(document).ready(function () {
         btn.addEventListener("click", function () {
           var username = btn.getAttribute("data-username");
           var detailsRow = document.querySelector("#details-" + username);
-          var ordersContent = document.querySelector("#orders-content-" + username);
+          var ordersContent = document.querySelector(
+            "#orders-content-" + username
+          );
 
           if (detailsRow.classList.contains("show")) {
             detailsRow.classList.remove("show");
@@ -184,23 +186,23 @@ function renderSiderBars(data) {
       icon: "fa-industry",
       fncid: 8,
     },
-    {
-      page: "receipt",
-      name: "Nhập hàng",
-      icon: "fa-file-invoice",
-      fncid: 9,
-    },
-    {
-      page: "role",
-      name: "Phân quyền",
-      icon: "fa-gavel",
-      fncid: 10,
-    },
+    // {
+    //   // page: "receipt",
+    //   // name: "Nhập hàng",
+    //   // icon: "fa-file-invoice",
+    //   // fncid: 9,
+    // },
+    // {
+    //   // page: "role",
+    //   // name: "Phân quyền",
+    //   // icon: "fa-gavel",
+    //   // fncid: 10,
+    // },
     {
       page: "discount",
       name: "Khuyến mãi",
       icon: "fa-file-invoice",
-      fncid: 11,
+      fncid: 9,
     },
   ];
 

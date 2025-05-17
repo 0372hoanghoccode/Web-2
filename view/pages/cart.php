@@ -142,9 +142,7 @@ if (isset($_SESSION['cart']) && ($_SESSION['cart'])) {
                 </div>
               </div>
             </div>
-            <div>
-              <div>(Còn '.$productDetail['quantity'].' sản phẩm)</div>
-            </div>
+          
           </div>
           <div class="number-product-cart">
             <div class="product-view-quantity-box">
