@@ -6,70 +6,70 @@ var btnTabDangNhap = document.querySelector(".btnTabDangNhap");
 
 // Add focus event to search input
 searchInput.addEventListener("focus", function () {
- notification.style.display = "flex";
+  notification.style.display = "flex";
 
- // Close notification when clicking outside after a delay
- setTimeout(function () {
-  document.addEventListener("click", clickOutsideHandler);
- }, 0);
+  // Close notification when clicking outside after a delay
+  setTimeout(function () {
+    document.addEventListener("click", clickOutsideHandler);
+  }, 0);
 });
 
 // Function to handle click outside
 function clickOutsideHandler(event) {
- var isClickInside =
-  notification.contains(event.target) || searchInput.contains(event.target);
- if (!isClickInside && event.target !== searchInput) {
-  // Kiểm tra xem không phải click vào trường tìm kiếm
-  notification.style.display = "none";
-  document.removeEventListener("click", clickOutsideHandler);
- }
+  var isClickInside =
+    notification.contains(event.target) || searchInput.contains(event.target);
+  if (!isClickInside && event.target !== searchInput) {
+    notification.style.display = "none";
+    document.removeEventListener("click", clickOutsideHandler);
+  }
 }
 
 // Hàm để hiện phần thông tin của tôi
 function showNotification() {
- document.getElementById("overlay").style.display = "block";
- document.getElementById("notificationBox").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById("notificationBox").style.display = "block";
 }
 
 function hideNotification() {
- document.getElementById("overlay").style.display = "none";
- document.getElementById("notificationBox").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById("notificationBox").style.display = "none";
 }
+
 function saveInfo() {
- var newName = document.getElementById("newName").value;
- var newPhone = document.getElementById("newPhone").value;
- var newAddress = document.getElementById("newAddress").value;
+  var newName = document.getElementById("newName").value;
+  var newPhone = document.getElementById("newPhone").value;
+  var newAddress = document.getElementById("newAddress").value;
 
- document.getElementById("name").innerText = newName;
- document.getElementById("phone").innerText = newPhone;
- document.getElementById("address").innerText = newAddress;
+  document.getElementById("name").innerText = newName;
+  document.getElementById("phone").innerText = newPhone;
+  document.getElementById("address").innerText = newAddress;
 
- hideNotification();
+  hideNotification();
 }
 
-// Ham de hien dang ki hay dang nhap
+// Hàm để hiện đăng ký hay đăng nhập
 function showForm(formId, button) {
- var forms = document.querySelectorAll(".form-container");
- forms.forEach(function (form) {
-  if (form.id === formId) {
-   form.classList.add("active");
-  } else {
-   form.classList.remove("active");
-  }
- });
+  var forms = document.querySelectorAll(".form-container");
+  forms.forEach(function (form) {
+    if (form.id === formId) {
+      form.classList.add("active");
+    } else {
+      form.classList.remove("active");
+    }
+  });
 
- var buttons = document.querySelectorAll(".button");
- buttons.forEach(function (btn) {
-  btn.classList.remove("active");
- });
+  var buttons = document.querySelectorAll(".button");
+  buttons.forEach(function (btn) {
+    btn.classList.remove("active");
+  });
 
- button.classList.add("active");
+  button.classList.add("active");
 }
 
 var urlParams = new URLSearchParams(window.location.search);
 var paramValue = urlParams.get("luachon");
 if (paramValue == "dangky") {
- showForm("signupForm", btnTabDangKy);
+  showForm("signupForm", btnTabDangKy);
 }
 
 // Kiểm tra form hợp lệ
@@ -87,304 +87,227 @@ const registerFullname = document.querySelector("#registerFullname");
 const registerPhoneNumber = document.querySelector("#registerPhoneNumber");
 const registerPassword = document.querySelector("#registerPassword");
 const registerAddress = document.querySelector("#registerAddress");
-const registerConfirmPassword = document.querySelector(
- "#registerConfirmPassword"
-);
+const registerConfirmPassword = document.querySelector("#registerConfirmPassword");
 const registerTinhThanhPho = document.querySelector("#tinhthanhpho");
 const registerQuanHuyen = document.querySelector("#quanhuyen");
 const registerPhuongXa = document.querySelector("#phuongxa");
 
-const errMessageUsernameRegister = document.querySelector(
- ".errMessageUsernameRegister"
-);
-const errMessageEmailRegister = document.querySelector(
- ".errMessageEmailRegister"
-);
-const errMessageFullnameRegister = document.querySelector(
- ".errMessageFullnameRegister"
-);
-const errMessagePhoneNumberRegister = document.querySelector(
- ".errMessagePhoneNumberRegister"
-);
-const errMessageAddressRegister = document.querySelector(
- ".errMessageAddressRegister"
-);
-const errMessagePasswordRegister = document.querySelector(
- ".errMessagePasswordRegister"
-);
-const errMessageConfirmPasswordRegister = document.querySelector(
- ".errMessageConfirmPasswordRegister"
-);
-const errMessageCityRegister = document.querySelector(
- ".errMessageCityRegister"
-);
-const errMessageDistrictRegister = document.querySelector(
- ".errMessageDistrictRegister"
-);
-const errMessageWardRegister = document.querySelector(
- ".errMessageWardRegister"
-);
+const errMessageUsernameRegister = document.querySelector(".errMessageUsernameRegister");
+const errMessageEmailRegister = document.querySelector(".errMessageEmailRegister");
+const errMessageFullnameRegister = document.querySelector(".errMessageFullnameRegister");
+const errMessagePhoneNumberRegister = document.querySelector(".errMessagePhoneNumberRegister");
+const errMessageAddressRegister = document.querySelector(".errMessageAddressRegister");
+const errMessagePasswordRegister = document.querySelector(".errMessagePasswordRegister");
+const errMessageConfirmPasswordRegister = document.querySelector(".errMessageConfirmPasswordRegister");
+const errMessageCityRegister = document.querySelector(".errMessageCityRegister");
+const errMessageDistrictRegister = document.querySelector(".errMessageDistrictRegister");
+const errMessageWardRegister = document.querySelector(".errMessageWardRegister");
 
 const validationFormDangNhap = () => {
- let isNotEmptyUsername = false;
- let isNotEmptyPassword = false;
+  let isNotEmptyUsername = false;
+  let isNotEmptyPassword = false;
 
- if (loginUsername.value.trim() == "") {
-  errMessageUsername.innerText = "Vui lòng điền username";
-  isNotEmptyUsername = false;
- } else {
-  errMessageUsername.innerText = "";
-  isNotEmptyUsername = true;
- }
+  if (loginUsername.value.trim() == "") {
+    errMessageUsername.innerText = "Vui lòng điền username";
+    isNotEmptyUsername = false;
+  } else {
+    errMessageUsername.innerText = "";
+    isNotEmptyUsername = true;
+  }
 
- if (loginPassword.value.trim() == "") {
-  errMessagePassword.innerText = "Vui lòng điền mật khẩu";
-  isNotEmptyPassword = false;
- } else {
-  errMessagePassword.innerText = "";
-  isNotEmptyPassword = true;
- }
+  if (loginPassword.value.trim() == "") {
+    errMessagePassword.innerText = "Vui lòng điền mật khẩu";
+    isNotEmptyPassword = false;
+  } else {
+    errMessagePassword.innerText = "";
+    isNotEmptyPassword = true;
+  }
 
- return isNotEmptyUsername && isNotEmptyPassword;
+  return isNotEmptyUsername && isNotEmptyPassword;
+};
+
+const validationFormDangKy = () => {
+  let isNotEmptyUsername = false;
+  let isNotEmptyFullname = false;
+  let isNotEmptyEmail = false;
+  let isNotEmptyPhoneNumber = false;
+  let isNotEmptyAddress = false;
+  let isNotEmptyPassword = false;
+  let isNotEmptyConfirmPassword = false;
+  let isNotEmptyCity = false;
+  let isNotEmptyDistrict = false;
+  let isNotEmptyWard = false;
+
+  const regexFullName = /[a-zA-ZÀ-ỹ]+(\s[a-zA-ZÀ-ỹ]+){1,}$/;
+  const regexPhoneNumber = /^0[0-9]{9}$/;
+  const regexAddress = /^\d+\/?\d+(\s[a-zA-ZÀ-ỹ]+){2,}$/;
+  const regexUsername = /^[a-zA-Z][a-zA-Z0-9]{7,}$/;
+  const regexEmail =
+    /^(([A-Za-z0-9]+((\.|\-|\_|\+)?[A-Za-z0-9]?)*[A-Za-z0-9]+)|[A-Za-z0-9]+)@(([A-Za-z0-9]+)+((\.|\-|\_)?([A-Za-z0-9]+)+)*)+\.([A-Za-z]{2,})+$/;
+
+  if (registerUsername.value.trim() == "") {
+    errMessageUsernameRegister.innerText = "Vui lòng điền username";
+    registerUsername.focus();
+    isNotEmptyUsername = false;
+  } else if (!regexUsername.test(registerUsername.value.trim())) {
+    errMessageUsernameRegister.innerText =
+      "Nhập username đúng định dạng, kí tự bắt đầu là chữ và tối thiểu 8 kí tự (ví dụ: minhne04)";
+    registerUsername.focus();
+    isNotEmptyUsername = false;
+  } else {
+    errMessageUsernameRegister.innerText = "";
+    isNotEmptyUsername = true;
+  }
+
+  if (registerEmail.value.trim() == "") {
+    errMessageEmailRegister.innerText = "Vui lòng điền email";
+    isNotEmptyEmail = false;
+  } else if (!regexEmail.test(registerEmail.value.trim())) {
+    errMessageEmailRegister.innerText =
+      "Nhập email đúng định dạng (ví dụ: minhne04@gmail.com)";
+    registerEmail.focus();
+    isNotEmptyEmail = false;
+  } else {
+    errMessageEmailRegister.innerText = "";
+    isNotEmptyEmail = true;
+  }
+
+  if (registerFullname.value.trim() == "") {
+    errMessageFullnameRegister.innerText = "Vui lòng điền họ và tên";
+    isNotEmptyFullname = false;
+  } else if (!regexFullName.test(registerFullname.value.trim())) {
+    errMessageFullnameRegister.innerText =
+      "Nhập họ và tên đúng định dạng (ví dụ: Lữ Minh)";
+    registerFullname.focus();
+    isNotEmptyFullname = false;
+  } else {
+    errMessageFullnameRegister.innerText = "";
+    isNotEmptyFullname = true;
+  }
+
+  if (registerPhoneNumber.value.trim() == "") {
+    errMessagePhoneNumberRegister.innerText = "Vui lòng điền số điện thoại";
+    isNotEmptyPhoneNumber = false;
+  } else if (!regexPhoneNumber.test(registerPhoneNumber.value.trim())) {
+    errMessagePhoneNumberRegister.innerText =
+      "Vui lòng điền số điện thoại theo đúng định dạng";
+    registerPhoneNumber.focus();
+    isNotEmptyPhoneNumber = false;
+  } else {
+    errMessagePhoneNumberRegister.innerText = "";
+    isNotEmptyPhoneNumber = true;
+  }
+
+  if (registerAddress.value.trim() == "") {
+    errMessageAddressRegister.innerText = "Vui lòng điền địa chỉ";
+    isNotEmptyAddress = false;
+  } else if (!regexAddress.test(registerAddress.value.trim())) {
+    errMessageAddressRegister.innerText =
+      "Nhập địa chỉ đúng định dạng (ví dụ: 273 An Dương Vương)";
+    registerAddress.focus();
+    isNotEmptyAddress = false;
+  } else {
+    errMessageAddressRegister.innerText = "";
+    isNotEmptyAddress = true;
+  }
+
+  if (registerPassword.value.trim() == "") {
+    errMessagePasswordRegister.innerText = "Vui lòng điền mật khẩu";
+    isNotEmptyPassword = false;
+  } else if (registerPassword.value.trim().length < 8) {
+    errMessagePasswordRegister.innerText =
+      "Vui lòng điền mật khẩu tối thiểu 8 kí tự";
+    registerPassword.focus();
+    isNotEmptyPassword = false;
+  } else {
+    errMessagePasswordRegister.innerText = "";
+    isNotEmptyPassword = true;
+  }
+
+  if (registerConfirmPassword.value.trim() == "") {
+    errMessageConfirmPasswordRegister.innerText =
+      "Vui lòng điền nhập lại mật khẩu";
+    isNotEmptyConfirmPassword = false;
+  } else if (
+    registerConfirmPassword.value.trim() != registerPassword.value.trim() &&
+    registerPassword.value.trim() != ""
+  ) {
+    errMessageConfirmPasswordRegister.innerText =
+      "Vui lòng điền nhập lại mật khẩu khớp với mật khẩu";
+    registerConfirmPassword.focus();
+    isNotEmptyConfirmPassword = false;
+  } else {
+    errMessageConfirmPasswordRegister.innerText = "";
+    isNotEmptyConfirmPassword = true;
+  }
+
+  if (registerTinhThanhPho.value === "Chọn Tỉnh/Thành phố") {
+    errMessageCityRegister.innerHTML = "Vui lòng chọn tỉnh thành phố";
+    isNotEmptyCity = false;
+  } else {
+    errMessageCityRegister.innerHTML = "";
+    isNotEmptyCity = true;
+  }
+
+  return (
+    isNotEmptyUsername &&
+    isNotEmptyEmail &&
+    isNotEmptyFullname &&
+    isNotEmptyPhoneNumber &&
+    isNotEmptyAddress &&
+    isNotEmptyPassword &&
+    isNotEmptyConfirmPassword &&
+    isNotEmptyCity
+  );
 };
 
 // Sự kiện nhấn enter khi nhập xong password (đăng nhập)
 loginPassword.addEventListener("keydown", (event) => {
- if (event.key === "Enter") {
-  event.preventDefault();
-  btnDangNhap.click();
- }
+  if (event.key === "Enter") {
+    event.preventDefault();
+    btnDangNhap.click();
+  }
 });
 
 // Sự kiện nhấn enter khi nhập xong nhập lại password
 registerConfirmPassword.addEventListener("keydown", (event) => {
- if (event.key === "Enter") {
-  event.preventDefault();
-  btnDangKy.click();
- }
+  if (event.key === "Enter") {
+    event.preventDefault();
+    btnDangKy.click();
+  }
 });
 
 $(document).ready(function () {
- $(".btnDangNhap").click(function (e) {
-  e.preventDefault();
-  if (validationFormDangNhap()) {
-   var $username = $("#loginUsername").val();
-   var $password = $("#loginPassword").val();
-   $.ajax({
-    url: "controller/signup.controller.php",
-    type: "post",
-    dataType: "html",
-    data: {
-     usernameLogin: $username,
-     passwordLogin: $password,
-    },
-   }).done(function (result) {
-    const data = JSON.parse(result);
-    if (data.success) {
-     window.location.href = "index.php";
-     alert(data.message);
-    } else {
-     alert(data.message);
-     // $(".result").html(data.message);
+  // Xử lý đăng nhập
+  $(".btnDangNhap").click(function (e) {
+    e.preventDefault();
+    if (validationFormDangNhap()) {
+      var $username = $("#loginUsername").val();
+      var $password = $("#loginPassword").val();
+      $.ajax({
+        url: "controller/signup.controller.php",
+        type: "post",
+        dataType: "html",
+        data: {
+          usernameLogin: $username,
+          passwordLogin: $password,
+        },
+      }).done(function (result) {
+        const data = JSON.parse(result);
+        if (data.success) {
+          window.location.href = "index.php";
+          alert(data.message);
+        } else {
+          alert(data.message);
+        }
+      });
     }
-   });
-  }
- });
-});
+  });
 
-const validationFormDangKy = () => {
- let isNotEmptyUsername = false;
- let isNotEmptyFullname = false;
- let isNotEmptyEmail = false;
- let isNotEmptyPhoneNumber = false;
- let isNotEmptyAddress = false;
- let isNotEmptyPassword = false;
- let isNotEmptyConfirmPassword = false;
- let isNotEmptyCity = false;
- let isNotEmptyDistrict = false;
- let isNotEmptyWard = false;
-
- const regexFullName = /[a-zA-ZÀ-ỹ]+(\s[a-zA-ZÀ-ỹ]+){1,}$/;
- const regexPhoneNumber = /^0[0-9]{9}$/;
- const regexAddress = /^\d+\/?\d+(\s[a-zA-ZÀ-ỹ]+){2,}$/;
- const regexUsername = /^[a-zA-Z][a-zA-Z0-9]{7,}$/;
- const regexEmail =
-  /^(([A-Za-z0-9]+((\.|\-|\_|\+)?[A-Za-z0-9]?)*[A-Za-z0-9]+)|[A-Za-z0-9]+)@(([A-Za-z0-9]+)+((\.|\-|\_)?([A-Za-z0-9]+)+)*)+\.([A-Za-z]{2,})+$/;
-
- if (registerUsername.value.trim() == "") {
-  errMessageUsernameRegister.innerText = "Vui lòng điền username";
-  registerUsername.focus();
-  isNotEmptyUsername = false;
- } else if (!regexUsername.test(registerUsername.value.trim())) {
-  errMessageUsernameRegister.innerText =
-   "Nhập username đúng định dạng, kí tự bắt đầu là chữ và tối thiểu 8 kí tự (ví dụ: minhne04)";
-  registerUsername.focus();
-  isNotEmptyUsername = false;
- } else {
-  errMessageUsernameRegister.innerText = "";
-  isNotEmptyUsername = true;
- }
-
- if (registerEmail.value.trim() == "") {
-  errMessageEmailRegister.innerText = "Vui lòng điền email";
-  isNotEmptyEmail = false;
- } else if (!regexEmail.test(registerEmail.value.trim())) {
-  errMessageEmailRegister.innerText =
-   "Nhập email đúng định dạng (ví dụ: minhne04@gmail.com)";
-  registerEmail.focus();
-  isNotEmptyEmail = false;
- } else {
-  errMessageEmailRegister.innerText = "";
-  isNotEmptyEmail = true;
- }
-
- if (registerFullname.value.trim() == "") {
-  errMessageFullnameRegister.innerText = "Vui lòng điền họ và tên";
-  isNotEmptyFullname = false;
- } else if (!regexFullName.test(registerFullname.value.trim())) {
-  errMessageFullnameRegister.innerText =
-   "Nhập họ và tên đúng định dạng (ví dụ: Lữ Minh)";
-  registerFullname.focus();
-  isNotEmptyFullname = false;
- } else {
-  errMessageFullnameRegister.innerText = "";
-  isNotEmptyFullname = true;
- }
-
- if (registerPhoneNumber.value.trim() == "") {
-  errMessagePhoneNumberRegister.innerText = "Vui lòng điền số điện thoại";
-  isNotEmptyPhoneNumber = false;
- } else if (!regexPhoneNumber.test(registerPhoneNumber.value.trim())) {
-  errMessagePhoneNumberRegister.innerText =
-   "Vui lòng điền số điện thoại theo đúng định dạng";
-  registerPhoneNumber.focus();
-  isNotEmptyPhoneNumber = false;
- } else {
-  errMessagePhoneNumberRegister.innerText = "";
-  isNotEmptyPhoneNumber = true;
- }
-
- if (registerAddress.value.trim() == "") {
-  errMessageAddressRegister.innerText = "Vui lòng điền địa chỉ";
-  isNotEmptyAddress = false;
- } else if (!regexAddress.test(registerAddress.value.trim())) {
-  isNotEmptyAddress = false;
-  errMessageAddressRegister.innerText =
-   "Nhập địa chỉ đúng định dạng (ví dụ: 273 An Dương Vương)";
-  registerAddress.focus();
- } else {
-  errMessageAddressRegister.innerText = "";
-  isNotEmptyAddress = true;
- }
-
- if (registerPassword.value.trim() == "") {
-  errMessagePasswordRegister.innerText = "Vui lòng điền mật khẩu";
-  isNotEmptyPassword = false;
- } else if (registerPassword.value.trim().length < 8) {
-  errMessagePasswordRegister.innerText =
-   "Vui lòng điền mật khẩu tối thiểu 8 kí tự";
-  registerPassword.focus();
-  isNotEmptyPassword = false;
- } else {
-  errMessagePasswordRegister.innerText = "";
-  isNotEmptyPassword = true;
- }
-
- if (registerConfirmPassword.value.trim() == "") {
-  errMessageConfirmPasswordRegister.innerText =
-   "Vui lòng điền nhập lại mật khẩu";
-  isNotEmptyConfirmPassword = false;
- } else if (
-  registerConfirmPassword.value.trim() != registerPassword.value.trim() &&
-  registerPassword.value.trim() != ""
- ) {
-  errMessageConfirmPasswordRegister.innerText =
-   "Vui lòng điền nhập lại mật khẩu khớp với mật khẩu";
-  registerConfirmPassword.focus();
-  isNotEmptyConfirmPassword = false;
- } else {
-  errMessageConfirmPasswordRegister.innerText = "";
-  isNotEmptyConfirmPassword = true;
- }
-
- if (registerTinhThanhPho.value === "Chọn Tỉnh/Thành phố") {
-  errMessageCityRegister.innerHTML = "Vui lòng chọn tỉnh thành phố";
-  isNotEmptyCity = false;
- } else {
-  errMessageCityRegister.innerHTML = "";
-  isNotEmptyCity = true;
- }
-
-  // if (
-  //   !isNotEmptyUsername ||
-  //   !isNotEmptyEmail ||
-  //   !isNotEmptyFullname ||
-  //   !isNotEmptyPhoneNumber ||
-  //   !isNotEmptyAddress ||
-  //   !isNotEmptyPassword ||
-  //   !isNotEmptyConfirmPassword ||
-  //   !isNotEmptyCity
-  // ) {
-  //   // alert("Vui lòng điền đầy đủ các trường dữ liệu!");
-  //   return false;
-  // }
-
- return (
-  isNotEmptyUsername &&
-  isNotEmptyEmail &&
-  isNotEmptyFullname &&
-  isNotEmptyPhoneNumber &&
-  isNotEmptyAddress &&
-  isNotEmptyPassword &&
-  isNotEmptyConfirmPassword &&
-  isNotEmptyCity
- );
-};
-
-const toast = document.querySelector(".toast");
-const overlay = document.querySelector(".toast-overlay");
-$(document).ready(function () {
- $(".btnSendCode").click(function (e) {
-  var date = new Date();
-  var currentMonth = date.getMonth() + 1;
-  if (currentMonth < 10) {
-   currentMonth = "0" + currentMonth;
-  }
-  var currentHour = date.getHours();
-  if (currentHour < 10) {
-   currentHour = "0" + currentHour;
-  }
-  var time =
-   date.getFullYear() +
-   "-" +
-   currentMonth +
-   "-" +
-   date.getDate() +
-   " " +
-   currentHour +
-   ":" +
-   date.getMinutes() +
-   ":" +
-   date.getSeconds();
-  var code = $("#verify_code").val();
-  if (code.length < 6) {
-    alert("Vui lòng nhập mã xác thực gồm 6 chữ số");
-    $("#verify_code").focus();
-  } else {
-   $.ajax({
-    url: "controller/signup.controller.php",
-    type: "post",
-    dataType: "html",
-    data: {
-     function: "checkCode",
-     verify_code: code,
-     verify_time: time,
-     emailRegister: $("#registerEmail").val(),
-    },
-   }).done(function (result) {
-    const data = JSON.parse(result);
+  // Xử lý đăng ký
+  $(".btnDangKy").click(function (e) {
+    e.preventDefault();
     if (validationFormDangKy()) {
-     if (data.success) {
       var username = $("#registerUsername").val();
       var email = $("#registerEmail").val();
       var fullname = $("#registerFullname").val();
@@ -395,148 +318,81 @@ $(document).ready(function () {
       var city = $("#tinhthanhpho").val();
       var district = $("#quanhuyen").val();
       var ward = $("#phuongxa").val();
+
       document.querySelector(".reload").classList.remove("hidden");
       $.ajax({
-       url: "controller/signup.controller.php",
-       type: "post",
-       dataType: "html",
-       data: {
-        function: "registerAccount",
-        usernameRegister: username,
-        emailRegister: email,
-        fullnameRegister: fullname,
-        phoneNumberRegister: phoneNumber,
-        addressRegister: address,
-        passwordRegister: password,
-        confirmPasswordRegister: confirmPassword,
-        cityRegister: city,
-        districtRegister: district,
-        wardRegister: ward,
-       },
-      }).done(function () {
-       window.location.href = "index.php?page=signup";
-       alert("Bạn đã đăng ký thành công!");
+        url: "controller/signup.controller.php",
+        type: "post",
+        dataType: "html",
+        data: {
+          function: "checkAccountExist",
+          usernameRegister: username,
+          emailRegister: email,
+        },
+      }).done(function (result) {
+        document.querySelector(".reload").classList.add("hidden");
+        const data = JSON.parse(result);
+        if (data.success) {
+          $.ajax({
+            url: "controller/signup.controller.php",
+            type: "post",
+            dataType: "html",
+            data: {
+              function: "registerAccount",
+              usernameRegister: username,
+              emailRegister: email,
+              fullnameRegister: fullname,
+              phoneNumberRegister: phoneNumber,
+              addressRegister: address,
+              passwordRegister: password,
+              confirmPasswordRegister: confirmPassword,
+              cityRegister: city,
+              districtRegister: district,
+              wardRegister: ward,
+            },
+          }).done(function (result) {
+            const data = JSON.parse(result);
+            if (data.success) {
+              alert("Bạn đã đăng ký thành công!");
+              window.location.href = "index.php?page=signup";
+            } else {
+              alert(data.message);
+            }
+          });
+        } else {
+          if (data.existEmail) {
+            errMessageEmailRegister.innerText = "Email đã được sử dụng";
+            registerEmail.focus();
+          }
+          if (data.existUsername) {
+            errMessageUsernameRegister.innerText = "Username đã tồn tại";
+            registerUsername.focus();
+          }
+        }
       });
-     } else {
-       $(".verify_code_msg").html(data.message);
-     }
-    } else {
-      console.log(data);
     }
-   });
-  }
- });
- $(".new_verify_code").click(function (e) {
-  var date = new Date();
-  var currentMonth = date.getMonth() + 1;
-  if (currentMonth < 10) {
-   currentMonth = "0" + currentMonth;
-  }
-  var currentHour = date.getHours();
-  if (currentHour < 10) {
-   currentHour = "0" + currentHour;
-  }
-  var time =
-   date.getFullYear() +
-   "-" +
-   currentMonth +
-   "-" +
-   date.getDate() +
-   " " +
-   currentHour +
-   ":" +
-   date.getMinutes() +
-   ":" +
-   date.getSeconds();
-  document.querySelector(".reload").classList.remove("hidden");
-  $.ajax({
-   url: "controller/signup.controller.php",
-   type: "post",
-   dataType: "html",
-   data: {
-    function: "sendNewCode",
-    verify_time: time,
-    email: $("#registerEmail").val(),
-   },
-  }).done(function (result) {
-   document.querySelector(".reload").classList.add("hidden");
-   $(".verify_code_msg").html(result);
   });
- });
-
- $(".btnDangKy").click(function (e) {
-  e.preventDefault();
-  if (validationFormDangKy()) {
-   var username = $("#registerUsername").val();
-   var email = $("#registerEmail").val();
-   document.querySelector(".reload").classList.remove("hidden");
-   $.ajax({
-    url: "controller/signup.controller.php",
-    type: "post",
-    dataType: "html",
-    data: {
-     function: "checkAccountExist",
-     usernameRegister: username,
-     emailRegister: email,
-    },
-   }).done(function (result) {
-    const data = JSON.parse(result);
-    document.querySelector(".reload").classList.add("hidden");
-    if (data.success) {
-     document
-      .querySelector("#verify_code")
-      .addEventListener("keydown", (event) => {
-       if (event.key === "Enter") {
-        event.preventDefault();
-        document.querySelector(".btnSendCode").click();
-       }
-      });
-
-     document
-      .querySelector(".verify_code_background")
-      .classList.remove("hidden");
-     $(".verify_code_msg").html(data.message);
-
-     // toast.classList.add("active");
-     // overlay.classList.add("active");
-
-     // $(".result").html("");
-    } else {
-     if (data.existEmail) {
-      errMessageEmailRegister.innerText = "Email đã được sử dụng";
-      registerEmail.focus();
-     }
-     if (data.existUsername) {
-      errMessageUsernameRegister.innerText = "Username đã tồn tại";
-      registerUsername.focus();
-     }
-     // $(".result").addClass("error");
-     // $(".result").html(data.message);
-    }
-   });
-  }
- });
 });
 
-// Xoá thông điệp lỗi khi bấm đăng nhập/đăng ký
+// Xóa thông điệp lỗi khi bấm đăng nhập/đăng ký
 function deleteResultMessage() {
- var resultElements = document.querySelectorAll(".result");
- resultElements.forEach((resultEle) => (resultEle.innerText = ""));
+  var resultElements = document.querySelectorAll(".result");
+  resultElements.forEach((resultEle) => (resultEle.innerText = ""));
 }
 
 function deleteInputFieldSignIn() {
- loginUsername.value = "";
- loginPassword.value = "";
+  loginUsername.value = "";
+  loginPassword.value = "";
 }
 
 function deleteInputFeildSignUp() {
- registerUsername.value = "";
- registerEmail.value = "";
- registerFullname.value = "";
- registerPhoneNumber.value = "";
- registerAddress.value = "";
- registerPassword.value = "";
- registerConfirmPassword.value = "";
+  registerUsername.value = "";
+  registerEmail.value = "";
+  registerFullname.value = "";
+  registerPhoneNumber.value = "";
+  registerAddress.value = "";
+  registerPassword.value = "";
+  registerConfirmPassword.value = "";
 }
 
 btnTabDangKy.addEventListener("click", deleteResultMessage);
@@ -13568,18 +13424,18 @@ function setInputFilter(textbox, inputFilter, errMsg) {
   });
  });
 }
-setInputFilter(
- document.getElementById("verify_code"),
- function (value) {
-  return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp.
- },
- "Only digits and '.' are allowed"
-);
+// setInputFilter(
+//  document.getElementById("verify_code"),
+//  function (value) {
+//   return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp.
+//  },
+//  "Only digits and '.' are allowed"
+// );
 
 // Close xác nhận đăng ký
-document
- .querySelector(".verify_code_confirm_container .closeModal")
- .addEventListener("click", (e) => {
-  document.getElementById("verify_code").value = "";
-  document.querySelector(".verify_code_background").classList.add("hidden");
- });
+// document
+//  .querySelector(".verify_code_confirm_container .closeModal")
+//  .addEventListener("click", (e) => {
+//   document.getElementById("verify_code").value = "";
+//   document.querySelector(".verify_code_background").classList.add("hidden");
+//  });
